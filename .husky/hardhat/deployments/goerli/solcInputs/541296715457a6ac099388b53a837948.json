@@ -1,0 +1,38 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/StakingPool.sol": {
+      "content": "pragma solidity >=0.8.0 <0.9.0;\n//SPDX-License-Identifier: MIT\n\n//import \"hardhat/console.sol\";\n// import \"@openzeppelin/contracts/access/Ownable.sol\";\n// https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol\ninterface IDepositContract {\n\n    function deposit(\n        bytes calldata pubkey,\n        bytes calldata withdrawal_credentials,\n        bytes calldata signature,\n        bytes32 deposit_data_root\n    ) external payable;\n\n}\n\n\ncontract StakingPool {\n\n  event Deposit(address depositContractAddress, address caller);\n\n  mapping (address => uint) public userBalances;\n\n  enum State { acceptingDeposits, staked, exited }\n  State currentState;\n\n  address public depositContractAddress;\n  IDepositContract depositContract;\n\n  address owner;\n\n  modifier onlyOwner() {\n   require(address(msg.sender) == owner, \"Not owner\");\n   _;\n  }\n\n  constructor(address depositContractAddress_, address owner_)  {\n    currentState = State.acceptingDeposits;\n    depositContractAddress = depositContractAddress_;\n    depositContract = IDepositContract(depositContractAddress);\n    owner = owner_;\n  }\n\n  function deposit(address userAddress) public payable {\n    userBalances[userAddress] += msg.value;\n  }\n\n  function withdraw(uint _amount) public {\n    require(currentState != State.staked, \"cannot withdraw once staked\");\n    require(userBalances[address(msg.sender)] >= _amount, \"not enough deposited\");\n    userBalances[address(msg.sender)] -= _amount;\n    payable(msg.sender).transfer(_amount);\n  }\n\n  function stake(\n    bytes calldata pubkey,\n    bytes calldata withdrawal_credentials,\n    bytes calldata signature,\n    bytes32 deposit_data_root\n  ) public onlyOwner{\n    require(address(this).balance >= 32, \"not enough eth\");\n    currentState = State.staked;\n    uint value = 32 ether;\n    depositContract.deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);\n\n    emit Deposit(depositContractAddress, msg.sender);\n  }\n\n  function rugpull() public {\n    payable(msg.sender).transfer(address(this).balance);\n  }\n\n  function unstake() public {\n    currentState = State.exited;\n  }\n\n\n  // to support receiving ETH by default\n  receive() external payable {}\n  fallback() external payable {}\n}\n"
+    },
+    "contracts/StakingPoolFactory.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.8.0 <0.9.0;\n\nimport \"./StakingPool.sol\";\n\ncontract StakingPoolFactory {\n  StakingPool[] public stakingPools;\n  mapping(address => bool) existsStakingPool;\n\n  event Create(\n    uint indexed contractId,\n    address indexed contractAddress,\n    address creator,\n    address owner,\n    address depositContractAddress\n  );\n\n  event Owners(\n    address indexed contractAddress,\n    address[] owners,\n    uint256 indexed signaturesRequired\n  );\n\n\n  constructor() {}\n\n\n  function create(\n    address depositContractAddress_,\n    address owner_\n  ) public {\n    uint id = numberOfStakingPools();\n\n    StakingPool stakingPool = (new StakingPool)(depositContractAddress_, owner_);\n    stakingPools.push(stakingPool);\n    existsStakingPool[address(stakingPool)] = true;\n\n    emit Create(id, address(stakingPool), msg.sender, owner_, depositContractAddress_);\n  }\n\n  function numberOfStakingPools() public view returns(uint) {\n    return stakingPools.length;\n  }\n\n  function getStakingPool(uint256 _index)\n    public\n    view\n    returns (\n      address stakingPoolAddress,\n      uint balance\n    ) {\n      StakingPool stakingPool = stakingPools[_index];\n      return (address(stakingPool), address(stakingPool).balance);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

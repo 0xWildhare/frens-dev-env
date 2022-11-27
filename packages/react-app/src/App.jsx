@@ -53,7 +53,8 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.goerli;
+; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -167,7 +168,13 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts, "YourContract", "purpose");
+  const purpose = useContractReader(readContracts, "stakingPool", "purpose");
+
+
+const contractName = "FrensPoolShare";
+  // keep track of a variable from the contract in the local React state:
+const balance = useContractReader(readContracts, contractName, "balanceOf", [address]);
+console.log("🤗 balance:", balance);
 
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
@@ -280,7 +287,19 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+          <Home
+            yourLocalBalance={yourLocalBalance}
+            balance={balance}
+            readContracts={readContracts}
+            address={address}
+            mainnetProvider={mainnetProvider}
+            blockExplorer={blockExplorer}
+            writeContracts={writeContracts}
+            tx={tx}
+            injectedProvider={injectedProvider}
+            loadWeb3Modal={loadWeb3Modal}
+            USE_BURNER_WALLET={USE_BURNER_WALLET}
+          />
         </Route>
         <Route exact path="/debug">
           {/*
@@ -290,7 +309,7 @@ function App(props) {
             */}
 
           <Contract
-            name="YourContract"
+            name="StakingPoolFactory"
             price={price}
             signer={userSigner}
             provider={localProvider}
@@ -298,7 +317,26 @@ function App(props) {
             blockExplorer={blockExplorer}
             contractConfig={contractConfig}
           />
-        </Route>
+          <Contract
+            name="StakingPool"
+            price={price}
+            signer={userSigner}
+            provider={localProvider}
+            address={address}
+            blockExplorer={blockExplorer}
+            contractConfig={contractConfig}
+          />
+
+          <Contract
+            name="FrensPoolShare"
+            price={price}
+            signer={userSigner}
+            provider={localProvider}
+            address={address}
+            blockExplorer={blockExplorer}
+            contractConfig={contractConfig}
+          />
+      </Route>
         <Route path="/hints">
           <Hints
             address={address}
