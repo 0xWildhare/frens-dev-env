@@ -76,7 +76,7 @@ function Home({
           <Button
             type={"primary"}
             onClick={() => {
-              tx(writeContracts.StakingPool.deposit(address, { value: mintPrice }));
+              tx(writeContracts.StakingPool.depositToPool({ value: mintPrice }));
             }}
           >
             MINT

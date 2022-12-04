@@ -801,6 +801,11 @@ const StakingPoolABI = [
         "internalType": "address",
         "name": "frensPoolShareAddress_",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "owner_",
+        "type": "address"
       }
     ],
     "stateMutability": "nonpayable",
@@ -811,18 +816,18 @@ const StakingPoolABI = [
     "inputs": [
       {
         "indexed": false,
-        "internalType": "address",
-        "name": "depositContractAddress",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "address",
-        "name": "caller",
+        "name": "depositer",
         "type": "address"
       }
     ],
-    "name": "Deposit",
+    "name": "DepositToPool",
     "type": "event"
   },
   {
@@ -845,6 +850,25 @@ const StakingPoolABI = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "depositContractAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
+    ],
+    "name": "Stake",
+    "type": "event"
+  },
+  {
     "stateMutability": "payable",
     "type": "fallback"
   },
@@ -857,19 +881,6 @@ const StakingPoolABI = [
       }
     ],
     "name": "addToDeposit",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "userAddress",
-        "type": "address"
-      }
-    ],
-    "name": "deposit",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
@@ -904,6 +915,13 @@ const StakingPoolABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "depositToPool",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -1167,6 +1185,7 @@ const StakingPoolABI = [
 ]
 
 
+
 // Mainnet DAI, Optimism and Arbitrium Rollup Contracts with local addresses
 module.exports = {
   1: {
@@ -1184,7 +1203,7 @@ module.exports = {
   31337: { //localhost
     contracts: {
       StakingPool: {
-        address: "0x740f24A3cbF1fbA1226C6018511F96d1055ce961",
+        address: "0xBD81a0f7CDABBD4eBCcaE66C80e56FC19E43B49b",
         abi: StakingPoolABI,
       },
     },
