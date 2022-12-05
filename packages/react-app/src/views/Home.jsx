@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, List, Card } from "antd";
 import { Address, AddressInput } from "../components";
+import { useEventListener } from "eth-hooks/events/useEventListener";
 
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
@@ -17,6 +18,7 @@ function Home({
   balance,
   address,
   mainnetProvider,
+  localProvider,
   blockExplorer,
   writeContracts,
   tx,
@@ -27,6 +29,7 @@ function Home({
   // you can also use hooks locally in your component of choice
 
   const yourBalance = balance && balance.toNumber && balance.toNumber();
+
   const mintPrice = 1;
   const [yourCollectibles, setYourCollectibles] = useState();
   const isSigner = USE_BURNER_WALLET
@@ -68,26 +71,39 @@ function Home({
   }, [address, yourBalance]);
 
   const [transferToAddresses, setTransferToAddresses] = useState({});
+  const createEvents = useEventListener(readContracts, "StakingPoolFactory", "Create", localProvider, 1);
+
+  const [newestPool, setNewestPool] = useState();
+  useEffect(()=>{
+    const lastCreate = createEvents&&createEvents[createEvents.length - 1];
+    console.log("lastCreate", lastCreate);
+    const newPool = lastCreate&&lastCreate.args&&lastCreate.args.contractAddress;
+    setNewestPool(newPool);
+  }, [createEvents]);
+  console.log("📟 create events:", createEvents);
 
   return (
     <div>
       <div style={{ maxWidth: 820, margin: "auto", marginTop: 32, paddingBottom: 32 }}>
         {isSigner ? (
-          <Button
-            type={"primary"}
-            onClick={() => {
-              tx(writeContracts.StakingPool.depositToPool({ value: mintPrice }));
-            }}
-          >
-            MINT
-          </Button>
+
+
+            <Button
+              type={"primary"}
+              onClick={() => {
+                tx(writeContracts.StakingPool.depositToPool({ value: mintPrice }));
+              }}
+            >
+              MINT
+            </Button>
+
         ) : (
           <Button type={"primary"} onClick={loadWeb3Modal}>
             CONNECT WALLET
           </Button>
         )}
       </div>
-      <div style={{ width: 820, margin: "auto", paddingBottom: 256 }}>
+      <div style={{ width: 820, margin: "auto", paddingBottom: 0 }}>
         <List
           bordered
           dataSource={yourCollectibles}
@@ -157,8 +173,18 @@ function Home({
                   </div>
                 </div>
               </List.Item>
+
             );
           }}
+        />
+      </div>
+      <div style={{paddingBottom: 256}}>
+        <h1>latest pool</h1>
+        <Address
+          address={newestPool}
+          ensProvider={mainnetProvider}
+          blockExplorer={blockExplorer}
+          fontSize={16}
         />
       </div>
     </div>
