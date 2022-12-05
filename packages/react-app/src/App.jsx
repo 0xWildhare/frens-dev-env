@@ -31,6 +31,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import { useEventListener } from "eth-hooks/events/useEventListener";
 
 const { ethers } = require("ethers");
 /*
@@ -146,6 +147,7 @@ function App(props) {
   // const contractConfig = useContractConfig();
 
   const contractConfig = { deployedContracts: deployedContracts || {}, externalContracts: externalContracts || {} };
+  console.log("contractConfig", contractConfig);
 
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
@@ -251,6 +253,18 @@ console.log("🤗 balance:", balance);
   }, [loadWeb3Modal]);
 
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
+
+  const createEvents = useEventListener(readContracts, "StakingPoolFactory", "Create", localProvider, 1);
+  const [newestPool, setNewestPool] = useState();
+  useEffect(()=>{
+    const lastCreate = createEvents&&createEvents[createEvents.length - 1];
+    console.log("lastCreate", lastCreate);
+    const newPool = lastCreate&&lastCreate.args&&lastCreate.args.contractAddress;
+    setNewestPool(newPool);
+  }, [createEvents]);
+  console.log("📟 create events:", createEvents);
+  contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = newestPool;
+  contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newestPool;
 
   return (
     <div className="App">

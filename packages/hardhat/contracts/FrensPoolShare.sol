@@ -21,25 +21,10 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
 //these move to storage contract
   uint private _tokenId;
   mapping(uint => address) poolById;
-  IStakingPoolFactory factoryContract;
-  ISSVRegistry ssvRegistry;
 //^^^^^
-//these nolonger need to be in the constructor (storage contract)
-  constructor(address factoryAddress_, address ssvRegistryAddress_, IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("staking con amigos", "FRENS") {
-    factoryContract = IStakingPoolFactory(factoryAddress_);
-    ssvRegistry = ISSVRegistry(ssvRegistryAddress_);
-  }
 
-//move to storage contract
-/*
-  function incrementTokenId() public onlyStakingPool(msg.sender) returns(uint){
-    _tokenId++;
-    return _tokenId;
-  }
-*/
-  //testing
-  function doesStakingPoolExist(address _stakingPoolAddress) public view returns(bool){
-    return(getBool(keccak256(abi.encodePacked("pool.exists", _stakingPoolAddress))));
+  constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("staking con amigos", "FRENS") {
+    //hi fren
   }
 
   function mint(address userAddress, address _pool) public onlyStakingPool(msg.sender) {
@@ -57,8 +42,6 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
   }
 
   //art stuff move to its own contract (possibly two contracts)
-
-
   function tokenURI(uint256 id) public view override returns (string memory) {
     require(_exists(id), "not exist");
     address poolAddress = poolById[id];
@@ -204,6 +187,7 @@ contract FrensPoolShare is ERC721Enumerable, Ownable, FrensBase {
     IStakingPool stakingPool = IStakingPool(payable(poolAddress));
     bytes memory poolPubKey = stakingPool.getPubKey();
     string memory pubKeyString = iToHex(poolPubKey);
+    ISSVRegistry ssvRegistry = ISSVRegistry(getAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry"))));
     uint32[] memory poolOperators = ssvRegistry.getOperatorsByValidator(poolPubKey);
     return(poolOperators, pubKeyString);
   }

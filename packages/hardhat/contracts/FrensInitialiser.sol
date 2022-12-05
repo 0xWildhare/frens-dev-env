@@ -12,21 +12,22 @@ contract FrensInitialiser is FrensBase {
   function setContractExists(address _contractAddress, bool _exists) public onlyGuardian{
     setBool(keccak256(abi.encodePacked("contract.exists", _contractAddress)), _exists);
   }
-  //set address
-  function setContractAddress(address _contractAddress, string memory _contractName) public onlyGuardian{
+  //set name and address
+  function setContract(address _contractAddress, string memory _contractName) public onlyGuardian{
     setAddress(keccak256(abi.encodePacked("contract.address", _contractName)), _contractAddress);
-  }
-  //set name
-  function setContractName(address _contractAddress, string memory _contractName) public onlyGuardian{
     setString(keccak256(abi.encodePacked("contract.name", _contractAddress)), _contractName);
+    setBool(keccak256(abi.encodePacked("contract.exists", _contractAddress)), true);
   }
 
-  function deleteContractName(address _contractAddress) public onlyGuardian {
-    deleteString(keccak256(abi.encodePacked("contract.name", _contractAddress)));
-  }
-
-  function deleteContractAddress(string memory _contractName) public onlyGuardian {
+  function deleteContract(address _contractAddress, string memory _contractName) public onlyGuardian {
     deleteAddress(keccak256(abi.encodePacked("contract.address", _contractName)));
+    deleteString(keccak256(abi.encodePacked("contract.name", _contractAddress)));
+    setBool(keccak256(abi.encodePacked("contract.exists", _contractAddress)), false);
+  }
+
+  function setExternalContract(address _contractAddress, string memory _contractName) public onlyGuardian {
+    setAddress(keccak256(abi.encodePacked("external.contract.address", _contractName)), _contractAddress);
+    setString(keccak256(abi.encodePacked("external.contract.name", _contractAddress)), _contractName);
   }
 
   ///add deletes

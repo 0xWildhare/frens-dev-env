@@ -71,8 +71,9 @@ function Home({
   }, [address, yourBalance]);
 
   const [transferToAddresses, setTransferToAddresses] = useState({});
-  const createEvents = useEventListener(readContracts, "StakingPoolFactory", "Create", localProvider, 1);
 
+
+  const createEvents = useEventListener(readContracts, "StakingPoolFactory", "Create", localProvider, 1);
   const [newestPool, setNewestPool] = useState();
   useEffect(()=>{
     const lastCreate = createEvents&&createEvents[createEvents.length - 1];

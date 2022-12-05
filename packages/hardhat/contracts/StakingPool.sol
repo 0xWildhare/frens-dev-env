@@ -22,23 +22,20 @@ contract StakingPool is Ownable, FrensBase {
   uint[] public idsInThisPool;//should this stay locally?
   enum State { acceptingDeposits, staked, exited }//should this stay locally? if not, need to think of all possible states: pending, frozen, underReview, exiting, etc. - maybe this gets its own contract?
   State currentState;//should this stay locally?
-  address public depositContractAddress;
+
   bytes public validatorPubKey;
-  IDepositContract depositContract;//these probably need to be local
-  IStakingPoolFactory factoryContract;//these probably need to be local (this one is not used?)
-  IFrensPoolShare frensPoolShare;//these probably need to be local
 //^^^^
-//only the owner needs to be in the constructor
-  constructor(address depositContractAddress_, address factory_, address frensPoolShareAddress_, address owner_, IFrensStorage frensStorage_) FrensBase(frensStorage_){
+
+  IFrensPoolShare frensPoolShare;
+
+  constructor(address owner_, IFrensStorage frensStorage_) FrensBase(frensStorage_){
     currentState = State.acceptingDeposits;
-    depositContractAddress = depositContractAddress_;
-    depositContract = IDepositContract(depositContractAddress);
-    factoryContract = IStakingPoolFactory(factory_);//this doesn't get used anywhere in this contract?
-    frensPoolShare = IFrensPoolShare(frensPoolShareAddress_);
+    address frensPoolShareAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare")));
+    frensPoolShare = IFrensPoolShare(frensPoolShareAddress);
     _transferOwnership(owner_);
 
   }
-//need a cap on deposits
+//TODO: need a cap on deposits
   function depositToPool() public payable {
     require(currentState == State.acceptingDeposits, "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
@@ -50,7 +47,7 @@ contract StakingPool is Ownable, FrensBase {
     frensPoolShare.mint(msg.sender, address(this));
     emit DepositToPool(msg.value,  msg.sender);
   }
-//need a cap on deposits
+//TODO: need a cap on deposits
   function addToDeposit(uint _id) public payable {
     require(frensPoolShare.exists(_id), "not exist");
     require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
@@ -141,7 +138,8 @@ contract StakingPool is Ownable, FrensBase {
     bytes memory withdrawalCredFromAddr = _toWithdrawalCred(address(this));
     //compare expected withdrawal_credentials to provided
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
-    depositContract.deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
+    address depositContractAddress = getAddress(keccak256(abi.encodePacked("external.contract.address", "DepositContract")));
+    IDepositContract(depositContractAddress).deposit{value: value}(pubkey, withdrawal_credentials, signature, deposit_data_root);
     emit Stake(depositContractAddress, msg.sender);
   }
 

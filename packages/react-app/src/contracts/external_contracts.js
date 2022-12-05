@@ -1200,14 +1200,16 @@ module.exports = {
       },
     },
   },
+  /*
   31337: { //localhost
     contracts: {
       StakingPool: {
-        address: "0xf66A0F9F6FcCb2eA2ddb9099a308bEfd6bb1d6C2",
+        address: "0x32f1712f5d0F95577B8D47a0C74cf3c7355798Bc",
         abi: StakingPoolABI,
       },
     },
   },
+
   5: { //goerli
     contracts: {
       StakingPool: {
@@ -1216,4 +1218,5 @@ module.exports = {
       },
     },
   },
+  */
 };
