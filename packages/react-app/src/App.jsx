@@ -261,10 +261,13 @@ console.log("🤗 balance:", balance);
     console.log("lastCreate", lastCreate);
     const newPool = lastCreate&&lastCreate.args&&lastCreate.args.contractAddress;
     setNewestPool(newPool);
+    if(newPool){
+      contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = newPool;
+      contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newPool;
+    };
   }, [createEvents]);
   console.log("📟 create events:", createEvents);
-  contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = newestPool;
-  contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newestPool;
+
 
   return (
     <div className="App">
