@@ -72,7 +72,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       //"0x00000000219ab540356cBB839Cbe05303d7705Fa", "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04" //mainnet (using goerli ssvRegistryAddress until there is a mainnet deployment - some features will not work on mainnet fork)
-      FrensStorage.address 
+      FrensStorage.address
      ],
     log: true,
     waitConfirmations: 5,
@@ -91,22 +91,22 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   if(StakingPoolFactoryOld == 0) {
     await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
-    console.log("StakingPoolFactory initialised");
+    console.log("StakingPoolFactory initialised", StakingPoolFactory.address);
   } else if(StakingPoolFactoryOld.address != StakingPoolFactory.address){
     await FrensInitialiser.deleteContract(StakingPoolFactoryOld.address, "StakingPoolFactory");
     await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
-    console.log("StakingPoolFactory updated");
+    console.log("StakingPoolFactory updated", StakingPoolFactory.address);
   }
 
   if(FrensPoolShareOld == 0){
     await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
     await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
-    console.log("FrensPoolShare initialised");
+    console.log("FrensPoolShare initialised", FrensPoolShare.address);
   } else if(FrensPoolShareOld.address != FrensPoolShare.address){
     await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
     await FrensInitialiser.deleteContract(FrensPoolShareOld.address, "FrensPoolShare");
     await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
-    console.log("FrensPoolShare updated");
+    console.log("FrensPoolShare updated", FrensPoolShare.address);
   }
 
   if(FrensInitialiserOld == 0) {
@@ -115,11 +115,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await FrensInitialiser.setExternalContract("0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04", "SSVRegistry") //goerli
     //deposit contract
     await FrensInitialiser.setExternalContract("0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b", "DepositContract") //goerli
-    console.log("initialiser initialised");
+    console.log("initialiser initialised", FrensInitialiser.address);
   } else if(FrensInitialiserOld.address != FrensInitialiser.address) {
     await FrensInitialiser.deleteContract(FrensInitialiserOld.address,"FrensInitialiser");
     await FrensInitialiser.setContract(FrensInitialiser.address, "FrensInitialiser");
-    console.log("initialiser updated");
+    console.log("initialiser updated", FrensInitialiser.address);
   }
 
 
