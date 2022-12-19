@@ -21,12 +21,26 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FrensInitialiserOld = 0;
   var FrensStorageOld = 0;
   var StakingPoolFactoryOld = 0;
+  var FrensPoolShareTokenURIOld = 0;
 
   try{
     FrensPoolShareOld = await ethers.getContract("FrensPoolShare", deployer);
+  } catch(e) {}
+
+  try{
     FrensInitialiserOld = await ethers.getContract("FrensInitialiser", deployer);
+  } catch(e) {}
+
+  try{
     FrensStorageOld = await ethers.getContract("FrensStorage", deployer);
+  } catch(e) {}
+
+  try{
     StakingPoolFactoryOld = await ethers.getContract("StakingPoolFactory", deployer);
+  } catch(e) {}
+
+  try{
+    FrensPoolShareTokenURIOld = await ethers.getContract("FrensPoolShareTokenURI", deployer);
   } catch(e) {
 
   }
@@ -65,9 +79,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     waitConfirmations: 5,
   });
 
-  const StakingPoolFactory = await ethers.getContract("StakingPoolFactory", deployer);
-
-  await deploy("FrensPoolShare", {
+    await deploy("FrensPoolShare", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
@@ -88,6 +100,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   const FrensPoolShare = await ethers.getContract("FrensPoolShare", deployer);
   const FrensInitialiser = await ethers.getContract("FrensInitialiser", deployer);
+  const StakingPoolFactory = await ethers.getContract("StakingPoolFactory", deployer);
 
   if(StakingPoolFactoryOld == 0) {
     await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
@@ -122,9 +135,26 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log("initialiser updated", FrensInitialiser.address);
   }
 
+  await deploy("FrensPoolShareTokenURI", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [  FrensStorage.address ],
+    log: true,
+    waitConfirmations: 5,
+  });
 
+  const FrensPoolShareTokenURI = await ethers.getContract("FrensPoolShareTokenURI", deployer);
+
+  if(FrensPoolShareTokenURIOld == 0){
+    await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
+    console.log("FrensPoolShareTokenURI initialised", FrensPoolShareTokenURI.address);
+  } else if(FrensPoolShareOld.address != FrensPoolShare.address){
+    await FrensInitialiser.deleteContract(FrensPoolShareTokenURIOld.address, "FrensPoolShareTokenURI");
+    await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
+    console.log("FrensPoolShareTokenURI updated", FrensPoolShareTokenURI.address);
+  }
 
 
 
 };
-module.exports.tags = ["FrensStorage", "StakingPoolFactory", "StakingPool", "FrensStorage", "FrensInitialiser"];
+module.exports.tags = ["FrensPoolShare", "StakingPoolFactory", "StakingPool", "FrensStorage", "FrensInitialiser", "FrensPoolShareTokenURI"];

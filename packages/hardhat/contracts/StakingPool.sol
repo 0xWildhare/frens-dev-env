@@ -1,7 +1,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
-import "hardhat/console.sol";
+//import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
 import "./interfaces/IStakingPoolFactory.sol";
@@ -26,7 +26,7 @@ contract StakingPool is Ownable, FrensBase {
   }
 //TODO: needs to interact with SSVtoken (via amm, check balance, check minimum amount needed in contract etc)
   function depositToPool() public payable {
-    require(getStateHash() == getStringHash("acceptingDeposits"), "not accepting deposits");
+    require(_getStateHash() == _getStringHash("acceptingDeposits"), "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
     require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("token.id")), 1);
@@ -40,15 +40,15 @@ contract StakingPool is Ownable, FrensBase {
 
   function addToDeposit(uint _id) public payable {
     require(frensPoolShare.exists(_id), "id does not exist");
-    require(frensPoolShare.getPoolById(_id) == address(this), "wrong staking pool");
-    require(getStateHash() == getStringHash("acceptingDeposits"), "not accepting deposits");
+    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
+    require(_getStateHash() == _getStringHash("acceptingDeposits"), "not accepting deposits");
     require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value);
     addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
   }
 
   function withdraw(uint _id, uint _amount) public {
-    require(getStateHash() != getStringHash("staked"), "cannot withdraw once staked");//TODO: this may need to be more restrictive
+    require(_getStateHash() != _getStringHash("staked"), "cannot withdraw once staked");//TODO: this may need to be more restrictive
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
     subUint(keccak256(abi.encodePacked("deposit.amount", _id)), _amount);
@@ -57,7 +57,7 @@ contract StakingPool is Ownable, FrensBase {
   }
   //TODO think about other options for distribution
   function distribute() public {
-    require(getStateHash() == getStringHash("staked"), "use withdraw when not staked");
+    require(_getStateHash() == _getStringHash("staked"), "use withdraw when not staked");
     uint contractBalance = address(this).balance;
     uint[] memory idsInPool = getArray(keccak256(abi.encodePacked("total.deposits", address(this))));
     require(contractBalance > 100, "minimum of 100 wei to distribute");
@@ -89,7 +89,7 @@ contract StakingPool is Ownable, FrensBase {
   }
 
   function getDistributableShare(uint _id) public view returns(uint) {
-    if(getStateHash() == getStringHash("acceptingDeposits")) {
+    if(_getStateHash() == _getStringHash("acceptingDeposits")) {
       return 0;
     } else {
       return getShare(_id);
@@ -101,7 +101,7 @@ contract StakingPool is Ownable, FrensBase {
   }
 
   function setPubKey(bytes memory _publicKey) public onlyOwner{
-    require(getStateHash() == getStringHash("acceptingDeposits"), "wrong state");
+    require(_getStateHash() == _getStringHash("acceptingDeposits"), "wrong state");
     //add checks for ssv operators?
     setBytes(keccak256(abi.encodePacked("validator.public.key", address(this))), _publicKey);
   }
@@ -110,11 +110,11 @@ contract StakingPool is Ownable, FrensBase {
     return getString(keccak256(abi.encodePacked("contract.state", address(this))));
   }
 
-  function getStateHash() internal view returns(bytes32){
+  function _getStateHash() internal view returns(bytes32){
     return keccak256(abi.encodePacked(getState()));
   }
 
-  function getStringHash(string memory s) internal pure returns(bytes32){
+  function _getStringHash(string memory s) internal pure returns(bytes32){
     return keccak256(abi.encodePacked(s));
   }
 
@@ -130,7 +130,7 @@ contract StakingPool is Ownable, FrensBase {
     bytes32 deposit_data_root
   ) public onlyOwner{
     require(address(this).balance >= 32 ether, "not enough eth");
-    require(getStateHash() == getStringHash("acceptingDeposits"), "wrong state");
+    require(_getStateHash() == _getStringHash("acceptingDeposits"), "wrong state");
     bytes memory zero;
     bytes memory validatorPublicKey = getBytes(keccak256(abi.encodePacked("validator.public.key", address(this))));
     if(keccak256(validatorPublicKey) != keccak256(zero)){
