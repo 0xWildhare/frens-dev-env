@@ -4,8 +4,9 @@ pragma solidity >=0.8.0 <0.9.0;
 //import "hardhat/console.sol";
 import "./StakingPool.sol";
 import "./FrensBase.sol";
+import "./interfaces/IStakingPoolFactory.sol";
 
-contract StakingPoolFactory is FrensBase {
+contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
 
   event Create(
     address indexed contractAddress,

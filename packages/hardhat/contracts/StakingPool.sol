@@ -4,14 +4,14 @@ pragma solidity >=0.8.0 <0.9.0;
 //import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/interfaces/IERC721Enumerable.sol";
-import "./interfaces/IStakingPoolFactory.sol";
 import "./interfaces/IDepositContract.sol";
 import "./interfaces/IFrensPoolShare.sol";
+import "./interfaces/IStakingPool.sol";
 import "./FrensBase.sol";
 
 
 //should ownable be replaces with an equivalent in storage/base?
-contract StakingPool is Ownable, FrensBase {
+contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   event Stake(address depositContractAddress, address caller);
   event DepositToPool(uint amount, address depositer);
