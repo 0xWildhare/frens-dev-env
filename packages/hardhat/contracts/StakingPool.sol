@@ -59,7 +59,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   function distribute() public {
     require(_getStateHash() == _getStringHash("staked"), "use withdraw when not staked");
     uint contractBalance = address(this).balance;
-    uint[] memory idsInPool = getArray(keccak256(abi.encodePacked("total.deposits", address(this))));
+    uint[] memory idsInPool = getIdsInThisPool();
     require(contractBalance > 100, "minimum of 100 wei to distribute");
     for(uint i=0; i<idsInPool.length; i++) {
       uint id = idsInPool[i];
@@ -120,6 +120,10 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function getDepositAmount(uint _id) public view returns(uint){
     return getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
+  }
+
+  function getTotalDeposits() public view returns(uint){
+    return getUint(keccak256(abi.encodePacked("total.deposits", address(this))));
   }
 
 //should staking info be added to pool before depositing is enabled?

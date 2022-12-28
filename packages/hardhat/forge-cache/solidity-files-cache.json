@@ -406,8 +406,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1672091492342,
-      "contentHash": "d5a9e989e9a2d943ee69986c4a14f0e5",
+      "lastModificationDate": 1672196547870,
+      "contentHash": "c298d30527cc8ddb971b82876bb0c8ff",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -1852,8 +1852,8 @@
       }
     },
     "test/foundry/StakingPool.t.sol": {
-      "lastModificationDate": 1672186171143,
-      "contentHash": "fd1dbdfc041bdb1cd2e98b31dab41ad7",
+      "lastModificationDate": 1672196199213,
+      "contentHash": "ba217aaa40cced4569c030041a71bbe0",
       "sourceName": "test/foundry/StakingPool.t.sol",
       "solcConfig": {
         "settings": {
