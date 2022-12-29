@@ -21,12 +21,16 @@ interface IStakingPool{
 
   function getPubKey() external view returns(bytes memory);
 
-  function setPubKey(bytes memory _publicKey) external;
+  function setPubKey(
+    bytes calldata pubKey,
+    bytes calldata withdrawal_credentials,
+    bytes calldata signature,
+    bytes32 deposit_data_root
+    ) external;
 
   function getState() external view returns(string memory);
 
   function getDepositAmount(uint _id) external view returns(uint);
-
 
   function stake(
     bytes calldata pubkey,
@@ -34,6 +38,8 @@ interface IStakingPool{
     bytes calldata signature,
     bytes32 deposit_data_root
   ) external;
+
+  function stake() external;
 
     function unstake() external;
 

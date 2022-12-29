@@ -32,6 +32,8 @@ contract StakingPoolTest is Test {
     //goerli
     //address payable public depCont = payable(0xff50ed3d0ec03aC01D4C79aAd74928BFF48a7b2b);
     address public ssvRegistryAddress = 0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04;
+    address public ENSAddress = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
+
     address public contOwner = 0x0000000000000000000000000000000001111738;
     address payable public alice = payable(0x00000000000000000000000000000000000A11cE);
     address payable public bob = payable(0x0000000000000000000000000000000000000B0b);
@@ -58,6 +60,8 @@ contract StakingPoolTest is Test {
       frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
       //initialise deposit Contract
       frensInitialiser.setExternalContract(depCont, "DepositContract");
+      //initialise ENS 
+      frensInitialiser.setExternalContract(ENSAddress, "ENS");
       //deploy NFT contract
       frensPoolShare = new FrensPoolShare(frensStorage);
       //initialise NFT contract
@@ -80,7 +84,7 @@ contract StakingPoolTest is Test {
       frensInitialiser.setContract(address(frensArt), "FrensArt");
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner);
+      (address pool) = proxy.create(contOwner, false);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -102,6 +106,14 @@ contract StakingPoolTest is Test {
         assertEq(x, depAmt);
         uint totDep = stakingPool.getTotalDeposits();
         assertEq(x, totDep);
+      } else if(x == 0) {
+        vm.expectRevert("must deposit ether");
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+      } else {
+        vm.expectRevert("total depostis cannot be more than 32 Eth");
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
       }
     }
 
@@ -117,7 +129,7 @@ contract StakingPoolTest is Test {
         uint depAmt2 = stakingPool.getDepositAmount(id);
         uint tot = uint(x) + uint(y);
         assertEq(tot, depAmt2);
-      }
+      } //TODO: add failing conditions for else if
     }
 
     function testWithdraw(uint128 x, uint128 y) public {
@@ -132,7 +144,7 @@ contract StakingPoolTest is Test {
         uint depAmt2 = stakingPool.getDepositAmount(id);
         uint tot = uint(x) - uint(y);
         assertEq(tot, depAmt2);
-      }
+      } //TODO: add failing conditions for else if
     }
 
     function testStake() public {
@@ -151,39 +163,39 @@ contract StakingPoolTest is Test {
     }
 
     function testDistribute(uint32 x, uint32 y) public {
-        if(x != 0 && y > 100){
-          uint maxUint32 = 4294967295;
-          uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
-          uint bobDeposit = 32000000000000000000 - aliceDeposit;
-          //stakingPool.sendToOwner();
-          hoax(alice);
-          stakingPool.depositToPool{value: aliceDeposit}();
-          hoax(bob);
-          stakingPool.depositToPool{value: bobDeposit}();
-          startHoax(contOwner);
-          stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
-          uint aliceBalance = address(alice).balance;
-          uint bobBalance = address(bob).balance;
-          uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
-          uint bobShare = (uint(y) + address(stakingPool).balance) - aliceShare;
-          payable(stakingPool).transfer(y);
-          stakingPool.distribute();
-          if(aliceShare == 1) aliceShare = 0;
-          if(bobShare == 1) bobShare =0;
-          uint aliceBalanceExpected = aliceBalance + aliceShare;
-          aliceBalance = address(alice).balance;
-          //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
-          if(aliceBalance != aliceBalanceExpected) aliceBalance += 1;
-          if(aliceBalance != aliceBalanceExpected) aliceBalance += 1;
-          assertEq(aliceBalance, aliceBalanceExpected);
-          uint bobBalanceExpected = bobBalance + bobShare;
-          bobBalance = address(bob).balance;
-          //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
-          if(bobBalance != bobBalanceExpected) bobBalance += 1;
-          if(bobBalance != bobBalanceExpected) bobBalance += 1;
-          //assertEq(bobBalance, bobBalanceExpected);
+      if(x != 0 && y > 100){
+        uint maxUint32 = 4294967295;
+        uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
+        uint bobDeposit = 32000000000000000000 - aliceDeposit;
+        //stakingPool.sendToOwner();
+        hoax(alice);
+        stakingPool.depositToPool{value: aliceDeposit}();
+        hoax(bob);
+        stakingPool.depositToPool{value: bobDeposit}();
+        startHoax(contOwner);
+        stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
+        uint aliceBalance = address(alice).balance;
+        uint bobBalance = address(bob).balance;
+        uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
+        uint bobShare = (uint(y) + address(stakingPool).balance) - aliceShare;
+        payable(stakingPool).transfer(y);
+        stakingPool.distribute();
+        if(aliceShare == 1) aliceShare = 0;
+        if(bobShare == 1) bobShare =0;
+        uint aliceBalanceExpected = aliceBalance + aliceShare;
+        aliceBalance = address(alice).balance;
+        //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
+        if(aliceBalance != aliceBalanceExpected) aliceBalance += 1;
+        if(aliceBalance != aliceBalanceExpected) aliceBalance += 1;
+        assertEq(aliceBalance, aliceBalanceExpected);
+        uint bobBalanceExpected = bobBalance + bobShare;
+        bobBalance = address(bob).balance;
+        //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
+        if(bobBalance != bobBalanceExpected) bobBalance += 1;
+        if(bobBalance != bobBalanceExpected) bobBalance += 1;
+        //assertEq(bobBalance, bobBalanceExpected);
 
-        }
+      }//TODO: add failing conditions for else if
 
     }
 

@@ -38,10 +38,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var FactoryProxyOld = 0;
   var FrensInitialiserOld = 0;
   var FrensPoolShareOld = 0;
-  var StakingPoolFactoryOld = await ethers.getContract("FrensStorage", deployer);
-  var FrensMetaHelperOld = await ethers.getContract("FrensStorage", deployer);
-  var FrensPoolShareTokenURIOld = await ethers.getContract("FrensStorage", deployer);
-  var FrensArtOld = await ethers.getContract("FrensStorage", deployer);
+  var StakingPoolFactoryOld = 0;
+  var FrensMetaHelperOld = 0;
+  var FrensPoolShareTokenURIOld = 0;
+  var FrensArtOld = 0;
 
   try{
     FrensStorageOld = await ethers.getContract("FrensStorage", deployer);
@@ -248,17 +248,20 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[36m%s\x1b[0m', "FrensArt updated", FrensArt.address);
   }
 
-  //deploying a pool for verification purposes only (is this necessary?)
-    await deploy("StakingPool", {
-      // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-      from: deployer,
-      args: [
-        "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
-        FrensStorage.address
-      ],
-      log: true,
-      waitConfirmations: 5,
-    });
+//deploying a pool for verification purposes only (is this necessary?)
+  await deploy("StakingPool", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
+      FrensStorage.address
+    ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const newPool = await StakingPoolFactory.create("0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", false);
+  console.log('\x1b[36m%s\x1b[0m', "pool", newPool.address);
 
 
 
