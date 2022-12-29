@@ -126,6 +126,10 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     return getUint(keccak256(abi.encodePacked("total.deposits", address(this))));
   }
 
+  function owner() public view override(IStakingPool, Ownable) returns (address){
+    return super.owner();
+  }
+
 //should staking info be added to pool before depositing is enabled?
   function stake(
     bytes calldata pubKey,

@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 interface IStakingPool{
+
+  function owner() external view returns (address);
+
   function depositToPool() external payable;
 
   function addToDeposit(uint _id) external payable;
