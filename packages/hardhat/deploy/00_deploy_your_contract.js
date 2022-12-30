@@ -89,7 +89,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   }
 
   const FrensStorage = await ethers.getContract("FrensStorage", deployer);
-  console.log("storage contrat", FrensStorage.address);
+  console.log("storage contract", FrensStorage.address);
   if(FrensStorageOld == 0){
     console.log('\x1b[33m%s\x1b[0m', "FrensStorage initialised", FrensStorage.address);
   } else if(FrensStorageOld.address != FrensStorage.address){
@@ -261,8 +261,6 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   });
 
   const newPool = await StakingPoolFactory.create("0x521B2cE927FD6d0D473789Bd3c70B296BBce613e", false);
-  console.log('\x1b[36m%s\x1b[0m', "pool", newPool.address);
-
 
 
 };

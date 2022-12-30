@@ -255,5 +255,11 @@ contract StakingPoolTest is Test {
 
     }
 
+    function testBadWithdrawalCred() public {
+      startHoax(contOwner);
+      vm.expectRevert("withdrawal credential mismatch");
+      stakingPool.setPubKey(pubkey, hex"01000000000000000000000000dead", signature, deposit_data_root);
+    }
+
 
 }

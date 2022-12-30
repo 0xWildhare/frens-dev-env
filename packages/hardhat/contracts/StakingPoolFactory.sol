@@ -21,7 +21,7 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
   function create(
     address owner_, 
     bool validatorLocked
-    ) public returns(address) {
+    ) public override returns(address) {
     StakingPool stakingPool = new StakingPool(owner_, frensStorage);
     setBool(keccak256(abi.encodePacked("pool.exists", address(stakingPool))), true);//do we need both pool.exists and contract.exists?
     setBool(keccak256(abi.encodePacked("contract.exists", address(stakingPool))), true);
