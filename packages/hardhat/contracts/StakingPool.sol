@@ -31,7 +31,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   function depositToPool() public payable {
     require(_getStateHash() == _getStringHash("acceptingDeposits"), "not accepting deposits");
     require(msg.value != 0, "must deposit ether");
-    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
+    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total deposits cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("token.id")), 1);
     uint id = getUint(keccak256(abi.encodePacked("token.id")));
     setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value);
@@ -45,7 +45,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(frensPoolShare.exists(_id), "id does not exist");
     require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
     require(_getStateHash() == _getStringHash("acceptingDeposits"), "not accepting deposits");
-    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total depostis cannot be more than 32 Eth");
+    require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total deposits cannot be more than 32 Eth");
     addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value);
     addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
   }

@@ -16,7 +16,7 @@ import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 
-contract StakingPoolTest is Test {
+contract StakingPoolLockedTest is Test {
     FrensArt public frensArt;
     FrensInitialiser public frensInitialiser;
     FrensMetaHelper public frensMetaHelper;
@@ -87,7 +87,7 @@ contract StakingPoolTest is Test {
       frensInitialiser.setContract(address(frensArt), "FrensArt");
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, false);
+      (address pool) = proxy.create(contOwner, true);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -100,6 +100,13 @@ contract StakingPoolTest is Test {
     }
 
     function testDeposit(uint72 x) public {
+      //test pool lock
+      vm.expectRevert("not accepting deposits");
+      hoax(alice);
+      stakingPool.depositToPool{value: x}();
+      //set pubKey
+      hoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       if(x > 0 && x <= 32 ether){
         startHoax(alice);
         stakingPool.depositToPool{value: x}();
@@ -121,6 +128,9 @@ contract StakingPoolTest is Test {
     }
 
     function testAddToDeposit(uint64 x, uint64 y) public {
+      //set pubKey
+      hoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       if(x > 0 && uint(x) + uint(y) <= 32 ether){
         startHoax(alice);
         stakingPool.depositToPool{value: x}();
@@ -146,6 +156,9 @@ contract StakingPoolTest is Test {
     }
 
     function testWithdraw(uint72 x, uint72 y) public {
+      //set pubKey
+      hoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       if(x >= y && x > 0 && uint(x) <= 32 ether){
         startHoax(alice);
         stakingPool.depositToPool{value: x}();
@@ -176,40 +189,30 @@ contract StakingPoolTest is Test {
     }
 
     function testStake() public { 
-      //stakingPool.sendToOwner();
       uint initialBalance = address(stakingPool).balance; //bc someone sent eth to this address on mainnet.
+      hoax(alice);
+      vm.expectRevert("not accepting deposits");
+      stakingPool.depositToPool{value: 32000000000000000000}();
+      //for this test to pass, it must be run on a mainnet fork,
+      //and the vlaues below must all be correctly gererated in the staking_deposit_cli
+      //use: ./deposit new-mnemonic --num_validators 1 --chain mainnet --eth1_withdrawal_address
+      //followed by the stakingPool contract address
+      hoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       hoax(alice);
       stakingPool.depositToPool{value: 32000000000000000000}();
       assertEq(initialBalance + 32000000000000000000, address(stakingPool).balance);
       bytes32 deposit_count_hash = keccak256(depositContract.get_deposit_count());
       hoax(contOwner);
-      //for this test to pass, it must be run on a mainnet fork,
-      //and the vlaues below must all be correctly gererated in the staking_deposit_cli
-      //use: ./deposit new-mnemonic --num_validators 1 --chain mainnet --eth1_withdrawal_address
-      //followed by the stakingPool contract address
-      stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
-      assertEq(initialBalance, address(stakingPool).balance);
-      assertFalse(keccak256(depositContract.get_deposit_count()) == deposit_count_hash);
-    }
-
-    function testStakeTwoStep() public { 
-      uint initialBalance = address(stakingPool).balance; //bc someone sent eth to this address on mainnet.
-      hoax(alice);
-      stakingPool.depositToPool{value: 32000000000000000000}();
-      assertEq(initialBalance + 32000000000000000000, address(stakingPool).balance);
-      bytes32 deposit_count_hash = keccak256(depositContract.get_deposit_count());
-      startHoax(contOwner);
-      //for this test to pass, it must be run on a mainnet fork,
-      //and the vlaues below must all be correctly gererated in the staking_deposit_cli
-      //use: ./deposit new-mnemonic --num_validators 1 --chain mainnet --eth1_withdrawal_address
-      //followed by the stakingPool contract address
-      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       stakingPool.stake();
       assertEq(initialBalance, address(stakingPool).balance);
       assertFalse(keccak256(depositContract.get_deposit_count()) == deposit_count_hash);
     }
 
     function testDistribute(uint32 x, uint32 y) public {
+      //set pubKey
+      hoax(contOwner);
+      stakingPool.setPubKey(pubkey, withdrawal_credentials, signature, deposit_data_root);
       uint maxUint32 = 4294967295;
       uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
       uint bobDeposit = 32000000000000000000 - aliceDeposit;
@@ -219,7 +222,7 @@ contract StakingPoolTest is Test {
         hoax(bob);
         stakingPool.depositToPool{value: bobDeposit}();
         startHoax(contOwner);
-        stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
+        stakingPool.stake();
         uint aliceBalance = address(alice).balance;
         uint bobBalance = address(bob).balance;
         uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
@@ -236,7 +239,6 @@ contract StakingPoolTest is Test {
         bobBalance = address(bob).balance;
         //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
         assertApproxEqAbs(bobBalance, bobBalanceExpected, 2);
-
       } else if(x == 0) {
         vm.expectRevert("must deposit ether");
         startHoax(alice);
@@ -247,13 +249,11 @@ contract StakingPoolTest is Test {
         hoax(bob);
         stakingPool.depositToPool{value: bobDeposit}();
         startHoax(contOwner);
-        stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
+        stakingPool.stake();
         payable(stakingPool).transfer(y);
         vm.expectRevert("minimum of 100 wei to distribute");
         stakingPool.distribute();
       }
-
     }
-
 
 }
