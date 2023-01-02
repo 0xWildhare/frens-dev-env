@@ -37,7 +37,8 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value);
     addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value);
     pushUint(keccak256(abi.encodePacked("ids.in.pool", address(this))), id);
-    frensPoolShare.mint(msg.sender, address(this));
+    setAddress(keccak256(abi.encodePacked("pool.for.id", id)), address(this));
+    frensPoolShare.mint(msg.sender);
     emit DepositToPool(msg.value,  msg.sender);
   }
 
