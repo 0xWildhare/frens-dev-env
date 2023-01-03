@@ -404,8 +404,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1672636511100,
-      "contentHash": "2bc2eae22195f963cdc05947ce941b73",
+      "lastModificationDate": 1672692644318,
+      "contentHash": "1d296de94154072d61e1e91a2acd1a13",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -1928,6 +1928,95 @@
         }
       }
     },
+    "test/foundry/DistributeRe-entrancyTest.t.sol": {
+      "lastModificationDate": 1672693236438,
+      "contentHash": "80dbb4aa56f2f67b09a2a9e9eac9225c",
+      "sourceName": "test/foundry/DistributeRe-entrancyTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FactoryProxy.sol",
+        "contracts/FrensArt.sol",
+        "contracts/FrensBase.sol",
+        "contracts/FrensInitialiser.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/ToColor.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "Attacker": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "DistributeRe-entrancyTest.t.sol/Attacker.json"
+        },
+        "StakingPoolTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "DistributeRe-entrancyTest.t.sol/StakingPoolTest.json"
+        }
+      }
+    },
     "test/foundry/FrensPoolShareTest.t.sol": {
       "lastModificationDate": 1672637576870,
       "contentHash": "dd256e3f2c9f32e8e50d7b9e57868a03",
@@ -2015,7 +2104,7 @@
       }
     },
     "test/foundry/MiscTest.t.sol": {
-      "lastModificationDate": 1672637435380,
+      "lastModificationDate": 1672637562822,
       "contentHash": "c52043e7c22e0f9c89ad178377b2323f",
       "sourceName": "test/foundry/MiscTest.t.sol",
       "solcConfig": {
@@ -2186,8 +2275,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1672635200792,
-      "contentHash": "c97b9d2a22b9e3469b07cf3b43490122",
+      "lastModificationDate": 1672683698451,
+      "contentHash": "821690164fd9ecae7697df182b787593",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2272,8 +2361,8 @@
       }
     },
     "test/foundry/TestHelper.sol": {
-      "lastModificationDate": 1672630259061,
-      "contentHash": "fd2182bc4d64d57fcd721ee7a894ddea",
+      "lastModificationDate": 1672689375948,
+      "contentHash": "78228a5f19d7a2bcd057b6a58bc0e2d6",
       "sourceName": "test/foundry/TestHelper.sol",
       "solcConfig": {
         "settings": {

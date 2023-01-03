@@ -32,3 +32,5 @@ contract NftReceiver is IERC721Receiver {
         return IERC721Receiver.onERC721Received.selector;
     }
 }
+
+

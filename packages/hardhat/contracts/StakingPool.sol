@@ -140,12 +140,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     payable(msg.sender).transfer(_amount);
   }
 
-  //TODO think about other options for distribution
+  //TODO: think about other options for distribution
+  //TODO: should this include an option to swap for SSV and pay operators?
   function distribute() public {
     require(_getStateHash() == _getStringHash("staked"), "use withdraw when not staked");
     uint contractBalance = address(this).balance;
-    uint[] memory idsInPool = getIdsInThisPool();
     require(contractBalance > 100, "minimum of 100 wei to distribute");
+    uint[] memory idsInPool = getIdsInThisPool();
     for(uint i=0; i<idsInPool.length; i++) {
       uint id = idsInPool[i];
       address tokenOwner = frensPoolShare.ownerOf(id);
@@ -156,12 +157,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function unstake() public onlyOwner{
     if(address(this).balance > 100){
-      distribute();
+      distribute(); 
     }
     setString(keccak256(abi.encodePacked("contract.state", address(this))), "exited");
 
-    //TODO what else needs to be in here (probably a limiting modifier and/or some requires) maybe add an arbitrary call to an external contract is enabled?
+    //TODO: what else needs to be in here (probably a limiting modifier and/or some requires) maybe add an arbitrary call to an external contract is enabled?
     //TODO: is this where we extract fees?
+    //TODO: This calls distribute, which works for the block rewards, but does not do anything with the attestation rewards.
   }
 
   function getIdsInThisPool() public view returns(uint[] memory) {

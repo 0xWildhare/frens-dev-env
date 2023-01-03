@@ -282,13 +282,16 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: aliceDeposit}();
         hoax(bob);
         stakingPool.depositToPool{value: bobDeposit}();
+        payable(stakingPool).transfer(y);
+        vm.expectRevert("use withdraw when not staked");
+        stakingPool.distribute();
         startHoax(contOwner);
         stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
         uint aliceBalance = address(alice).balance;
         uint bobBalance = address(bob).balance;
         uint aliceShare = (uint(y) + address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
         uint bobShare = (uint(y) + address(stakingPool).balance) - aliceShare;
-        payable(stakingPool).transfer(y);
+        payable(stakingPool).transfer(y); //this happens twice, because the previous two lines use the existing balance (after the first deposit to test the revert) to calculate shares.
         stakingPool.distribute();
         if(aliceShare == 1) aliceShare = 0;
         if(bobShare == 1) bobShare =0;
