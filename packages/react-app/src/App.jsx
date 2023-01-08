@@ -263,9 +263,9 @@ console.log("🤗 balance:", balance);
     setNewestPool(newPool);
     if(newPool){
       contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = newPool;
-      contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newPool;
+      //contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newPool;
     };
-  }, [createEvents]);
+  }, [createEvents, address]);
   console.log("📟 create events:", createEvents);
 
 
