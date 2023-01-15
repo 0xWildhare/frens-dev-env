@@ -341,6 +341,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       "0x521B2cE927FD6d0D473789Bd3c70B296BBce613e",
+      false,
       FrensStorage.address
     ],
     log: true,
