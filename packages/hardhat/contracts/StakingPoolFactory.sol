@@ -15,7 +15,7 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
   );
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
-    version = 1;
+    version = 2;
   }
 
   function create(

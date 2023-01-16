@@ -9,6 +9,7 @@ import "./interfaces/IFrensPoolShare.sol";
 import "./interfaces/IStakingPool.sol";
 import "./interfaces/IFrensClaim.sol";
 import "./interfaces/IFrensArt.sol";
+import "./interfaces/IFrensPoolSetter.sol";
 import "./FrensBase.sol";
 
 
@@ -39,20 +40,16 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       currentState = State.acceptingDeposits;
     }
     _transferOwnership(owner_);
-    version = 1;
+    version = 2;
   }
 
   function depositToPool() external payable {
     require(currentState == State.acceptingDeposits, "not accepting deposits"); //state must be "aceptingDeposits"
     require(msg.value != 0, "must deposit ether"); //cannot generate 0 value nft
     require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total deposits cannot be more than 32 Eth"); //limit deposits to 32 eth
-
-    addUint(keccak256(abi.encodePacked("token.id")), 1); //increment token id
-    uint id = getUint(keccak256(abi.encodePacked("token.id"))); //retrieve token id
-    setUint(keccak256(abi.encodePacked("deposit.amount", id)), msg.value); //assign msg.value to the deposit.amount of token id
-    addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value); //increase total.deposits of this pool by msg.value
-    pushUint(keccak256(abi.encodePacked("ids.in.pool", address(this))), id); //add id to list of ids in pool
-    setAddress(keccak256(abi.encodePacked("pool.for.id", id)), address(this)); //set this as the pool for id
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.depositToPool(msg.value);
+    assert(success);
     frensPoolShare.mint(msg.sender); //mint nft
     emit DepositToPool(msg.value,  msg.sender); 
   }
@@ -62,9 +59,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool"); //id must be associated with this pool
     require(currentState == State.acceptingDeposits, "not accepting deposits"); //pool must be "acceptingDeposits"
     require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total deposits cannot be more than 32 Eth"); //limit deposits to 32 eth
-
-    addUint(keccak256(abi.encodePacked("deposit.amount", _id)), msg.value); //add msg.value to deposit.amount for id
-    addUint(keccak256(abi.encodePacked("total.deposits", address(this))), msg.value); //add msg.value to total.deposits for pool
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.addToDeposit(_id, msg.value);
+    assert(success);
   }
 
   function stake(
@@ -115,14 +112,12 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     if(getBool(keccak256(abi.encodePacked("validator.locked", address(this))))){
       require(currentState == State.awaitingValidatorInfo, "wrong state");
       assert(!getBool(keccak256(abi.encodePacked("validator.set", address(this))))); //this should never happen
-      setString(keccak256(abi.encodePacked("contract.state", address(this))), "acceptingDeposits");
+      currentState = State.acceptingDeposits;
     }
     require(currentState == State.acceptingDeposits, "wrong state");
-    setBytes(keccak256(abi.encodePacked("pubKey", address(this))), pubKey);
-    setBytes(keccak256(abi.encodePacked("withdrawal_credentials", address(this))), withdrawal_credentials);
-    setBytes(keccak256(abi.encodePacked("signature", address(this))), signature);
-    setBytes32(keccak256(abi.encodePacked("deposit_data_root", address(this))), deposit_data_root);
-    setBool(keccak256(abi.encodePacked("validator.set", address(this))), true);
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.setPubKey(pubKey, withdrawal_credentials, signature, deposit_data_root);
+    assert(success);
   }
 
   function arbitraryContractCall(
@@ -148,8 +143,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(currentState == State.acceptingDeposits, "cannot withdraw once staked");//TODO: this may need to be more restrictive
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
-    subUint(keccak256(abi.encodePacked("deposit.amount", _id)), _amount);
-    subUint(keccak256(abi.encodePacked("total.deposits", address(this))), _amount);
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.withdraw(_id, _amount);
+    assert(success);
     payable(msg.sender).transfer(_amount);
   }
 
@@ -170,7 +166,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       uint id = idsInPool[i];
       address tokenOwner = frensPoolShare.ownerOf(id);
       uint share = _getShare(id, contractBalance);
-      addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
+      IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+      bool success = frensPoolSetter.distribute(tokenOwner, share);
+      assert(success);
     }
     payable(address(frensClaim)).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
 
@@ -276,7 +274,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     IFrensArt newFrensArt = IFrensArt(newArtContract);
     string memory newArt = newFrensArt.renderTokenById(1);
     require(bytes(newArt).length != 0, "invalid art contract");
-    setAddress(keccak256(abi.encodePacked("pool.specific.art.address", address(this))), newArtContract);
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.setArt(newArtContract);
+    assert(success);
   }
 
 
