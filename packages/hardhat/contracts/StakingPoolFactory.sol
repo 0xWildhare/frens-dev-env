@@ -23,7 +23,7 @@ contract StakingPoolFactory is IStakingPoolFactory, FrensBase {
     bool validatorLocked
     ) public override returns(address) {
     StakingPool stakingPool = new StakingPool(owner_, validatorLocked, frensStorage);
-    setBool(keccak256(abi.encodePacked("pool.exists", address(stakingPool))), true);//do we need both pool.exists and contract.exists?
+    setBool(keccak256(abi.encodePacked("pool.exists", address(stakingPool))), true);
     setBool(keccak256(abi.encodePacked("validator.locked", address(stakingPool))), validatorLocked);
     emit Create(address(stakingPool), msg.sender, owner_);
     return(address(stakingPool));

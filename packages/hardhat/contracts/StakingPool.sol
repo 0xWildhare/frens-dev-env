@@ -111,7 +111,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(keccak256(withdrawal_credentials) == keccak256(withdrawalCredFromAddr), "withdrawal credential mismatch");
     if(getBool(keccak256(abi.encodePacked("validator.locked", address(this))))){
       require(currentState == State.awaitingValidatorInfo, "wrong state");
-      assert(!getBool(keccak256(abi.encodePacked("validator.set", address(this))))); //this should never happen
+      assert(!getBool(keccak256(abi.encodePacked("validator.set", address(this))))); //this should never fail
       currentState = State.acceptingDeposits;
     }
     require(currentState == State.acceptingDeposits, "wrong state");
@@ -153,7 +153,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   //TODO: should this include an option to swap for SSV and pay operators?
   //TODO: is this where we extract fes?
   function distribute() public {
-    require(currentState == State.acceptingDeposits, "use withdraw when not staked");
+    require(currentState != State.acceptingDeposits, "use withdraw when not staked");
     _distribute();
       }
 
