@@ -17,15 +17,15 @@ import "../../contracts/FrensStorage.sol";
 import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
+import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/FrensClaim.sol";
 import "../../contracts/FrensPoolSetter.sol";
-import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
 
 
-contract MiscTest is Test {
+contract FrensInitialiserTest is Test {
     FrensArt public frensArt;
     FrensInitialiser public frensInitialiser;
     FrensMetaHelper public frensMetaHelper;
@@ -134,22 +134,35 @@ contract MiscTest is Test {
 
     }
 
-    function testMaliciousProxyInteraction() public {
-      IMaliciousProxyInterface maliciousProxy = IMaliciousProxyInterface(address(factoryProxy));
+  function testInitializer() public {
+    setUp(); //annoying formality innit
+  }
+
+  function testDelete() public {
+    frensInitialiser.deleteContract(address(stakingPoolFactory), "StakingPoolFactory");
+    vm.expectRevert("only factory can call");
+    stakingPoolFactory.create(contOwner, false, false, 0, 32000000000000000000);
+  }
+
+  function testDisallow() public {
       hoax(alice);
-      vm.expectRevert(bytes("")); //should not be able to call an internal function
-      maliciousProxy.setBool(keccak256(abi.encodePacked("this.shouldnt.work")), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("this.shouldnt.work"))));
+      stakingPool.depositToPool{value: 1 ether}();
+      uint bobBalance = address(bob).balance;
+
+      frensInitialiser.allowExternalContract(0x0000000000000000000000000000000000000B0b); //bob is our external contract here
       
+      hoax(contOwner);
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+      assertEq(bobBalance + 1 ether, address(bob).balance);
+
+      frensInitialiser.disAllowExternalContract(0x0000000000000000000000000000000000000B0b);
+
+      hoax(contOwner);
+      vm.expectRevert("contract not allowed");
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+
     }
 
-    function testNonGuardianInitialiserAccess() public {
-      hoax(alice);
-      vm.expectRevert("Account is not a temporary guardian");
-      frensInitialiser.setContractExists(address(alice), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("contract.exists", address(alice)))));
-    }
+
 
 }

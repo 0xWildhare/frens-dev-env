@@ -88,6 +88,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   function stake() public {
     require(address(this).balance >= 32 ether, "not enough eth"); 
     require(currentState == State.acceptingDeposits, "wrong state");
+    require(getBool(keccak256(abi.encodePacked("validator.set", address(this)))), "validator not set");
     uint value = 32 ether;
     bytes memory pubKey = getBytes(keccak256(abi.encodePacked("pubKey", address(this))));
     bytes memory withdrawal_credentials = getBytes(keccak256(abi.encodePacked("withdrawal_credentials", address(this))));
@@ -277,13 +278,6 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.setArt(newArtContract);
     assert(success);
-  }
-
-
-//REMOVE rugpull is for testing only and should not be in the mainnet version
-//if this gets deploied on mainnet call 911 or DM @0xWildhare
-  function rugpull() public onlyOwner{
-    payable(msg.sender).transfer(address(this).balance);
   }
 
   // to support receiving ETH by default

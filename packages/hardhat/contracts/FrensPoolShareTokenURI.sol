@@ -39,10 +39,10 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
         'this fren has a deposit of ',depositString,
         ' Eth in pool ', stakingPoolAddress,
         ', with claimable balance of ', shareString, ' Eth'));
-      string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
+     /* string memory image = Base64.encode(bytes(generateSVGofTokenById(id, poolAddress)));
 
 
-  //TODO: add pool owner to traits and possibly art (Add ENS integration for art - only display if ENS exists for address)
+  
       return
         string(
           abi.encodePacked(
@@ -82,7 +82,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
               )
             )
           )
-        );
+        ); */ return "";
     }
 
     function generateSVGofTokenById(uint256 id, address pool) internal view returns (string memory) {

@@ -11,7 +11,7 @@ contract FrensClaim is IFrensClaim, FrensBase {
         version = 2;
     }
 
-    function claim(address claimant) public {
+    function claim(address claimant) override public {
         uint amount = getUint(keccak256(abi.encodePacked("claimable.amount", claimant)));
         setUint(keccak256(abi.encodePacked("claimable.amount", claimant)), 0);
         payable(claimant).transfer(amount);

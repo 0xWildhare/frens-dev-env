@@ -160,10 +160,10 @@
         58
       ],
       "FrensBase": [
-        814
+        828
       ],
       "IFrensStorage": [
-        3826
+        5070
       ]
     },
     "nodeType": "SourceUnit",
@@ -193,7 +193,7 @@
         "file": "./FrensBase.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 59,
-        "sourceUnit": 815,
+        "sourceUnit": 829,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -227,7 +227,7 @@
                     "referencedDeclaration": 7,
                     "src": "186:13:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$3826",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$5070",
                       "typeString": "contract IFrensStorage"
                     }
                   }
@@ -241,7 +241,7 @@
                     "176:9:0"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 814,
+                  "referencedDeclaration": 828,
                   "src": "176:9:0"
                 },
                 "nodeType": "ModifierInvocation",
@@ -266,7 +266,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IFrensStorage_$3826",
+                    "typeIdentifier": "t_contract$_IFrensStorage_$5070",
                     "typeString": "contract IFrensStorage"
                   },
                   "typeName": {
@@ -279,13 +279,13 @@
                         "147:13:0"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 3826,
+                      "referencedDeclaration": 5070,
                       "src": "147:13:0"
                     },
-                    "referencedDeclaration": 3826,
+                    "referencedDeclaration": 5070,
                     "src": "147:13:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$3826",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$5070",
                       "typeString": "contract IFrensStorage"
                     }
                   },
@@ -798,7 +798,7 @@
                       "name": "getAddress",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 456,
+                      "referencedDeclaration": 470,
                       "src": "1296:10:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_view$_t_bytes32_$returns$_t_address_$",
@@ -1118,7 +1118,7 @@
                 "118:9:0"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 814,
+              "referencedDeclaration": 828,
               "src": "118:9:0"
             },
             "id": 4,
@@ -1132,7 +1132,7 @@
         "fullyImplemented": true,
         "linearizedBaseContracts": [
           58,
-          814
+          828
         ],
         "name": "FactoryProxy",
         "nameLocation": "102:12:0",

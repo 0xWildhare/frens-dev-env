@@ -17,15 +17,15 @@ import "../../contracts/FrensStorage.sol";
 import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
+import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/FrensClaim.sol";
 import "../../contracts/FrensPoolSetter.sol";
-import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
 
 
-contract MiscTest is Test {
+contract StakingPoolTest is Test {
     FrensArt public frensArt;
     FrensInitialiser public frensInitialiser;
     FrensMetaHelper public frensMetaHelper;
@@ -134,22 +134,11 @@ contract MiscTest is Test {
 
     }
 
-    function testMaliciousProxyInteraction() public {
-      IMaliciousProxyInterface maliciousProxy = IMaliciousProxyInterface(address(factoryProxy));
-      hoax(alice);
-      vm.expectRevert(bytes("")); //should not be able to call an internal function
-      maliciousProxy.setBool(keccak256(abi.encodePacked("this.shouldnt.work")), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("this.shouldnt.work"))));
-      
-    }
-
-    function testNonGuardianInitialiserAccess() public {
-      hoax(alice);
-      vm.expectRevert("Account is not a temporary guardian");
-      frensInitialiser.setContractExists(address(alice), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("contract.exists", address(alice)))));
-    }
+  function testFactory() public {
+    address pool3 = stakingPoolFactory.create(contOwner, false, false, 0, 32000000000000000000);
+    StakingPool stakingPool3 = StakingPool(payable(pool3));
+    vm.expectRevert("not enough eth");
+    stakingPool3.stake();
+  }
 
 }

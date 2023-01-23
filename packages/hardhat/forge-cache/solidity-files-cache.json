@@ -13,7 +13,7 @@
   },
   "files": {
     "contracts/FactoryProxy.sol": {
-      "lastModificationDate": 1672114057013,
+      "lastModificationDate": 1674366060403,
       "contentHash": "3f67bfb96036100aafdd04b65cbd5b3f",
       "sourceName": "contracts/FactoryProxy.sol",
       "solcConfig": {
@@ -152,8 +152,8 @@
       }
     },
     "contracts/FrensClaim.sol": {
-      "lastModificationDate": 1673822548296,
-      "contentHash": "5ca27f84829f592603497ffc93d2c965",
+      "lastModificationDate": 1674430130456,
+      "contentHash": "0fe9a15a1e0a59343038862e838a2d7c",
       "sourceName": "contracts/FrensClaim.sol",
       "solcConfig": {
         "settings": {
@@ -240,6 +240,50 @@
         }
       }
     },
+    "contracts/FrensManager.sol": {
+      "lastModificationDate": 1674421787855,
+      "contentHash": "548e81e6d4c561bf42740cf34268e554",
+      "sourceName": "contracts/FrensManager.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensBase.sol",
+        "contracts/interfaces/IFrensStorage.sol"
+      ],
+      "versionRequirement": ">=0.8.0, <0.9.0",
+      "artifacts": {
+        "FrensManager": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensManager.sol/FrensManager.json"
+        }
+      }
+    },
     "contracts/FrensMetaHelper.sol": {
       "lastModificationDate": 1673822569100,
       "contentHash": "335422d7819726b77fa7d14622bbc6cd",
@@ -292,8 +336,8 @@
       }
     },
     "contracts/FrensPoolSetter.sol": {
-      "lastModificationDate": 1673832311753,
-      "contentHash": "7ae51e6e58cc64424b1388d8852c0434",
+      "lastModificationDate": 1674435485717,
+      "contentHash": "610390e9be16f968fa42283a476919c3",
       "sourceName": "contracts/FrensPoolSetter.sol",
       "solcConfig": {
         "settings": {
@@ -396,8 +440,8 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1673822615575,
-      "contentHash": "289fcbbe76fe2b8be7c9ad8905db558f",
+      "lastModificationDate": 1674403083542,
+      "contentHash": "780cd9baf1086467d40166c25311a5d3",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
@@ -494,8 +538,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1673930973934,
-      "contentHash": "7c3073c455d0164c40443bd816eb13ca",
+      "lastModificationDate": 1674364259591,
+      "contentHash": "4e6e8006aec1ca394bd4c827a160be05",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -550,8 +594,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1673833463622,
-      "contentHash": "487748f5a1d49aaf93fce0204f7bbd30",
+      "lastModificationDate": 1674435846538,
+      "contentHash": "3fa1c1eb05500ebf76010bdd9e5b47a5",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -854,8 +898,8 @@
       }
     },
     "contracts/interfaces/IFrensPoolSetter.sol": {
-      "lastModificationDate": 1673832257692,
-      "contentHash": "bce3fb7445288d7617be0dfa1f83a4bd",
+      "lastModificationDate": 1674435644744,
+      "contentHash": "27e167ee64edf7f20f3fde445798b8aa",
       "sourceName": "contracts/interfaces/IFrensPoolSetter.sol",
       "solcConfig": {
         "settings": {
@@ -1146,8 +1190,8 @@
       }
     },
     "contracts/interfaces/IStakingPoolFactory.sol": {
-      "lastModificationDate": 1672355003179,
-      "contentHash": "bc498713292c1381e0a53dc48009a836",
+      "lastModificationDate": 1674435810816,
+      "contentHash": "4e60f95dc0c08fdf3983539ddbc225b3",
       "sourceName": "contracts/interfaces/IStakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -2107,8 +2151,8 @@
       }
     },
     "test/foundry/DistributeRe-entrancyTest.t.sol": {
-      "lastModificationDate": 1673930556470,
-      "contentHash": "d69d9bcb27b4b00da8added4e01fcbd8",
+      "lastModificationDate": 1674436260727,
+      "contentHash": "d3513496d422f9feb6bf79c83bf93391",
       "sourceName": "test/foundry/DistributeRe-entrancyTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2199,9 +2243,190 @@
         }
       }
     },
+    "test/foundry/FrensInitialiserTest.t.sol": {
+      "lastModificationDate": 1674436845144,
+      "contentHash": "d9216d5fcfb69e415ecfa25e8879d862",
+      "sourceName": "test/foundry/FrensInitialiserTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FactoryProxy.sol",
+        "contracts/FrensArt.sol",
+        "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
+        "contracts/FrensInitialiser.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensPoolSetter.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/ToColor.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolSetter.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "FrensInitialiserTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensInitialiserTest.t.sol/FrensInitialiserTest.json"
+        }
+      }
+    },
+    "test/foundry/FrensManagerTest.t.sol": {
+      "lastModificationDate": 1674436301672,
+      "contentHash": "d238d0e03e9c7db5e0082ce6d5958a76",
+      "sourceName": "test/foundry/FrensManagerTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FactoryProxy.sol",
+        "contracts/FrensArt.sol",
+        "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
+        "contracts/FrensInitialiser.sol",
+        "contracts/FrensManager.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensPoolSetter.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/ToColor.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolSetter.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "FrensManagerTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "FrensManagerTest.t.sol/FrensManagerTest.json"
+        }
+      }
+    },
     "test/foundry/FrensPoolShareTest.t.sol": {
-      "lastModificationDate": 1673930566874,
-      "contentHash": "41557abe2ec809f4acc5e11251d05626",
+      "lastModificationDate": 1674436318481,
+      "contentHash": "2ff215050842e21178ffe413bace54d3",
       "sourceName": "test/foundry/FrensPoolShareTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2290,8 +2515,8 @@
       }
     },
     "test/foundry/MiscTest.t.sol": {
-      "lastModificationDate": 1673930579495,
-      "contentHash": "6ba052311296eaea17516a7c5a70321b",
+      "lastModificationDate": 1674436336231,
+      "contentHash": "5ffc430f3c31ee3ab5fc20d91cc7aef6",
       "sourceName": "test/foundry/MiscTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2379,9 +2604,99 @@
         }
       }
     },
+    "test/foundry/StakingPoolFactoryTest.t.sol": {
+      "lastModificationDate": 1674436358707,
+      "contentHash": "30f7e26a279842860f90f4b7465ab523",
+      "sourceName": "test/foundry/StakingPoolFactoryTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FactoryProxy.sol",
+        "contracts/FrensArt.sol",
+        "contracts/FrensBase.sol",
+        "contracts/FrensClaim.sol",
+        "contracts/FrensInitialiser.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensPoolSetter.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/ToColor.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensClaim.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensPoolSetter.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/ISSVRegistry.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "StakingPoolTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolFactoryTest.t.sol/StakingPoolTest.json"
+        }
+      }
+    },
     "test/foundry/StakingPoolLockedTest.t.sol": {
-      "lastModificationDate": 1673930591578,
-      "contentHash": "09341ac9f278754c731c91e5677de259",
+      "lastModificationDate": 1674436372369,
+      "contentHash": "e1c28ffb6e7a0f91b9ddbef7e2426c45",
       "sourceName": "test/foundry/StakingPoolLockedTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2469,8 +2784,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1673833402149,
-      "contentHash": "66c373c0a5cf6cf895de637ad66a1820",
+      "lastModificationDate": 1674436391484,
+      "contentHash": "a23fab20ceec4e3bc6fb2a318efccab2",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {

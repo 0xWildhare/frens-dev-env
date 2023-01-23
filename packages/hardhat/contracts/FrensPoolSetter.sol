@@ -9,6 +9,17 @@ contract FrensPoolSetter is FrensBase {
         version = 2;
     }
 
+    function create(address stakingPool, bool validatorLocked, bool frensLocked, uint poolMin, uint poolMax) external returns(bool) {
+        string memory callingContract = getString(keccak256(abi.encodePacked("contract.name", msg.sender)));
+        require(keccak256(abi.encodePacked(callingContract)) == keccak256(abi.encodePacked("StakingPoolFactory")), "only factory can call");
+        setBool(keccak256(abi.encodePacked("pool.exists", stakingPool)), true);
+        setBool(keccak256(abi.encodePacked("validator.locked", stakingPool)), validatorLocked);
+        setBool(keccak256(abi.encodePacked("frens.locked", stakingPool)), frensLocked);
+        setUint(keccak256(abi.encodePacked("pool.min", stakingPool)), poolMin);
+        setUint(keccak256(abi.encodePacked("pool.max", stakingPool)), poolMax);
+        return true;
+    }
+
     function depositToPool(uint depositAmount) external onlyStakingPool(msg.sender) returns(bool) {
         addUint(keccak256(abi.encodePacked("token.id")), 1); //increment token id
         uint id = getUint(keccak256(abi.encodePacked("token.id"))); //retrieve token id

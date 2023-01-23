@@ -11,6 +11,21 @@
           "internalType": "bool",
           "name": "validatorLocked",
           "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "frensLocked",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolMin",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolMax",
+          "type": "uint256"
         }
       ],
       "name": "create",
@@ -36,9 +51,9 @@
     "linkReferences": {}
   },
   "methodIdentifiers": {
-    "create(address,bool)": "319e9090"
+    "create(address,bool,bool,uint256,uint256)": "e403e1ae"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner_\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"validatorLocked\",\"type\":\"bool\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0xa09ae0bd2ac371390418befdb940f15f6dce1e235d09028b14d761e258cd4a45\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a9cc1ee4273f02a8c1bbf053d836bc9d95d4156eaf402017d2dd9d2bf67c53d8\",\"dweb:/ipfs/QmdjsW1TjFHiEZ3qTeKKEzZJN6tY8LvzhXmy8QZS2Ehj1X\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner_\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"validatorLocked\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"frensLocked\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"poolMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"poolMax\",\"type\":\"uint256\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0x54171f99a684dc2e87957241a3544727513819bc58d10416e0dc84185c1d5374\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://59f6b26f34af6b19b4fff323fa8cb0518875b040db525c957591d0cbfd1a7290\",\"dweb:/ipfs/QmXFr3LMjyFQjM5igudDNZffmu4isgCKt6kbS6uhAnNpiw\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -57,6 +72,21 @@
               "internalType": "bool",
               "name": "validatorLocked",
               "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "frensLocked",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "poolMin",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "poolMax",
+              "type": "uint256"
             }
           ],
           "stateMutability": "nonpayable",
@@ -108,10 +138,10 @@
     },
     "sources": {
       "contracts/interfaces/IStakingPoolFactory.sol": {
-        "keccak256": "0xa09ae0bd2ac371390418befdb940f15f6dce1e235d09028b14d761e258cd4a45",
+        "keccak256": "0x54171f99a684dc2e87957241a3544727513819bc58d10416e0dc84185c1d5374",
         "urls": [
-          "bzz-raw://a9cc1ee4273f02a8c1bbf053d836bc9d95d4156eaf402017d2dd9d2bf67c53d8",
-          "dweb:/ipfs/QmdjsW1TjFHiEZ3qTeKKEzZJN6tY8LvzhXmy8QZS2Ehj1X"
+          "bzz-raw://59f6b26f34af6b19b4fff323fa8cb0518875b040db525c957591d0cbfd1a7290",
+          "dweb:/ipfs/QmXFr3LMjyFQjM5igudDNZffmu4isgCKt6kbS6uhAnNpiw"
         ],
         "license": "MIT"
       }
@@ -120,19 +150,19 @@
   },
   "ast": {
     "absolutePath": "contracts/interfaces/IStakingPoolFactory.sol",
-    "id": 4714,
+    "id": 5618,
     "exportedSymbols": {
       "IStakingPoolFactory": [
-        4713
+        5617
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "0:197:21",
+    "src": "0:255:26",
     "nodes": [
       {
-        "id": 4703,
+        "id": 5601,
         "nodeType": "PragmaDirective",
-        "src": "0:31:21",
+        "src": "0:31:26",
         "nodes": [],
         "literals": [
           "solidity",
@@ -145,34 +175,34 @@
         ]
       },
       {
-        "id": 4713,
+        "id": 5617,
         "nodeType": "ContractDefinition",
-        "src": "64:132:21",
+        "src": "64:190:26",
         "nodes": [
           {
-            "id": 4712,
+            "id": 5616,
             "nodeType": "FunctionDefinition",
-            "src": "99:94:21",
+            "src": "99:152:26",
             "nodes": [],
-            "functionSelector": "319e9090",
+            "functionSelector": "e403e1ae",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "create",
-            "nameLocation": "108:6:21",
+            "nameLocation": "108:6:26",
             "parameters": {
-              "id": 4708,
+              "id": 5612,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4705,
+                  "id": 5603,
                   "mutability": "mutable",
                   "name": "owner_",
-                  "nameLocation": "128:6:21",
+                  "nameLocation": "128:6:26",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4712,
-                  "src": "120:14:21",
+                  "scope": 5616,
+                  "src": "120:14:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -180,10 +210,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4704,
+                    "id": 5602,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "120:7:21",
+                    "src": "120:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -194,13 +224,13 @@
                 },
                 {
                   "constant": false,
-                  "id": 4707,
+                  "id": 5605,
                   "mutability": "mutable",
                   "name": "validatorLocked",
-                  "nameLocation": "146:15:21",
+                  "nameLocation": "146:15:26",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4712,
-                  "src": "141:20:21",
+                  "scope": 5616,
+                  "src": "141:20:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -208,33 +238,114 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 4706,
+                    "id": 5604,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "141:4:21",
+                    "src": "141:4:26",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     }
                   },
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5607,
+                  "mutability": "mutable",
+                  "name": "frensLocked",
+                  "nameLocation": "172:11:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5616,
+                  "src": "167:16:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 5606,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "167:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5609,
+                  "mutability": "mutable",
+                  "name": "poolMin",
+                  "nameLocation": "194:7:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5616,
+                  "src": "189:12:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5608,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "189:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5611,
+                  "mutability": "mutable",
+                  "name": "poolMax",
+                  "nameLocation": "212:7:26",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5616,
+                  "src": "207:12:26",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 5610,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "207:4:26",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
                 }
               ],
-              "src": "114:52:21"
+              "src": "114:110:26"
             },
             "returnParameters": {
-              "id": 4711,
+              "id": 5615,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4710,
+                  "id": 5614,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4712,
-                  "src": "184:7:21",
+                  "scope": 5616,
+                  "src": "242:7:26",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -242,10 +353,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4709,
+                    "id": 5613,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "184:7:21",
+                    "src": "242:7:26",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -255,9 +366,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "183:9:21"
+              "src": "241:9:26"
             },
-            "scope": 4713,
+            "scope": 5617,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
@@ -270,15 +381,15 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          4713
+          5617
         ],
         "name": "IStakingPoolFactory",
-        "nameLocation": "74:19:21",
-        "scope": 4714,
+        "nameLocation": "74:19:26",
+        "scope": 5618,
         "usedErrors": []
       }
     ],
     "license": "MIT"
   },
-  "id": 21
+  "id": 26
 }

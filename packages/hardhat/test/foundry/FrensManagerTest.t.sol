@@ -17,15 +17,16 @@ import "../../contracts/FrensStorage.sol";
 import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
+import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/FrensClaim.sol";
 import "../../contracts/FrensPoolSetter.sol";
-import "../../contracts/FrensPoolShare.sol";
+import "../../contracts/FrensManager.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
 
 
-contract MiscTest is Test {
+contract FrensManagerTest is Test {
     FrensArt public frensArt;
     FrensInitialiser public frensInitialiser;
     FrensMetaHelper public frensMetaHelper;
@@ -39,6 +40,7 @@ contract MiscTest is Test {
     IStakingPoolFactory public proxy;
     FrensClaim public frensClaim;
     FrensPoolSetter public frensPoolSetter;
+    FrensManager public frensManager;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -72,47 +74,51 @@ contract MiscTest is Test {
       vm.prank(address(this), address(this));
       frensInitialiser.setContract(address(frensInitialiser), "FrensInitialiser");
       frensInitialiser.setContractExists(address(frensInitialiser), true);
+      //Deploy FrensManager
+      frensManager = new FrensManager(frensStorage);
+      frensInitialiser.setContract(address(frensManager), "frensManager");
+      frensInitialiser.setContractExists(address(frensManager), true);
       //initialise SSVRegistry
-      frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
+      frensManager.setExternalContract(ssvRegistryAddress, "SSVRegistry");
       //initialise deposit Contract
-      frensInitialiser.setExternalContract(depCont, "DepositContract");
+      frensManager.setExternalContract(depCont, "DepositContract");
       //initialise ENS 
-      frensInitialiser.setExternalContract(ENSAddress, "ENS");
+      frensManager.setExternalContract(ENSAddress, "ENS");
       //deploy NFT contract
       frensPoolShare = new FrensPoolShare(frensStorage);
       //initialise NFT contract
-      frensInitialiser.setContract(address(frensPoolShare), "FrensPoolShare");
-      frensInitialiser.setContractExists(address(frensPoolShare), false);
+      frensManager.setContract(address(frensPoolShare), "FrensPoolShare");
+      //frensInitialiser.setContractExists(address(frensPoolShare), false);
       //deploy Factory
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
-      frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
+      frensManager.setContract(address(stakingPoolFactory), "StakingPoolFactory");
       frensInitialiser.setContractExists(address(stakingPoolFactory), true);
       //deploy Claims
       frensClaim = new FrensClaim(frensStorage);
       //initialise Claims
-      frensInitialiser.setContract(address(frensClaim), "FrensClaim");
+      frensManager.setContract(address(frensClaim), "FrensClaim");
       frensInitialiser.setContractExists(address(frensClaim), true);
       //deploy PoolSetter
       frensPoolSetter = new FrensPoolSetter(frensStorage);
       //initialise PoolSetter
-      frensInitialiser.setContract(address(frensPoolSetter), "FrensPoolSetter");
+      frensManager.setContract(address(frensPoolSetter), "FrensPoolSetter");
       frensInitialiser.setContractExists(address(frensPoolSetter), true);
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
-      frensInitialiser.setContract(address(frensMetaHelper), "FrensMetaHelper");
-      frensInitialiser.setContractExists(address(frensMetaHelper), false);
+      frensManager.setContract(address(frensMetaHelper), "FrensMetaHelper");
+      //frensInitialiser.setContractExists(address(frensMetaHelper), false);
       //deploy TokenURI
       frensPoolShareTokenURI = new FrensPoolShareTokenURI(frensStorage);
       //Initialise TokenURI
-      frensInitialiser.setContract(address(frensPoolShareTokenURI), "FrensPoolShareTokenURI");
-      frensInitialiser.setContractExists(address(frensPoolShareTokenURI), false);
+      frensManager.setContract(address(frensPoolShareTokenURI), "FrensPoolShareTokenURI");
+      //frensInitialiser.setContractExists(address(frensPoolShareTokenURI), false);
       //deployArt
       frensArt = new FrensArt(frensStorage);
       //initialise art
-      frensInitialiser.setContract(address(frensArt), "FrensArt");
-      frensInitialiser.setContractExists(address(frensArt), false);
+      frensManager.setContract(address(frensArt), "FrensArt");
+      //frensInitialiser.setContractExists(address(frensArt), false);
       //set contracts as deployed
       //tx.origin must be this contract
       vm.prank(address(this), address(this));
@@ -134,22 +140,51 @@ contract MiscTest is Test {
 
     }
 
-    function testMaliciousProxyInteraction() public {
-      IMaliciousProxyInterface maliciousProxy = IMaliciousProxyInterface(address(factoryProxy));
+  function testManager() public {
+    setUp(); //annoying formality innit
+  }
+
+  function testManagerDelete() public {
+    vm.expectRevert("method not allowed for contracts that write to storage");
+    frensManager.deleteContract(address(stakingPoolFactory), "StakingPoolFactory");
+
+    //no revert before contract delete:
+    hoax(alice);
+    stakingPool.depositToPool{value: 1}();
+    string memory tokenArt = frensPoolShare.renderTokenById(1);
+    assertGt(bytes(tokenArt).length, 0);
+
+    frensManager.deleteContract(address(frensArt), "FrensArt");
+    vm.expectRevert();
+    frensPoolShare.tokenURI(1);    
+  }
+
+  function testDisallow() public {
       hoax(alice);
-      vm.expectRevert(bytes("")); //should not be able to call an internal function
-      maliciousProxy.setBool(keccak256(abi.encodePacked("this.shouldnt.work")), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("this.shouldnt.work"))));
+      stakingPool.depositToPool{value: 1 ether}();
+      uint bobBalance = address(bob).balance;
+
+      frensManager.allowExternalContract(0x0000000000000000000000000000000000000B0b); //bob is our external contract here
       
+      hoax(contOwner);
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+      assertEq(bobBalance + 1 ether, address(bob).balance);
+
+      frensManager.disAllowExternalContract(0x0000000000000000000000000000000000000B0b);
+
+      hoax(contOwner);
+      vm.expectRevert("contract not allowed");
+      stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
+
     }
 
-    function testNonGuardianInitialiserAccess() public {
-      hoax(alice);
-      vm.expectRevert("Account is not a temporary guardian");
-      frensInitialiser.setContractExists(address(alice), true);
-      BoolGetter boolGetter = new BoolGetter(frensStorage);
-      assertFalse(boolGetter.getBoolFromStorage(keccak256(abi.encodePacked("contract.exists", address(alice)))));
+    function testSet() public {
+      FrensArt frensArt2 = new FrensArt(frensStorage);
+      frensManager.setContract(address(frensArt2), "FrensArt");
+      address newArtCont = frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "FrensArt")));
+      assertEq(newArtCont, address(frensArt2));
     }
+
+
 
 }
