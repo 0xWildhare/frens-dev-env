@@ -21,4 +21,6 @@ interface IFrensPoolSetter {
     function distribute(address tokenOwner, uint share) external returns(bool);
 
     function setArt(address newArtContract) external returns(bool);
+
+    function unlockTransfer(uint id) external returns(bool);
 }

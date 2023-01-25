@@ -210,6 +210,19 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     
   }
 
+  function rageQuit(uint id) public {
+    require(msg.sender == frensPoolShare.ownerOf(id), "not the owner");
+    /*this needs logic to set a price, 
+      *allow this contract to transfer the NFT, 
+      *allow a purchase (will require a method), 
+      *and start a timer,
+      *once the timer has expired, the owner can call a method that has the following code to unlock it
+    */
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.unlockTransfer(id);
+    assert(success);
+  }
+
   //getters
 
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {

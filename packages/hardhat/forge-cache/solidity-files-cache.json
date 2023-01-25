@@ -336,8 +336,8 @@
       }
     },
     "contracts/FrensPoolSetter.sol": {
-      "lastModificationDate": 1674435485717,
-      "contentHash": "610390e9be16f968fa42283a476919c3",
+      "lastModificationDate": 1674619860248,
+      "contentHash": "44f2008b2a4fdd8788a2c570b27e1dc3",
       "sourceName": "contracts/FrensPoolSetter.sol",
       "solcConfig": {
         "settings": {
@@ -380,8 +380,8 @@
       }
     },
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1673822589561,
-      "contentHash": "0eb674978a3a22ccdd0282330cf78f1e",
+      "lastModificationDate": 1674622841877,
+      "contentHash": "f33c12383d715745835a7829d7c1d289",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
         "settings": {

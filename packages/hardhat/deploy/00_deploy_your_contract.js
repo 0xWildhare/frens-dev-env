@@ -218,7 +218,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(StakingPoolFactoryOld == 0 || reinitialiseEverything) {
     const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
     await factoryInit.wait();
-    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, true); //grants privileges to write to FrensStorage
+    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, false); //grants privileges to write to FrensStorage
     await factoryBoolTrue.wait();
     console.log('\x1b[33m%s\x1b[0m', "StakingPoolFactory initialised", StakingPoolFactory.address);
   } else if(StakingPoolFactoryOld.address != StakingPoolFactory.address){
@@ -226,7 +226,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     await factoryDel.wait();
     const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
     await factoryInit.wait();
-    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, true); //grants privileges to write to FrensStorage
+    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, false); //grants privileges to write to FrensStorage
     await factoryBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "StakingPoolFactory updated", StakingPoolFactory.address);
   }
@@ -386,7 +386,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[33m%s\x1b[0m', "FRENS Group Contracts Deployed");
   }
 
-  const newPool = await StakingPoolFactory.create("0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa", false);
+  const newPool = await StakingPoolFactory.create("0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa", false, false, 0, 32000000000000000000n);
   
   newPoolResult = await newPool.wait();
   console.log("new pool", newPoolResult.logs[0].address);

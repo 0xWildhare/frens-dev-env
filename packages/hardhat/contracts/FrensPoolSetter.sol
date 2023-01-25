@@ -27,6 +27,8 @@ contract FrensPoolSetter is FrensBase {
         addUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), depositAmount); //increase total.deposits of this pool by msg.value
         pushUint(keccak256(abi.encodePacked("ids.in.pool", msg.sender)), id); //add id to list of ids in pool
         setAddress(keccak256(abi.encodePacked("pool.for.id", id)), msg.sender); //set this as the pool for id
+        bool transferLocked = getBool(keccak256(abi.encodePacked("frens.locked", msg.sender)));
+        setBool(keccak256(abi.encodePacked("transfer.locked", id)), transferLocked); //set transfer lock if  pool is locked (use rageQuit if locked)
         return true;
     }
 
@@ -63,6 +65,11 @@ contract FrensPoolSetter is FrensBase {
 
     function setArt(address newArtContract) external onlyStakingPool(msg.sender) returns(bool) { 
         setAddress(keccak256(abi.encodePacked("pool.specific.art.address", msg.sender)), newArtContract);
+        return true;
+    }
+
+    function unlockTransfer(uint id) external onlyStakingPool(msg.sender) returns(bool) {
+        setBool(keccak256(abi.encodePacked("transfer.locked", id)), false);
         return true;
     }
 }

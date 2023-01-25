@@ -47,4 +47,11 @@ contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase
     return frensArt.renderTokenById(id);
   }
 
+  function _beforeTokenTransfer(address from, address to, uint tokenId) internal override {
+    super._beforeTokenTransfer(from, to, tokenId);
+    if(from != address(0) && to != address(0)){
+      require(!getBool(keccak256(abi.encodePacked("transfer.locked", tokenId))), "not transferable");
+    } 
+  }
+
 }
