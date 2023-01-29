@@ -40,7 +40,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       currentState = State.acceptingDeposits;
     }
     _transferOwnership(owner_);
-    version = 2;
+    version = 0;
   }
 
   function depositToPool() external payable {
@@ -120,7 +120,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     bool success = frensPoolSetter.setPubKey(pubKey, withdrawal_credentials, signature, deposit_data_root);
     assert(success);
   }
-
+/* not ready for mainnet release
   function arbitraryContractCall(
         address payable to,
         uint256 value,
@@ -139,7 +139,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       );
       return result;
     }
-
+*/
   function withdraw(uint _id, uint _amount) external {
     require(currentState == State.acceptingDeposits, "cannot withdraw once staked");//TODO: this may need to be more restrictive
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
@@ -209,20 +209,27 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     //TODO: is this where we extract fees?
     
   }
-
-  function rageQuit(uint id) public {
+/* not ready for mainnet release
+  function rageQuit(uint id, uint price) public {
     require(msg.sender == frensPoolShare.ownerOf(id), "not the owner");
-    /*this needs logic to set a price, 
-      *allow this contract to transfer the NFT, 
-      *allow a purchase (will require a method), 
-      *and start a timer,
-      *once the timer has expired, the owner can call a method that has the following code to unlock it
-    */
+    uint deposit = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
+    require(price <= deposit, "cannot set price higher than deposit");
+    frensPoolShare.
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.rageQuit(id, price);
+    assert(success);
+    
+    
+  }
+  //TODO:needs a purchase function for ragequit
+  function unlockTransfer(uint id) public {
+    uint time = getUint(keccak256(abi.encodePacked("rage.time", id))) + 1 weeks;
+    require(time >= block.timestamp);
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.unlockTransfer(id);
     assert(success);
   }
-
+  */
   //getters
 
   function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {

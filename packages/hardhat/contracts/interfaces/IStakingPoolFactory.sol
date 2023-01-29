@@ -5,10 +5,10 @@ interface IStakingPoolFactory {
 
   function create(
     address owner_, 
-    bool validatorLocked,
-    bool frensLocked,
-    uint poolMin,
-    uint poolMax
+    bool validatorLocked//,
+    //bool frensLocked,
+    //uint poolMin,
+    //uint poolMax
    ) external returns(address);
 
 }

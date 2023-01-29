@@ -3,7 +3,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 interface IFrensPoolSetter {
 
-    function create(address stakingPool, bool validatorLocked, bool frensLocked, uint poolMin, uint poolMax) external returns(bool);
+    function create(address stakingPool, bool validatorLocked/*, bool frensLocked, uint poolMin, uint poolMax*/) external returns(bool);
 
     function depositToPool(uint depositAmount) external returns(bool);
 
@@ -21,6 +21,8 @@ interface IFrensPoolSetter {
     function distribute(address tokenOwner, uint share) external returns(bool);
 
     function setArt(address newArtContract) external returns(bool);
+
+    function rageQuit(uint id, uint price) external  returns(bool);
 
     function unlockTransfer(uint id) external returns(bool);
 }

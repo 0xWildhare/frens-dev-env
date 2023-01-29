@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract FrensPoolShare is IFrensPoolShare, ERC721Enumerable, Ownable, FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) ERC721("staking con amigos", "FRENS") {
-    version = 2;
+    version = 0;
   }
 
   function mint(address userAddress) public onlyStakingPool(msg.sender) {

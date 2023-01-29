@@ -6,7 +6,7 @@ import "./FrensBase.sol";
 contract FrensManager is FrensBase {
 
   constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage) {
-    //nothing?
+    version = 0;
   }
   
   //set name and address

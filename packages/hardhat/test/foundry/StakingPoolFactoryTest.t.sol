@@ -119,14 +119,14 @@ contract StakingPoolTest is Test {
       frensStorage.setDeployedStatus();
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, false, false, 0, 32000000000000000000);
+      (address pool) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       //console.log("pool", pool);
 
       //create a second staking pool through proxy contract
-      (address pool2) = proxy.create(contOwner, false, false, 0, 32000000000000000000);
+      (address pool2) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -135,7 +135,7 @@ contract StakingPoolTest is Test {
     }
 
   function testFactory() public {
-    address pool3 = stakingPoolFactory.create(contOwner, false, false, 0, 32000000000000000000);
+    address pool3 = stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
     StakingPool stakingPool3 = StakingPool(payable(pool3));
     vm.expectRevert("not enough eth");
     stakingPool3.stake();

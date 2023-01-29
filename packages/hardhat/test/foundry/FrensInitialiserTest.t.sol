@@ -119,14 +119,14 @@ contract FrensInitialiserTest is Test {
       frensStorage.setDeployedStatus();
 
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, false, false, 0, 32000000000000000000);
+      (address pool) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       //console.log("pool", pool);
 
       //create a second staking pool through proxy contract
-      (address pool2) = proxy.create(contOwner, false, false, 0, 32000000000000000000);
+      (address pool2) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -141,9 +141,9 @@ contract FrensInitialiserTest is Test {
   function testDelete() public {
     frensInitialiser.deleteContract(address(stakingPoolFactory), "StakingPoolFactory");
     vm.expectRevert("only factory can call");
-    stakingPoolFactory.create(contOwner, false, false, 0, 32000000000000000000);
+    stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
   }
-
+/*
   function testDisallow() public {
       hoax(alice);
       stakingPool.depositToPool{value: 1 ether}();
@@ -162,7 +162,7 @@ contract FrensInitialiserTest is Test {
       stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
 
     }
-
+*/
 
 
 }
