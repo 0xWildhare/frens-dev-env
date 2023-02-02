@@ -33,7 +33,7 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
       uint shareForId = stakingPool.getDistributableShare(id);
       string memory shareString = metaHelper.getEthDecimalString(shareForId);
       string memory stakingPoolAddress = Strings.toHexString(uint160(poolAddress), 20);
-      (uint32[] memory poolOperators, string memory pubKeyString) = metaHelper.getOperatorsForPool(poolAddress);
+      (/*uint32[] memory poolOperators*/, string memory pubKeyString) = metaHelper.getOperatorsForPool(poolAddress);
       string memory name = string(abi.encodePacked('fren pool share #',id.toString()));
       string memory description = string(abi.encodePacked(
         'this fren has a deposit of ',depositString,
@@ -66,15 +66,15 @@ contract FrensPoolShareTokenURI is IFrensPoolShareTokenURI, FrensBase {
                   shareString, ' Eth',
                   '"},{"trait_type": "pool state", "value": "',
                   poolState,
-                 /* '"},{"trait_type": "operator1", "value": "',
-                  poolOperators.length == 0 ? "Not Set" : uint(poolOperators[0]).toString(),
-                  '"},{"trait_type": "operator2", "value": "',
-                  poolOperators.length == 0 ? "Not Set" : uint(poolOperators[1]).toString(),
-                  '"},{"trait_type": "operator3", "value": "',
-                  poolOperators.length == 0 ? "Not Set" : uint(poolOperators[2]).toString(),
-                  '"},{"trait_type": "operator4", "value": "',
-                  poolOperators.length == 0 ? "Not Set" : uint(poolOperators[3]).toString(),
-                 */ '"}], "image": "',
+                 // '"},{"trait_type": "operator1", "value": "',
+                 // poolOperators.length == 0 ? "Not Set" : uint(poolOperators[0]).toString(),
+                 // '"},{"trait_type": "operator2", "value": "',
+                 // poolOperators.length == 0 ? "Not Set" : uint(poolOperators[1]).toString(),
+                 // '"},{"trait_type": "operator3", "value": "',
+                 // poolOperators.length == 0 ? "Not Set" : uint(poolOperators[2]).toString(),
+                 // '"},{"trait_type": "operator4", "value": "',
+                 // poolOperators.length == 0 ? "Not Set" : uint(poolOperators[3]).toString(),
+                  '"}], "image": "',
                   'data:image/svg+xml;base64,',
                   image,
                   '"}' 

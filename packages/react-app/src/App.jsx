@@ -268,7 +268,7 @@ console.log("🤗 balance:", balance);
   }, [createEvents, address]);
   console.log("📟 create events:", createEvents);
 
-  //contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = "0x9e81930181c5e0dec8834bde347b66d221f8e933";
+  contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = "0x624aDBE468BB8D7A4cD2D063039e4B54b47126D9";
 
   return (
     <div className="App">
