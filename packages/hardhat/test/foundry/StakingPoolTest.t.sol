@@ -496,6 +496,26 @@ contract StakingPoolTest is Test {
       stakingPool.arbitraryContractCall(payable(address(bob)), 1 ether, "0x0");
       assertEq(bobBalance + 1 ether, address(bob).balance);
     }
+
+
+    function testBurn(uint72 x) public { //this would be a stupid thing to want to do, so it will probably not be included
+      if(x > 0 && x <= 32 ether){
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
+        stakingPool.burn(id);
+        vm.expectRevert("ERC721Enumerable: owner index out of bounds");
+        id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
+      } else if(x == 0) {
+        vm.expectRevert("must deposit ether");
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+      } else {
+        vm.expectRevert("total deposits cannot be more than 32 Eth");
+        startHoax(alice);
+        stakingPool.depositToPool{value: x}();
+      }
+    }
 */
 
 function testFees(uint32 x, uint32 y) public {
@@ -563,5 +583,12 @@ function testFees(uint32 x, uint32 y) public {
         stakingPool.distribute();
       }
 
+    }
+
+    function testExit() public {
+      hoax(contOwner);
+      stakingPool.exitPool();
+      string memory state = stakingPool.getState();
+      assertEq(keccak256(abi.encodePacked("exited")), keccak256(abi.encodePacked(state)),"not exited");
     }
 }
