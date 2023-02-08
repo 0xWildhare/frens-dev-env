@@ -155,7 +155,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     }
 */
   function withdraw(uint _id, uint _amount) external {
-    require(currentState == State.acceptingDeposits, "cannot withdraw once staked");//TODO: this may need to be more restrictive
+    require(currentState == State.acceptingDeposits, "cannot withdraw once staked");
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
     require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
@@ -272,6 +272,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getShare(uint _id) public view returns(uint) {
+    require(frensPoolShare.getPoolById(_id) == address(this), "wrong pool for id");
     uint contractBalance = address(this).balance;
     return _getShare(_id, contractBalance);
   }
