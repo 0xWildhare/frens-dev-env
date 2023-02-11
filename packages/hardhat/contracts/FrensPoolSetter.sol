@@ -2,8 +2,13 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "./FrensBase.sol";
+//import "hardhat/console.sol";
 
 contract FrensPoolSetter is FrensBase {
+
+    uint public num;
+    address public sender;
+    uint public value;
 
     constructor(IFrensStorage _frensStorage) FrensBase(_frensStorage){
         version = 0;
@@ -59,6 +64,7 @@ contract FrensPoolSetter is FrensBase {
     }
 
     function distribute(address tokenOwner, uint share) external onlyStakingPool(msg.sender) returns(bool) {
+        sender = msg.sender;
         addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
         return true;
     }

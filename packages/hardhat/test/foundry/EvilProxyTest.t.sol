@@ -25,6 +25,8 @@ import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
 
+import "../../contracts/EvilProxy.sol";
+import "../../contracts/interfaces/IFrensPoolSetter.sol";
 
 contract StakingPoolTest is Test {
     FrensArt public frensArt;
@@ -41,6 +43,7 @@ contract StakingPoolTest is Test {
     IStakingPoolFactory public proxy;
     FrensClaim public frensClaim;
     FrensPoolSetter public frensPoolSetter;
+    EvilProxy public evilProxy;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -54,6 +57,7 @@ contract StakingPoolTest is Test {
     address public contOwner = 0x0000000000000000000000000000000001111738;
     address payable public alice = payable(0x00000000000000000000000000000000000A11cE);
     address payable public bob = payable(0x0000000000000000000000000000000000000B0b);
+    address payable public eve = payable(0x0000000000000000000000000000000000000E7E);
     address payable public feeRecipient = payable(0x0000000000000000000000000694200000001337);
 
     bytes pubkey = hex"b01569ec66772826955cb5ff0637ba938c4be3b01fe1ada49ef7a7ab4b799d259d952488240ca8db87d8a9ebad3a8aa7";
@@ -123,6 +127,9 @@ contract StakingPoolTest is Test {
       frensInitialiser.setContractExists(address(frensArt), false);
       //set contracts as deployed
       //tx.origin must be this contract
+      //deploy EvilProxy
+      evilProxy = new EvilProxy(frensStorage);
+      
       vm.prank(address(this), address(this));
       frensStorage.setDeployedStatus();
 
@@ -142,6 +149,27 @@ contract StakingPoolTest is Test {
 
     }
 
+    function testEvilProxy() public {
+      hoax(alice);
+      payable(frensClaim).transfer(1 ether);
+      hoax(eve);
+      address evilPoolAddress = proxy.create(eve, false);
+      StakingPool evilPool = StakingPool(payable(evilPoolAddress));
+      vm.prank(eve);
+      uint balanceEveBefore = address(eve).balance;
+      frensClaim.claim(address(eve));
+      assertEq(balanceEveBefore, address(eve).balance, "eveBalance mismatch from claim 0");
+      vm.prank(eve);
+      vm.expectRevert("contract not allowed");
+      evilPool.arbitraryContractCall(payable(evilProxy), 0, abi.encodeWithSignature("distribute(address, uint256)", address(eve), 1 ether));
+
+      frensInitialiser.allowExternalContract(address(evilProxy)); //this is the part that should not happen.
+      vm.prank(eve);
+      vm.expectRevert("txn failed"); //but that bitch still cant steal*
+      evilPool.arbitraryContractCall(payable(evilProxy), 0, abi.encodeWithSignature("distribute(address,uint256)", address(eve), 1 ether));
+      // *just bc I cant figure out how to do it, doesn't mean that no one can.
+    }
+/*
     function testOwner() public {
       address stakingPoolOwner = stakingPool.owner();
       assertEq(stakingPoolOwner, address(contOwner));
@@ -497,7 +525,6 @@ contract StakingPoolTest is Test {
       assertEq(bobBalance + 1 ether, address(bob).balance);
     }
 
-/*
     function testBurn(uint72 x) public { //this would be a stupid thing to want to do, so it will probably not be included
       if(x > 0 && x <= 32 ether){
         startHoax(alice);
@@ -516,7 +543,7 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: x}();
       }
     }
-*/
+
 
 function testFees(uint32 x, uint32 y) public {
       uint maxUint32 = 4294967295;
@@ -591,4 +618,6 @@ function testFees(uint32 x, uint32 y) public {
       string memory state = stakingPool.getState();
       assertEq(keccak256(abi.encodePacked("exited")), keccak256(abi.encodePacked(state)),"not exited");
     }
+
+*/
 }
