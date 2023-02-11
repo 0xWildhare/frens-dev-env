@@ -440,4 +440,4 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   console.log("FrensArtTest", FrensArtTest.address);
 */
 };
-module.exports.tags = ["FrensPoolShare", "StakingPoolFactory", "StakingPool", "FrensStorage", "FrensInitialiser", "FrensPoolShareTokenURI"];
+module.exports.tags = ["FactoryProxy", "FrensArt", "FrensClaim", "FrensInitialiser", "FrensManager", "FrensMetaHelper", "FrensPoolSetter", "FrensPoolShare", "FrensPoolShareTokenURI", "FrensStorage", "StakingPoolFactory", "StakingPool"];
