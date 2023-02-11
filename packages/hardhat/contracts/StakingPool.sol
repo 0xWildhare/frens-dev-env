@@ -134,7 +134,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     bool success = frensPoolSetter.setPubKey(pubKey, withdrawal_credentials, signature, deposit_data_root);
     assert(success);
   }
-/* not ready for mainnet release?
+
   function arbitraryContractCall(
         address payable to,
         uint256 value,
@@ -153,7 +153,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       );
       return result;
     }
-*/
+
   function withdraw(uint _id, uint _amount) external {
     require(currentState == State.acceptingDeposits, "cannot withdraw once staked");
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
@@ -286,7 +286,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function getPubKey() public view returns(bytes memory){
-    return getBytes(keccak256(abi.encodePacked("validator.public.key", address(this))));
+    return getBytes(keccak256(abi.encodePacked("pubKey", address(this))));
   }
 
   function getState() public view returns(string memory){

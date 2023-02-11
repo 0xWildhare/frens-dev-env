@@ -479,7 +479,7 @@ contract StakingPoolTest is Test {
       vm.expectRevert("pubKey mismatch");
       stakingPool.stake(hex"dead", withdrawal_credentials, signature, deposit_data_root);
     }
-/*
+
     function testArbitrarySend() public {
       hoax(alice);
       stakingPool.depositToPool{value: 1 ether}();
@@ -497,7 +497,7 @@ contract StakingPoolTest is Test {
       assertEq(bobBalance + 1 ether, address(bob).balance);
     }
 
-
+/*
     function testBurn(uint72 x) public { //this would be a stupid thing to want to do, so it will probably not be included
       if(x > 0 && x <= 32 ether){
         startHoax(alice);
