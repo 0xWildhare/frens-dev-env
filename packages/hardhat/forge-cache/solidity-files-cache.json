@@ -285,8 +285,8 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1675569437783,
-      "contentHash": "4749d001909bc000249dd5b7b0dbe191",
+      "lastModificationDate": 1676132017691,
+      "contentHash": "d111fe875bc45c95cc43e2cf6d12cf31",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -537,8 +537,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1676131842329,
-      "contentHash": "3a090588fc9ed6d0dc0806c55df4182b",
+      "lastModificationDate": 1676132496764,
+      "contentHash": "668c78018986987e4e84a0af8c01a6bd",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
