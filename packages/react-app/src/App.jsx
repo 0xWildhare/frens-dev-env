@@ -268,7 +268,7 @@ console.log("🤗 balance:", balance);
   }, [createEvents, address]);
   console.log("📟 create events:", createEvents);
 
-  contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = "0xAF6109c2e9B8818d0792aC56cB4cc119Ed533C71";
+  contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = "0x9DBbd01011DC79af8d9c5Da46A1F4F9F3f9c7fC9";
 
   return (
     <div className="App">
