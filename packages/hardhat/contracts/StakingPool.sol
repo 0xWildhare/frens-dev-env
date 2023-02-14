@@ -189,8 +189,8 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
       bool success = frensPoolSetter.distribute(tokenOwner, share);
       assert(success);
     }
-    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
-    payable(address(frensClaim)).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
+    address frensClaimAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim")));
+    payable(frensClaimAddress).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
 
   }
 
@@ -203,6 +203,16 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     frensClaim.claim(claimant);
   }
 
+  function claimAll() public {
+    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
+    uint[] memory idsInPool = getIdsInThisPool();
+    for(uint i=0; i<idsInPool.length; i++) { //this is expensive for large pools
+      uint id = idsInPool[i];
+      address tokenOwner = frensPoolShare.ownerOf(id);
+      frensClaim.claim(tokenOwner);
+    }
+  }
+
   function distributeAndClaim() external {
     distribute();
     claim(msg.sender);
@@ -210,12 +220,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function distributeAndClaimAll() external {
     distribute();
-    uint[] memory idsInPool = getIdsInThisPool();
-    for(uint i=0; i<idsInPool.length; i++) { //this is expensive for large pools
-      uint id = idsInPool[i];
-      address tokenOwner = frensPoolShare.ownerOf(id);
-      claim(tokenOwner);
-    }
+    claimAll();
   }
 
   function exitPool() external onlyOwner{
@@ -325,6 +330,12 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     require(bytes(newArt).length != 0, "invalid art contract");
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.setArt(newArtContract);
+    assert(success);
+  }
+
+  function resetArt() external onlyOwner {
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.setArt(address(0));
     assert(success);
   }
 
