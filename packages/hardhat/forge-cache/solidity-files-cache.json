@@ -152,8 +152,8 @@
       }
     },
     "contracts/FrensClaim.sol": {
-      "lastModificationDate": 1674933502323,
-      "contentHash": "6e55c93ea1979dd7d900ee31c3b449b9",
+      "lastModificationDate": 1676701830575,
+      "contentHash": "2a1477154e21695c6b61b2ddd2c3bd36",
       "sourceName": "contracts/FrensClaim.sol",
       "solcConfig": {
         "settings": {
@@ -187,7 +187,12 @@
       "imports": [
         "contracts/FrensBase.sol",
         "contracts/interfaces/IFrensClaim.sol",
-        "contracts/interfaces/IFrensStorage.sol"
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
       "artifacts": {
@@ -335,8 +340,8 @@
       }
     },
     "contracts/FrensPoolSetter.sol": {
-      "lastModificationDate": 1676097230116,
-      "contentHash": "337d54c2521ac8d4196c10271582eaa3",
+      "lastModificationDate": 1676696929728,
+      "contentHash": "7aff6222f4a90a730595e50f9d7ea065",
       "sourceName": "contracts/FrensPoolSetter.sol",
       "solcConfig": {
         "settings": {
@@ -537,8 +542,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1676226112643,
-      "contentHash": "6ba52e4c7a959fbdebf65d5ca9a883be",
+      "lastModificationDate": 1676699569836,
+      "contentHash": "5be3bb2e264af580a6fe19fce6401bcb",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -815,8 +820,8 @@
       }
     },
     "contracts/interfaces/IFrensClaim.sol": {
-      "lastModificationDate": 1673137721337,
-      "contentHash": "3a69a7fa770f96b84f3237f820011adf",
+      "lastModificationDate": 1676699466148,
+      "contentHash": "4c05e3f93b39234b499a7cd9a9824190",
       "sourceName": "contracts/interfaces/IFrensClaim.sol",
       "solcConfig": {
         "settings": {

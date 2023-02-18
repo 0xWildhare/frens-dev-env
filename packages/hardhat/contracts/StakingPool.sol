@@ -30,10 +30,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   State currentState;
 
   IFrensPoolShare frensPoolShare;
+  IFrensClaim frensClaim;
 
   constructor(address owner_, bool validatorLocked_, IFrensStorage frensStorage_) FrensBase(frensStorage_){
     address frensPoolShareAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare")));
     frensPoolShare = IFrensPoolShare(frensPoolShareAddress); //this hardcodes the nft contract to the pool
+    address frensClaimAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim")));
+    frensClaim = IFrensClaim(frensClaimAddress); //this hard codes the claim address to the pool
     if(validatorLocked_){
       currentState = State.awaitingValidatorInfo;
     } else {
@@ -174,24 +177,18 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     uint contractBalance = address(this).balance;
     require(contractBalance > 100, "minimum of 100 wei to distribute");
     uint feePercent = getUint(keccak256(abi.encodePacked("protocol.fee")));
+
     if(feePercent > 0){
       address feeRecipient = getAddress(keccak256(abi.encodePacked("fee.recipient")));
       uint feeAmount = feePercent * contractBalance / 100;
       payable(feeRecipient).transfer(feeAmount);
       contractBalance = address(this).balance;
     }
+    
     uint[] memory idsInPool = getIdsInThisPool();
-    for(uint i=0; i<idsInPool.length; i++) {
-      uint id = idsInPool[i];
-      address tokenOwner = frensPoolShare.ownerOf(id);
-      uint share = _getShare(id, contractBalance);
-      IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
-      bool success = frensPoolSetter.distribute(tokenOwner, share);
-      assert(success);
-    }
-    address frensClaimAddress = getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim")));
-    payable(frensClaimAddress).transfer(contractBalance); //dust -> claim contract instead of pools - the gas to calculate and leave dust in pool >> lifetime expected dust/pool
-
+    
+    bool success = frensClaim.distribute{value: contractBalance}(idsInPool);
+    assert(success);
   }
 
   function claim() external {
@@ -199,12 +196,10 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   }
 
   function claim(address claimant) public {
-    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
     frensClaim.claim(claimant);
   }
 
   function claimAll() public {
-    IFrensClaim frensClaim = IFrensClaim(getAddress(keccak256(abi.encodePacked("contract.address", "FrensClaim"))));
     uint[] memory idsInPool = getIdsInThisPool();
     for(uint i=0; i<idsInPool.length; i++) { //this is expensive for large pools
       uint id = idsInPool[i];
@@ -263,24 +258,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 */
   //getters
 
-  function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
-    uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
-    uint totDeps = getUint(keccak256(abi.encodePacked("total.deposits", address(this))));
-    if(depAmt == 0) return 0;
-    uint calcedShare =  _contractBalance * depAmt / totDeps;
-    if(calcedShare > 1){
-      return(calcedShare - 1); //steal 1 wei to avoid rounding errors drawing balance negative
-    }else return 0;
-  }
-
-  function getIdsInThisPool() public view returns(uint[] memory) {
+    function getIdsInThisPool() public view returns(uint[] memory) {
     return getArray(keccak256(abi.encodePacked("ids.in.pool", address(this))));
   }
 
   function getShare(uint _id) public view returns(uint) {
     require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
-    uint contractBalance = address(this).balance;
-    return _getShare(_id, contractBalance);
+    return frensClaim.getShare(_id);
   }
 
   function getDistributableShare(uint _id) public view returns(uint) {

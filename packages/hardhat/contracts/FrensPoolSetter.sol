@@ -58,11 +58,6 @@ contract FrensPoolSetter is FrensBase {
         return true;
     }
 
-    function distribute(address tokenOwner, uint share) external onlyStakingPool(msg.sender) returns(bool) {
-        addUint(keccak256(abi.encodePacked("claimable.amount", tokenOwner)), share);
-        return true;
-    }
-
     function setArt(address newArtContract) external onlyStakingPool(msg.sender) returns(bool) { 
         setAddress(keccak256(abi.encodePacked("pool.specific.art.address", msg.sender)), newArtContract);
         return true;
