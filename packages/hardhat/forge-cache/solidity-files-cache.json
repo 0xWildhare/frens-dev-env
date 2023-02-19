@@ -152,8 +152,8 @@
       }
     },
     "contracts/FrensClaim.sol": {
-      "lastModificationDate": 1676701830575,
-      "contentHash": "2a1477154e21695c6b61b2ddd2c3bd36",
+      "lastModificationDate": 1676779675946,
+      "contentHash": "0711cfd48acfde4cf4949b51cf342cb5",
       "sourceName": "contracts/FrensClaim.sol",
       "solcConfig": {
         "settings": {
@@ -290,8 +290,8 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1676132017691,
-      "contentHash": "d111fe875bc45c95cc43e2cf6d12cf31",
+      "lastModificationDate": 1676779747202,
+      "contentHash": "95ed6c2d49b61b7776c150aea48ade4e",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
         "settings": {
@@ -340,8 +340,8 @@
       }
     },
     "contracts/FrensPoolSetter.sol": {
-      "lastModificationDate": 1676696929728,
-      "contentHash": "7aff6222f4a90a730595e50f9d7ea065",
+      "lastModificationDate": 1676779452782,
+      "contentHash": "7d699d54ebb42cb49fb7c1be3e1d7606",
       "sourceName": "contracts/FrensPoolSetter.sol",
       "solcConfig": {
         "settings": {
@@ -542,8 +542,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1676699569836,
-      "contentHash": "5be3bb2e264af580a6fe19fce6401bcb",
+      "lastModificationDate": 1676781418837,
+      "contentHash": "00ca24008546efa9c09f8c3c99af5109",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {

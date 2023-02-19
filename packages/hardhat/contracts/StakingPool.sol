@@ -60,7 +60,6 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function addToDeposit(uint _id) external payable {
     require(frensPoolShare.exists(_id), "id does not exist"); //id must exist
-    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool"); //id must be associated with this pool
     require(currentState == State.acceptingDeposits, "not accepting deposits"); //pool must be "acceptingDeposits"
     require(getUint(keccak256(abi.encodePacked("total.deposits", address(this)))) + msg.value <= 32 ether, "total deposits cannot be more than 32 Eth"); //limit deposits to 32 eth
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
@@ -160,8 +159,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
   function withdraw(uint _id, uint _amount) external {
     require(currentState == State.acceptingDeposits, "cannot withdraw once staked");
     require(msg.sender == frensPoolShare.ownerOf(_id), "not the owner");
-    require(getUint(keccak256(abi.encodePacked("deposit.amount", _id))) >= _amount, "not enough deposited");
-    require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
+    require(getUint(keccak256(abi.encodePacked("deposit.amount", address(this), _id))) >= _amount, "not enough deposited");
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.withdraw(_id, _amount);
     assert(success);
@@ -231,7 +229,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 /* not ready for mainnet release
   function rageQuit(uint id, uint price) public {
     require(msg.sender == frensPoolShare.ownerOf(id), "not the owner");
-    uint deposit = getUint(keccak256(abi.encodePacked("deposit.amount", id)));
+    uint deposit = getUint(keccak256(abi.encodePacked("deposit.amount", address(this), id)));
     require(price <= deposit, "cannot set price higher than deposit");
     frensPoolShare.
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
@@ -289,7 +287,7 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function getDepositAmount(uint _id) public view returns(uint){
     require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
-    return getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
+    return getUint(keccak256(abi.encodePacked("deposit.amount", address(this), _id)));
   }
 
   function getTotalDeposits() public view returns(uint){

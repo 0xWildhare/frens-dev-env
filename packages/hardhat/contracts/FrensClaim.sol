@@ -34,8 +34,8 @@ contract FrensClaim is IFrensClaim, FrensBase {
     }
 
     function _getShare(uint _id, uint _contractBalance) internal view returns(uint) {
-        uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", _id)));
         address pool = getAddress(keccak256(abi.encodePacked("pool.for.id", _id)));
+        uint depAmt = getUint(keccak256(abi.encodePacked("deposit.amount", pool, _id)));
         uint totDeps = getUint(keccak256(abi.encodePacked("total.deposits", pool)));
         if(depAmt == 0) return 0;
         uint calcedShare =  _contractBalance * depAmt / totDeps;
