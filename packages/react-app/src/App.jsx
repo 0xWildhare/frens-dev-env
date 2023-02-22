@@ -262,13 +262,14 @@ console.log("🤗 balance:", balance);
     const newPool = lastCreate&&lastCreate.args&&lastCreate.args.contractAddress;
     setNewestPool(newPool);
     if(newPool){
-      contractConfig.deployedContracts[31337].localhost.contracts.StakingPool.address = newPool;
-      //contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = newPool;
+      contractConfig.externalContracts[31337].contracts.StakingPool.address = newPool;
+      //contractConfig.externalContracts[5].contracts.StakingPool.address = newPool;
     };
   }, [createEvents, address]);
   console.log("📟 create events:", createEvents);
 
-  //contractConfig.deployedContracts[5].goerli.contracts.StakingPool.address = "0x393218f2E1AD7C0c01169ACf0ab1F318D9C95500";
+  //contractConfig.externalContracts[5].contracts.StakingPool.address = "0xE94Ac3fB52F0fb552d7Bd4D5d2cA9b35570d222E";
+  //contractConfig.externalContracts[31337].contracts.StakingPool.address = "0xE94Ac3fB52F0fb552d7Bd4D5d2cA9b35570d222E";
 
   return (
     <div className="App">
