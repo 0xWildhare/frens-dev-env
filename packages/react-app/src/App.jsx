@@ -54,7 +54,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost;
+const initialNetwork = NETWORKS.goerli;
 ; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
@@ -263,13 +263,13 @@ console.log("🤗 balance:", balance);
     setNewestPool(newPool);
     if(newPool){
       contractConfig.externalContracts[31337].contracts.StakingPool.address = newPool;
-      //contractConfig.externalContracts[5].contracts.StakingPool.address = newPool;
+      contractConfig.externalContracts[5].contracts.StakingPool.address = newPool;
     };
   }, [createEvents, address]);
   console.log("📟 create events:", createEvents);
 
   //contractConfig.externalContracts[5].contracts.StakingPool.address = "0xE94Ac3fB52F0fb552d7Bd4D5d2cA9b35570d222E";
-  //contractConfig.externalContracts[31337].contracts.StakingPool.address = "0xE94Ac3fB52F0fb552d7Bd4D5d2cA9b35570d222E";
+  //contractConfig.externalContracts[31337].contracts.StakingPool.address = "0x0ca59f6397a2e0f0829fc16b1c4769726e3498c6";
 
   return (
     <div className="App">

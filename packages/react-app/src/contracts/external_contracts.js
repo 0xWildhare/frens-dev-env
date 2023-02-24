@@ -1263,7 +1263,7 @@ module.exports = {
   5: { //goerli
     contracts: {
       StakingPool: {
-        address: "0x2b87aD82336dE1EDad1D261A75eb069A018bCb5e", //deployed 12/03/2022
+        address: "0xBCA672756de0C2aEe9B1729DD3d7F4310214E977", //deployed 22/02/2023
         abi: StakingPoolABI,
       },
     },
