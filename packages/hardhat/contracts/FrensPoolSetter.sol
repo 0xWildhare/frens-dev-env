@@ -76,4 +76,12 @@ contract FrensPoolSetter is FrensBase {
         setBool(keccak256(abi.encodePacked("transfer.locked", id)), false);
         return true;
     }
+    /*
+    function exitPool(uint[] ids) external onlyStakingPool(msg.sender) returns(bool) {
+        for(uint i; i = 0; i++) {
+            setUint(keccak256(abi.encodePacked("deposit.amount", msg.sender, id)), 0);
+        }
+        setUint(keccak256(abi.encodePacked("total.deposits", msg.sender)), 1); //1 wei to avoid divide by zero errors
+    }
+    */
 }

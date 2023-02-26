@@ -43,6 +43,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var StakingPoolFactoryOld = 0;
   var FrensClaimOld = 0;
   var FrensPoolSetterOld = 0;
+  var FrensOracleOld = 0;
   var FrensMetaHelperOld = 0;
   var FrensPoolShareTokenURIOld = 0;
   var FrensArtOld = 0;
@@ -80,6 +81,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     FrensPoolSetterOld = await ethers.getContract("FrensPoolSetter", deployer);
+  } catch(e) {}
+
+  try{
+    FrensMetaHelperOld = await ethers.getContract("FrensOracle", deployer);
   } catch(e) {}
 
   try{
@@ -331,6 +336,34 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
     await FrensPoolSetterBoolTrue.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensPoolSetter updated", FrensPoolSetter.address);
+  }
+
+  await deploy("FrensOracle", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      FrensStorage.address
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensOracle = await ethers.getContract("FrensOracle", deployer);
+
+  if(FrensOracleOld == 0 || reinitialiseEverything){
+    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
+    await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensOracle initialised", FrensOracle.address);
+  } else if(FrensOracleOld.address != FrensOracle.address){
+    const metaDel = await FrensInitialiser.deleteContract(FrensOracleOld.address, "FrensOracle");
+    await metaDel.wait();
+    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
+    await meatInit.wait();
+    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
+    await metaBoolFalse.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensOracle updated", FrensOracle.address);
   }
 
   await deploy("FrensMetaHelper", {

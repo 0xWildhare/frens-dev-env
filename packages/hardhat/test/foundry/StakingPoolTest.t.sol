@@ -21,6 +21,7 @@ import "../../contracts/StakingPoolFactory.sol";
 import "../../contracts/FrensPoolShare.sol";
 import "../../contracts/FrensClaim.sol";
 import "../../contracts/FrensPoolSetter.sol";
+import "../../contracts/FrensOracle.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
 import "./TestHelper.sol";
@@ -41,6 +42,7 @@ contract StakingPoolTest is Test {
     IStakingPoolFactory public proxy;
     FrensClaim public frensClaim;
     FrensPoolSetter public frensPoolSetter;
+    FrensOracle public frensOracle;
 
     //mainnet
     address payable public depCont = payable(0x00000000219ab540356cBB839Cbe05303d7705Fa);
@@ -106,6 +108,11 @@ contract StakingPoolTest is Test {
       //initialise manager
       frensInitialiser.setContract(address(frensManager), "FrensManager");
       frensInitialiser.setContractExists(address(frensManager), true);
+      //deploy FrensOracle
+      frensOracle = new FrensOracle(frensStorage);
+      //initialise FrensOracle
+      frensInitialiser.setContract(address(frensOracle), "FrensOracle");
+      frensInitialiser.setContractExists(address(frensOracle), false);
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
@@ -586,8 +593,13 @@ function testFees(uint32 x, uint32 y) public {
     }
 
     function testExit() public {
-      hoax(contOwner);
-      stakingPool.exitPool();
+      hoax(alice);
+      stakingPool.depositToPool{value: 32 ether}();
+      vm.prank(contOwner);
+      stakingPool.stake(pubkey, withdrawal_credentials, signature, deposit_data_root);
+      vm.prank(address(this), address(this));
+      frensOracle.setExiting(pubkey, true);
+      frensOracle.checkValidatorState(address(stakingPool));
       string memory state = stakingPool.getState();
       assertEq(keccak256(abi.encodePacked("exited")), keccak256(abi.encodePacked(state)),"not exited");
     }

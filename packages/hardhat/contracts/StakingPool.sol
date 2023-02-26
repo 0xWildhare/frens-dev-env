@@ -10,10 +10,10 @@ import "./interfaces/IStakingPool.sol";
 import "./interfaces/IFrensClaim.sol";
 import "./interfaces/IFrensArt.sol";
 import "./interfaces/IFrensPoolSetter.sol";
+import "./interfaces/IFrensOracle.sol";
 import "./FrensBase.sol";
 
 
-//should ownable be replaces with an equivalent in storage/base?
 contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   event Stake(address depositContractAddress, address caller);
@@ -187,6 +187,9 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     
     bool success = frensClaim.distribute{value: contractBalance}(idsInPool);
     assert(success);
+
+    IFrensOracle frensOracle = IFrensOracle(getAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle"))));
+    frensOracle.checkValidatorState(address(this));
   }
 
   function claim() external {
@@ -216,15 +219,19 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     claimAll();
   }
 
-  function exitPool() external onlyOwner{
+  function exitPool() external {
+    require(msg.sender == getAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle"))), "must be called by oracle");
     if(address(this).balance > 100){
       _distribute(); 
     }
+    /*
+    uint[] memory idsInPool = getIdsInThisPool();
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.exitPool(idsInPool);
+    assert(success);
+    */
     currentState = State.exited;
 
-    //TODO: what else needs to be in here (probably a limiting modifier and/or some requires) maybe add an arbitrary call to an external contract is enabled?
-    //TODO: is this where we extract fees?
-    
   }
 /* not ready for mainnet release
   function rageQuit(uint id, uint price) public {

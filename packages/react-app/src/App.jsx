@@ -54,7 +54,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.goerli;
+const initialNetwork = NETWORKS.localhost;
 ; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
@@ -350,6 +350,16 @@ console.log("🤗 balance:", balance);
 
           <Contract
             name="FrensPoolShare"
+            price={price}
+            signer={userSigner}
+            provider={localProvider}
+            address={address}
+            blockExplorer={blockExplorer}
+            contractConfig={contractConfig}
+          />
+
+          <Contract
+            name="FrensOracle"
             price={price}
             signer={userSigner}
             provider={localProvider}

@@ -25,4 +25,6 @@ interface IFrensPoolSetter {
     function rageQuit(uint id, uint price) external  returns(bool);
 
     function unlockTransfer(uint id) external returns(bool);
+
+    //function exitPool(uint[] ids) external returns(bool);
 }
