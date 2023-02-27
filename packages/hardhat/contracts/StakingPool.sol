@@ -166,6 +166,38 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     payable(msg.sender).transfer(_amount);
   }
 
+   function claim(uint id) public {
+    require(getAddress(keccak256(abi.encodePacked("pool.for.id", id))) == address(this), "wrong staking pool");
+    require(currentState != State.acceptingDeposits, "use withdraw when not staked");
+    require(address(this).balance > 100, "must be greater than 100 wei to claim");
+    //has the validator exited?
+    bool exited;
+    if(currentState != State.exited){
+      IFrensOracle frensOracle = IFrensOracle(getAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle"))));
+      exited = frensOracle.checkValidatorState(address(this));
+    } else exited = true;
+    
+    uint amount = _getShare(id);
+    
+    IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
+    bool success = frensPoolSetter.claim(id, amount, exited);
+    assert(success);
+
+    //fee? not applied to exited
+    uint feePercent = getUint(keccak256(abi.encodePacked("protocol.fee")));
+    if(feePercent > 0 && !exited){
+      address feeRecipient = getAddress(keccak256(abi.encodePacked("fee.recipient")));
+      uint feeAmount = feePercent * amount / 100;
+      if(feeAmount > 0) payable(feeRecipient).transfer(feeAmount);
+      amount = amount - feeAmount;
+    }
+    
+    payable(frensPoolShare.ownerOf(id)).transfer(amount);
+  }
+
+
+
+/*
   function distribute() public {
     require(currentState != State.acceptingDeposits, "use withdraw when not staked");
     _distribute();
@@ -218,13 +250,13 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
     distribute();
     claimAll();
   }
-
+*/
   function exitPool() external {
     require(msg.sender == getAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle"))), "must be called by oracle");
+    /*
     if(address(this).balance > 100){
       _distribute(); 
     }
-    /*
     uint[] memory idsInPool = getIdsInThisPool();
     IFrensPoolSetter frensPoolSetter = IFrensPoolSetter(getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolSetter"))));
     bool success = frensPoolSetter.exitPool(idsInPool);
@@ -269,14 +301,33 @@ contract StakingPool is IStakingPool, Ownable, FrensBase {
 
   function getShare(uint _id) public view returns(uint) {
     require(getAddress(keccak256(abi.encodePacked("pool.for.id", _id))) == address(this), "wrong staking pool");
-    return frensClaim.getShare(_id);
+    return _getShare(_id);
+  }
+
+  function _getShare(uint _id) internal view returns(uint) {
+    if(address(this).balance == 0) return 0;
+    uint frenDep = getUint(keccak256(abi.encodePacked("deposit.amount", address(this), _id)));
+    uint totDep = getUint(keccak256(abi.encodePacked("total.deposits", address(this))));
+    uint frenPastClaims = getUint(keccak256(abi.encodePacked("fren.past.claims", address(this), _id)));
+    uint totPastClaims = getUint(keccak256(abi.encodePacked("total.claims", address(this))));
+    uint totFrenRewards = (frenDep * (address(this).balance + totPastClaims) / totDep);
+    if(totFrenRewards == 0) return 0;
+    uint amount = totFrenRewards - frenPastClaims;
+    return amount;
   }
 
   function getDistributableShare(uint _id) public view returns(uint) {
     if(currentState == State.acceptingDeposits) {
       return 0;
     } else {
-      return(getShare(_id));
+      uint share = _getShare(_id);
+       //fee? not applied to exited
+      uint feePercent = getUint(keccak256(abi.encodePacked("protocol.fee")));
+      if(feePercent > 0 && currentState != State.exited){
+        uint feeAmount = feePercent * address(this).balance / 100;
+        share = share - feeAmount;
+      }
+    return share;
     }
   }
 

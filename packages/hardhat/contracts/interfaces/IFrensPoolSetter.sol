@@ -18,7 +18,9 @@ interface IFrensPoolSetter {
 
     function withdraw(uint _id, uint _amount) external returns(bool);
 
-    function distribute(address tokenOwner, uint share) external returns(bool);
+    //function distribute(address tokenOwner, uint share) external returns(bool);
+
+    function claim(uint id, uint amount, bool exited) external returns(bool);
 
     function setArt(address newArtContract) external returns(bool);
 

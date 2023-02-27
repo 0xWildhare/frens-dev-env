@@ -13,12 +13,13 @@ contract FrensOracle is FrensBase, IFrensOracle {
         version = 0;
     }
 
-    function checkValidatorState(address poolAddress) external {
+    function checkValidatorState(address poolAddress) external returns(bool) {
         bytes memory pubKey = getBytes(keccak256(abi.encodePacked("pubKey", poolAddress)));
         if(isExiting[pubKey]){
             IStakingPool pool = IStakingPool(poolAddress);
             pool.exitPool();
         }
+        return isExiting[pubKey];
     }
 
    function setExiting(bytes memory pubKey, bool _isExiting) external onlyGuardian{
