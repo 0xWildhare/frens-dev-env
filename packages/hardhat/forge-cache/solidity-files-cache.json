@@ -673,8 +673,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1677458923450,
-      "contentHash": "8ff700aea5d6973b3153886a5bd88d2d",
+      "lastModificationDate": 1677477692636,
+      "contentHash": "cd2b333b0f1642bed6a142a9f8a36cd8",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -709,7 +709,6 @@
         "contracts/FrensBase.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IFrensArt.sol",
-        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensOracle.sol",
         "contracts/interfaces/IFrensPoolSetter.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
@@ -767,7 +766,6 @@
         "contracts/StakingPool.sol",
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IFrensArt.sol",
-        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensOracle.sol",
         "contracts/interfaces/IFrensPoolSetter.sol",
         "contracts/interfaces/IFrensPoolShare.sol",
@@ -830,8 +828,8 @@
       }
     },
     "contracts/Waves.sol": {
-      "lastModificationDate": 1677451585913,
-      "contentHash": "56cebafe1cae81093aa44c9b74fe5374",
+      "lastModificationDate": 1677464846547,
+      "contentHash": "683814f03371f41aa744f6c5b5817230",
       "sourceName": "contracts/Waves.sol",
       "solcConfig": {
         "settings": {
@@ -3010,7 +3008,6 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
-        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensLogo.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensOracle.sol",
@@ -3054,8 +3051,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1677461618538,
-      "contentHash": "aff626876bbe11ac97ad3e2df6b6b39f",
+      "lastModificationDate": 1677479854443,
+      "contentHash": "3b44504254dc40b4d2ef2f60d50b4048",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -3103,7 +3100,6 @@
         "contracts/interfaces/IDepositContract.sol",
         "contracts/interfaces/IENS.sol",
         "contracts/interfaces/IFrensArt.sol",
-        "contracts/interfaces/IFrensClaim.sol",
         "contracts/interfaces/IFrensLogo.sol",
         "contracts/interfaces/IFrensMetaHelper.sol",
         "contracts/interfaces/IFrensOracle.sol",
