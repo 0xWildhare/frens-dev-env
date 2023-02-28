@@ -798,8 +798,8 @@ const StakingPoolABI = [
         "type": "bool"
       },
       {
-        "internalType": "contract IFrensPoolShare",
-        "name": "frensPoolShare_",
+        "internalType": "contract IFrensStorage",
+        "name": "frensStorage_",
         "type": "address"
       }
     ],
@@ -891,7 +891,7 @@ const StakingPoolABI = [
     "name": "artForPool",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "contract IFrensArt",
         "name": "",
         "type": "address"
       }
@@ -910,19 +910,6 @@ const StakingPoolABI = [
     "name": "claim",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "depositContractAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -985,6 +972,32 @@ const StakingPoolABI = [
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "frensPoolShare",
+    "outputs": [
+      {
+        "internalType": "contract IFrensPoolShare",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "frensStorage",
+    "outputs": [
+      {
+        "internalType": "contract IFrensStorage",
+        "name": "",
+        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -1094,34 +1107,14 @@ const StakingPoolABI = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "resetArt",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "contract IFrensArt",
         "name": "newArtContract",
         "type": "address"
       }
     ],
     "name": "setArt",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "contract IFrensOracle",
-        "name": "_oracle",
-        "type": "address"
-      }
-    ],
-    "name": "setOracle",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1338,7 +1331,7 @@ module.exports = {
   31337: { //localhost
     contracts: {
       StakingPool: {
-        address: "0x885c0dF68394B0555fCd8f0026226E8De5997Edc",
+        address: "0x11aeB12971476aAa9131Cd8229d137Ff77C8F318",
         abi: StakingPoolABI,
       },
     },

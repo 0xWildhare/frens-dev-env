@@ -114,7 +114,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     reinitialiseEverything = true;
     console.log('\x1b[31m%s\x1b[0m', "FrensStorage updated and initialising", FrensStorage.address);
   }
-
+/*
   if(FactoryProxyOld == 0 || chainId == 31337){ //should not update proxy contract on testnet of mainnet
     await deploy("FactoryProxy", {
       // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
@@ -132,21 +132,21 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   } else if(FactoryProxyOld.address != FactoryProxy.address){
     console.log('\x1b[31m%s\x1b[0m', "FactoryProxy updated", FactoryProxy.address);
   }
-
+*/
   if(reinitialiseEverything) {
     //ssv
-    const ssvHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "SSVRegistry"]);
+    const ssvHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract.address", "SSVRegistry"]);
     const ssvInit = await FrensStorage.setAddress(ssvHash, SSVRegistry);
     await ssvInit.wait();
     //deposit contract
-    const depContHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "DepositContract"]);
+    const depContHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract.address", "DepositContract"]);
     const depContInit = await FrensStorage.setAddress(depContHash, DepositContract);
     await depContInit.wait();
     //ENS
-    const ENSHash =  ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "ENS"]);
+    const ENSHash =  ethers.utils.solidityKeccak256(["string", "string"], ["external.contract.address", "ENS"]);
     const ENSInit = await FrensStorage.setAddress(ENSHash, ENS);
     await ENSInit.wait();
-    console.log('\x1b[36m%s\x1b[0m', "external contracts initialised", FrensInitialiser.address);
+    console.log('\x1b[36m%s\x1b[0m', "external contracts initialised", SSVRegistry, DepositContract, ENS);
   } 
 
   
@@ -156,7 +156,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       //"0x00000000219ab540356cBB839Cbe05303d7705Fa", "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04" //mainnet (using goerli ssvRegistryAddress until there is a mainnet deployment - some features will not work on mainnet fork)
-      FrensStorage.address
+      //FrensStorage.address
      ],
     log: true,
     waitConfirmations: 5,
@@ -168,26 +168,22 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   if(FrensPoolShareOld == 0){
     const poolShareXfer = await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
     await poolShareXfer.wait();
-    const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
+    const poolShareHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensPoolShare"]);
+    const poolShareInit = await FrensStorage.setAddress(poolShareHash, FrensPoolShare.address);
     await poolShareInit.wait();
-    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
-    await nftBoolFalse.wait();
+    
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShare initialised", FrensPoolShare.address);
   } else if(FrensPoolShareOld.address != FrensPoolShare.address){
     const poolShareXfer = await FrensPoolShare.transferOwnership("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6");
     await poolShareXfer.wait();
-    const poolShareDel = await FrensInitialiser.deleteContract(FrensPoolShareOld.address, "FrensPoolShare");
-    await poolShareDel.wait();
-    const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
+    const poolShareHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensPoolShare"]);
+    const poolShareInit = await FrensStorage.setAddress(poolShareHash, FrensPoolShare.address);
     await poolShareInit.wait();
-    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
-    await nftBoolFalse.wait();
     console.log('\x1b[31m%s\x1b[0m', "FrensPoolShare updated", FrensPoolShare.address);
   }else if(reinitialiseEverything) {
-    const poolShareInit = await FrensInitialiser.setContract(FrensPoolShare.address, "FrensPoolShare");
+    const poolShareHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensPoolShare"]);
+    const poolShareInit = await FrensStorage.setAddress(poolShareHash, FrensPoolShare.address);
     await poolShareInit.wait();
-    const nftBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShare.address, false); //removes privileges to write to FrensStorage
-    await nftBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShare (re)initialised", FrensPoolShare.address);
   }
 
@@ -196,7 +192,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       //"0x00000000219ab540356cBB839Cbe05303d7705Fa", "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04" //mainnet (using goerli ssvRegistryAddress until there is a mainnet deployment - some features will not work on mainnet fork)
-      FrensPoolShare.address //goerli
+      FrensStorage.address 
      ],
     log: true,
     waitConfirmations: 5,
@@ -205,74 +201,20 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const StakingPoolFactory = await ethers.getContract("StakingPoolFactory", deployer);
 
   if(StakingPoolFactoryOld == 0 || reinitialiseEverything) {
-    const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
+    const factoryHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "StakingPoolFactory"]);
+    const factoryInit = await FrensStorage.setAddress(factoryHash, StakingPoolFactory.address);
     await factoryInit.wait();
-    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, false); //grants privileges to write to FrensStorage
-    await factoryBoolTrue.wait();
+    await FrensPoolShare.grantRole(ethers.constants.HashZero,  StakingPoolFactory.address);
     console.log('\x1b[33m%s\x1b[0m', "StakingPoolFactory initialised", StakingPoolFactory.address);
   } else if(StakingPoolFactoryOld.address != StakingPoolFactory.address){
-    const factoryDel = await FrensInitialiser.deleteContract(StakingPoolFactoryOld.address, "StakingPoolFactory");
-    await factoryDel.wait();
-    const factoryInit = await FrensInitialiser.setContract(StakingPoolFactory.address, "StakingPoolFactory");
+    const factoryHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "StakingPoolFactory"]);
+    const factoryInit = await FrensStorage.setAddress(factoryHash, StakingPoolFactory.address);
     await factoryInit.wait();
-    const factoryBoolTrue = await FrensInitialiser.setContractExists(StakingPoolFactory.address, false); //grants privileges to write to FrensStorage
-    await factoryBoolTrue.wait();
+    await FrensPoolShare.grantRole(ethers.constants.HashZero,  StakingPoolFactory.address);
     console.log('\x1b[36m%s\x1b[0m', "StakingPoolFactory updated", StakingPoolFactory.address);
   }
-/*
-  await deploy("FrensClaim", {
-    from: deployer,
-    args: [
-      FrensStorage.address //goerli
-     ],
-    log: true,
-    waitConfirmations: 5,
-  });
 
-  const FrensClaim = await ethers.getContract("FrensClaim", deployer);
-
-  if(FrensClaimOld == 0 || reinitialiseEverything) {
-    const frensClaimInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
-    await frensClaimInit.wait();
-    const frensClaimBoolTrue = await FrensInitialiser.setContractExists(FrensClaim.address, true); //grants privileges to write to FrensStorage
-    await frensClaimBoolTrue.wait();
-    console.log('\x1b[33m%s\x1b[0m', "FrensClaim initialised", FrensClaim.address);
-  } else if(FrensClaimOld.address != FrensClaim.address){
-    //cdo not delete old contract - will break old pools.
-    const frensClaimInit = await FrensInitialiser.setContract(FrensClaim.address, "FrensClaim");
-    await frensClaimInit.wait();
-    const frensClaimBoolTrue = await FrensInitialiser.setContractExists(FrensClaim.address, true); //grants privileges to write to FrensStorage
-    await frensClaimBoolTrue.wait();
-    console.log('\x1b[36m%s\x1b[0m', "FrensClaim updated", FrensClaim.address);
-  }
-*/
-  await deploy("FrensPoolSetter", {
-    from: deployer,
-    args: [
-      FrensStorage.address //goerli
-     ],
-    log: true,
-    waitConfirmations: 5,
-  });
-
-  const FrensPoolSetter = await ethers.getContract("FrensPoolSetter", deployer);
-
-  if(FrensPoolSetterOld == 0 || reinitialiseEverything) {
-    const FrensPoolSetterInit = await FrensInitialiser.setContract(FrensPoolSetter.address, "FrensPoolSetter");
-    await FrensPoolSetterInit.wait();
-    const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
-    await FrensPoolSetterBoolTrue.wait();
-    console.log('\x1b[33m%s\x1b[0m', "FrensPoolSetter initialised", FrensPoolSetter.address);
-  } else if(FrensPoolSetterOld.address != FrensPoolSetter.address){
-    const FrensPoolSetterDel = await FrensInitialiser.deleteContract(FrensPoolSetterOld.address, "FrensPoolSetter");
-    await FrensPoolSetterDel.wait();
-    const FrensPoolSetterInit = await FrensInitialiser.setContract(FrensPoolSetter.address, "FrensPoolSetter");
-    await FrensPoolSetterInit.wait();
-    const FrensPoolSetterBoolTrue = await FrensInitialiser.setContractExists(FrensPoolSetter.address, true); //grants privileges to write to FrensStorage
-    await FrensPoolSetterBoolTrue.wait();
-    console.log('\x1b[36m%s\x1b[0m', "FrensPoolSetter updated", FrensPoolSetter.address);
-  }
-
+  
   await deploy("FrensOracle", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
@@ -286,18 +228,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensOracle = await ethers.getContract("FrensOracle", deployer);
 
   if(FrensOracleOld == 0 || reinitialiseEverything){
-    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
-    await meatInit.wait();
-    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
-    await metaBoolFalse.wait();
+    const oracleHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensOracle"]);
+    const oracleInit = await FrensStorage.setAddress(oracleHash, FrensOracle.address);
+    await oracleInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensOracle initialised", FrensOracle.address);
   } else if(FrensOracleOld.address != FrensOracle.address){
-    const metaDel = await FrensInitialiser.deleteContract(FrensOracleOld.address, "FrensOracle");
-    await metaDel.wait();
-    const meatInit = await FrensInitialiser.setContract(FrensOracle.address, "FrensOracle");
-    await meatInit.wait();
-    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensOracle.address, false); //removes privileges to write to FrensStorage
-    await metaBoolFalse.wait();
+    const oracleHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensOracle"]);
+    const oracleInit = await FrensStorage.setAddress(oracleHash, FrensOracle.address);
+    await oracleInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensOracle updated", FrensOracle.address);
   }
 
@@ -314,25 +252,23 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensMetaHelper = await ethers.getContract("FrensMetaHelper", deployer);
 
   if(FrensMetaHelperOld == 0 || reinitialiseEverything){
-    const meatInit = await FrensInitialiser.setContract(FrensMetaHelper.address, "FrensMetaHelper");
-    await meatInit.wait();
-    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensMetaHelper.address, false); //removes privileges to write to FrensStorage
-    await metaBoolFalse.wait();
+    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetahelper"]);
+    const metaInit = await FrensStorage.setAddress(metaHash, FrensMetaHelper.address);
+    await metaInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensMetaHelper initialised", FrensMetaHelper.address);
   } else if(FrensMetaHelperOld.address != FrensMetaHelper.address){
-    const metaDel = await FrensInitialiser.deleteContract(FrensMetaHelperOld.address, "FrensMetaHelper");
-    await metaDel.wait();
-    const meatInit = await FrensInitialiser.setContract(FrensMetaHelper.address, "FrensMetaHelper");
-    await meatInit.wait();
-    const metaBoolFalse = await FrensInitialiser.setContractExists(FrensMetaHelper.address, false); //removes privileges to write to FrensStorage
-    await metaBoolFalse.wait();
+    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetahelper"]);
+    const metaInit = await FrensStorage.setAddress(metaHash, FrensMetaHelper.address);
+    await metaInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensMetaHelper updated", FrensMetaHelper.address);
   }
 
   await deploy("FrensPoolShareTokenURI", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: [   ],
+    args: [ 
+      FrensStorage.address
+      ],
     log: true,
     waitConfirmations: 5,
   });
@@ -340,18 +276,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensPoolShareTokenURI = await ethers.getContract("FrensPoolShareTokenURI", deployer);
 
   if(FrensPoolShareTokenURIOld == 0 || reinitialiseEverything){
-    const tokUriInit = await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
+    const tokUriHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensPoolShareTokenURI"]);
+    const tokUriInit = await FrensStorage.setAddress(tokUriHash, FrensPoolShareTokenURI.address);
     await tokUriInit.wait();
-    const uriBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShareTokenURI.address, false); //removes privileges to write to FrensStorage
-    await uriBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensPoolShareTokenURI initialised", FrensPoolShareTokenURI.address);
   } else if(FrensPoolShareTokenURIOld.address != FrensPoolShareTokenURI.address){
-    const tokUriDel = await FrensInitialiser.deleteContract(FrensPoolShareTokenURIOld.address, "FrensPoolShareTokenURI");
-    await tokUriDel.wait();
-    const tokUriInit = await FrensInitialiser.setContract(FrensPoolShareTokenURI.address, "FrensPoolShareTokenURI");
+    const tokUriHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensPoolShareTokenURI"]);
+    const tokUriInit = await FrensStorage.setAddress(tokUriHash, FrensPoolShareTokenURI.address);
     await tokUriInit.wait();
-    const uriBoolFalse = await FrensInitialiser.setContractExists(FrensPoolShareTokenURI.address, false); //removes privileges to write to FrensStorage
-    await uriBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensPoolShareTokenURI updated", FrensPoolShareTokenURI.address);
   }
 
@@ -359,7 +291,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
-      
+          FrensStorage.address
      ],
     log: true,
     waitConfirmations: 5,
@@ -368,18 +300,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensArt = await ethers.getContract("FrensArt", deployer);
 
   if(FrensArtOld == 0 || reinitialiseEverything){
-    const artInit = await FrensInitialiser.setContract(FrensArt.address, "FrensArt");
+    const artHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensArt"]);
+    const artInit = await FrensStorage.setAddress(artHash, FrensArt.address);
     await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(FrensArt.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensArt initialised", FrensArt.address);
   } else if(FrensArtOld.address != FrensArt.address){
-    const artDel = await FrensInitialiser.deleteContract(FrensArtOld.address, "FrensArt");
-    await artDel.wait();
-    const artInit = await FrensInitialiser.setContract(FrensArt.address, "FrensArt");
+    const artHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensArt"]);
+    const artInit = await FrensStorage.setAddress(artHash, FrensArt.address);
     await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(FrensArt.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensArt updated", FrensArt.address);
   }
 
@@ -396,18 +324,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const PmFont = await ethers.getContract("PmFont", deployer);
 
   if(PmFontOld == 0 || reinitialiseEverything){
-    const artInit = await FrensInitialiser.setContract(PmFont.address, "PmFont");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(PmFont.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const pmHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "PmFont"]);
+    const pmInit = await FrensStorage.setAddress(pmHash, PmFont.address);
+    await pmInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "PmFont initialised", PmFont.address);
   } else if(PmFontOld.address != PmFont.address){
-    const artDel = await FrensInitialiser.deleteContract(PmFontOld.address, "PmFont");
-    await artDel.wait();
-    const artInit = await FrensInitialiser.setContract(PmFont.address, "PmFont");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(PmFont.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const pmHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "PmFont"]);
+    const pmInit = await FrensStorage.setAddress(pmHash, PmFont.address);
+    await pmInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "PmFont updated", PmFont.address);
   }
 
@@ -424,18 +348,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensLogo = await ethers.getContract("FrensLogo", deployer);
 
   if(FrensLogoOld == 0 || reinitialiseEverything){
-    const artInit = await FrensInitialiser.setContract(FrensLogo.address, "FrensLogo");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(FrensLogo.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const logoHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensLogo"]);
+    const logoInit = await FrensStorage.setAddress(logoHash, FrensLogo.address);
+    await logoInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensLogo initialised", FrensLogo.address);
   } else if(FrensLogoOld.address != FrensLogo.address){
-    const artDel = await FrensInitialiser.deleteContract(FrensLogoOld.address, "FrensLogo");
-    await artDel.wait();
-    const artInit = await FrensInitialiser.setContract(FrensLogo.address, "FrensLogo");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(FrensLogo.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const logoHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensLogo"]);
+    const logoInit = await FrensStorage.setAddress(logoHash, FrensLogo.address);
+    await logoInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensLogo updated", FrensLogo.address);
   }
 
@@ -452,18 +372,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const Waves = await ethers.getContract("Waves", deployer);
 
   if(WavesOld == 0 || reinitialiseEverything){
-    const artInit = await FrensInitialiser.setContract(Waves.address, "Waves");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(Waves.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const wavesHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "Waves"]);
+    const wavesInit = await FrensStorage.setAddress(wavesHash, Waves.address);
+    await wavesInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "Waves initialised", Waves.address);
   } else if(WavesOld.address != Waves.address){
-    const artDel = await FrensInitialiser.deleteContract(WavesOld.address, "Waves");
-    await artDel.wait();
-    const artInit = await FrensInitialiser.setContract(Waves.address, "Waves");
-    await artInit.wait();
-    const artBoolFalse = await FrensInitialiser.setContractExists(Waves.address, false); //removes privileges to write to FrensStorage
-    await artBoolFalse.wait();
+    const wavesHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "Waves"]);
+    const wavesInit = await FrensStorage.setAddress(wavesHash, Waves.address);
+    await wavesInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "Waves updated", Waves.address);
   }
 
@@ -474,15 +390,14 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
       args: [
         "0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa",
         false,
-        FrensPoolShare.address,
-        FrensArt.address,
+        FrensStorage.address
       ],
       log: true,
       waitConfirmations: 5,
     });
   }
 
-  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, FrensArt.address/*, false, 0, 32000000000000000000n*/);
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);
   
   newPoolResult = await newPool.wait();
   console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);
@@ -507,4 +422,4 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   console.log("FrensArtTest", FrensArtTest.address);
 */
 };
-module.exports.tags = ["FactoryProxy", "FrensArt", "FrensClaim", "FrensInitialiser", "FrensManager", "FrensMetaHelper", "FrensPoolSetter", "FrensPoolShare", "FrensPoolShareTokenURI", "FrensStorage", "StakingPoolFactory", "StakingPool"];
+module.exports.tags = ["FrensArt", "FrensMetaHelper", "FrensPoolSetter", "FrensPoolShare", "FrensPoolShareTokenURI", "FrensStorage", "StakingPoolFactory", "StakingPool"];
