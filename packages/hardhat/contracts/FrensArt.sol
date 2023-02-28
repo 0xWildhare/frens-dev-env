@@ -6,6 +6,8 @@ import "./interfaces/IFrensLogo.sol";
 import "./interfaces/IWaves.sol";
 import "./interfaces/IFrensStorage.sol";
 
+import "hardhat/console.sol";
+
 contract FrensArt {
 
     IFrensStorage frensStorage;
@@ -18,10 +20,15 @@ contract FrensArt {
 
     // Visibility is `public` to enable it being called by other contracts for composition.
     function renderTokenById(uint256 id) public view returns (string memory) {
-        IFrensMetaHelper frensMetaHelper = IFrensMetaHelper(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "frensMetaHelper"))));
+        console.log("0");
+        IFrensMetaHelper frensMetaHelper = IFrensMetaHelper(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "FrensMetaHelper"))));
+        console.log("1", address(frensMetaHelper));
         IPmFont pmFont = IPmFont(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "PmFont"))));
+        console.log("2", address(pmFont));
         IWaves waves = IWaves(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "Waves"))));
+        console.log("3", address(waves));
         IFrensLogo frensLogo = IFrensLogo(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "FrensLogo"))));
+        console.log("4", address(frensLogo));
         string memory depositString = frensMetaHelper.getDepositStringForId(id);
         string memory pool = frensMetaHelper.getPoolString(id);
         bytes memory permanentMarker = pmFont.getPmFont();
@@ -39,7 +46,7 @@ contract FrensArt {
                 '<rect height="400" width="400" fill="url(#grad1)" />',
                 logo,
                 wavesGraphic,
-                '<text font-size="15.5" x="200" y="163" text-anchor="middle" font-family="sans" letter-spacing="6" fill="white">',
+                '<text font-size="15.5" x="200" y="163" text-anchor="middle" font-family="Sans,Arial" letter-spacing="6" fill="white">',
                 "DEPOSIT",
                 "</text>",
                 '<text font-size="45" x="200" y="212" text-anchor="middle"  font-weight="910" font-family="Sans,Arial" letter-spacing="-1" fill="white">',

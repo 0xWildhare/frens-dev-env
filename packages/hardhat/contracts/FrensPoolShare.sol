@@ -7,6 +7,7 @@ import "./interfaces/IFrensPoolShareTokenURI.sol";
 import "./interfaces/IFrensArt.sol";
 import "./interfaces/IFrensPoolShare.sol";
 import "./interfaces/IStakingPool.sol";
+import "./interfaces/IFrensStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -20,18 +21,15 @@ contract FrensPoolShare is
 {
     // Counters.Counter private _tokenIds;
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    IFrensPoolShareTokenURI frensPoolShareTokenURI;
+    
+    IFrensStorage frensStorage;
+
     mapping(uint => address) public poolByIds;
 
-    constructor() ERC721("FRENS Share", "FRENS") {
+    constructor(IFrensStorage frensStorage_) ERC721("FRENS Share", "FRENS") {
+        frensStorage = frensStorage_;
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-    }
 
-    function setFrensPoolShareTokenURI(
-        IFrensPoolShareTokenURI _frensPoolShareTokenURI
-    ) public {
-        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender));
-        frensPoolShareTokenURI = _frensPoolShareTokenURI;
     }
 
     function mint(address userAddress) public {
@@ -52,6 +50,7 @@ contract FrensPoolShare is
     function tokenURI(
         uint256 id
     ) public view override(ERC721, IFrensPoolShare) returns (string memory) {
+        IFrensPoolShareTokenURI frensPoolShareTokenURI = IFrensPoolShareTokenURI(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShareTokenURI"))));
         return frensPoolShareTokenURI.tokenURI(id);
     }
 

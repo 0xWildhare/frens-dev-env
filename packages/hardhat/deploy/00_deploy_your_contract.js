@@ -156,7 +156,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       //"0x00000000219ab540356cBB839Cbe05303d7705Fa", "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04" //mainnet (using goerli ssvRegistryAddress until there is a mainnet deployment - some features will not work on mainnet fork)
-      //FrensStorage.address
+      FrensStorage.address
      ],
     log: true,
     waitConfirmations: 5,
@@ -252,12 +252,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const FrensMetaHelper = await ethers.getContract("FrensMetaHelper", deployer);
 
   if(FrensMetaHelperOld == 0 || reinitialiseEverything){
-    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetahelper"]);
+    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetaHelper"]);
     const metaInit = await FrensStorage.setAddress(metaHash, FrensMetaHelper.address);
     await metaInit.wait();
     console.log('\x1b[33m%s\x1b[0m', "FrensMetaHelper initialised", FrensMetaHelper.address);
   } else if(FrensMetaHelperOld.address != FrensMetaHelper.address){
-    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetahelper"]);
+    const metaHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMetaHelper"]);
     const metaInit = await FrensStorage.setAddress(metaHash, FrensMetaHelper.address);
     await metaInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "FrensMetaHelper updated", FrensMetaHelper.address);
