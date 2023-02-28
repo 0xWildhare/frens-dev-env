@@ -798,8 +798,8 @@ const StakingPoolABI = [
         "type": "bool"
       },
       {
-        "internalType": "contract IFrensStorage",
-        "name": "frensStorage_",
+        "internalType": "contract IFrensPoolShare",
+        "name": "frensPoolShare_",
         "type": "address"
       }
     ],
@@ -829,43 +829,6 @@ const StakingPoolABI = [
       }
     ],
     "name": "DepositToPool",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "sender",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "value",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "data",
-        "type": "bytes"
-      },
-      {
-        "indexed": false,
-        "internalType": "bytes",
-        "name": "result",
-        "type": "bytes"
-      }
-    ],
-    "name": "ExecuteTransaction",
     "type": "event"
   },
   {
@@ -924,10 +887,23 @@ const StakingPoolABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "artForPool",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "id",
+        "name": "_id",
         "type": "uint256"
       }
     ],
@@ -938,9 +914,54 @@ const StakingPoolABI = [
   },
   {
     "inputs": [],
+    "name": "depositContractAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "depositForId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "depositToPool",
     "outputs": [],
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "deposit_data_root",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -954,11 +975,11 @@ const StakingPoolABI = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_id",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "getDepositAmount",
+    "name": "frenPastClaim",
     "outputs": [
       {
         "internalType": "uint256",
@@ -983,32 +1004,6 @@ const StakingPoolABI = [
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getIdsInThisPool",
-    "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getPubKey",
-    "outputs": [
-      {
-        "internalType": "bytes",
-        "name": "",
-        "type": "bytes"
       }
     ],
     "stateMutability": "view",
@@ -1047,8 +1042,14 @@ const StakingPoolABI = [
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTotalDeposits",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "idsInPool",
     "outputs": [
       {
         "internalType": "uint256",
@@ -1067,6 +1068,19 @@ const StakingPoolABI = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pubKey",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
       }
     ],
     "stateMutability": "view",
@@ -1102,29 +1116,55 @@ const StakingPoolABI = [
   {
     "inputs": [
       {
+        "internalType": "contract IFrensOracle",
+        "name": "_oracle",
+        "type": "address"
+      }
+    ],
+    "name": "setOracle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes",
-        "name": "pubKey",
+        "name": "_pubKey",
         "type": "bytes"
       },
       {
         "internalType": "bytes",
-        "name": "withdrawal_credentials",
+        "name": "_withdrawal_credentials",
         "type": "bytes"
       },
       {
         "internalType": "bytes",
-        "name": "signature",
+        "name": "_signature",
         "type": "bytes"
       },
       {
         "internalType": "bytes32",
-        "name": "deposit_data_root",
+        "name": "_deposit_data_root",
         "type": "bytes32"
       }
     ],
     "name": "setPubKey",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "signature",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1138,28 +1178,67 @@ const StakingPoolABI = [
     "inputs": [
       {
         "internalType": "bytes",
-        "name": "pubKey",
+        "name": "_pubKey",
         "type": "bytes"
       },
       {
         "internalType": "bytes",
-        "name": "withdrawal_credentials",
+        "name": "_withdrawal_credentials",
         "type": "bytes"
       },
       {
         "internalType": "bytes",
-        "name": "signature",
+        "name": "_signature",
         "type": "bytes"
       },
       {
         "internalType": "bytes32",
-        "name": "deposit_data_root",
+        "name": "_deposit_data_root",
         "type": "bytes32"
       }
     ],
     "name": "stake",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalClaims",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalDeposits",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "transferLocked",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -1177,12 +1256,25 @@ const StakingPoolABI = [
   },
   {
     "inputs": [],
-    "name": "version",
+    "name": "validatorLocked",
     "outputs": [
       {
-        "internalType": "uint8",
+        "internalType": "bool",
         "name": "",
-        "type": "uint8"
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "validatorSet",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -1204,6 +1296,19 @@ const StakingPoolABI = [
     "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawal_credentials",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {

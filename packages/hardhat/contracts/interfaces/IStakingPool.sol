@@ -3,6 +3,8 @@ pragma solidity >=0.8.0 <0.9.0;
 
 interface IStakingPool{
 
+  function depositForId(uint _id) external view returns(uint);
+
   function owner() external view returns (address);
 
   function depositToPool() external payable;
@@ -19,13 +21,13 @@ interface IStakingPool{
 
   function claim(uint id) external;
 
-  function getIdsInThisPool() external view returns(uint[] memory);
+  // function getIdsInThisPool() external view returns(uint[] memory);
 
   function getShare(uint _id) external view returns(uint);
 
   function getDistributableShare(uint _id) external view returns(uint);
 
-  function getPubKey() external view returns(bytes memory);
+  // function getPubKey() external view returns(bytes memory);
 
   function setPubKey(
     bytes calldata pubKey,
@@ -36,7 +38,7 @@ interface IStakingPool{
 
   function getState() external view returns(string memory);
 
-  function getDepositAmount(uint _id) external view returns(uint);
+  // function getDepositAmount(uint _id) external view returns(uint);
 
   function stake(
     bytes calldata pubkey,

@@ -38,12 +38,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   var FrensStorageOld = 0;
   var FactoryProxyOld = 0;
-  var FrensInitialiserOld = 0;
-  var FrensManagerOld = 0;
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
-  //var FrensClaimOld = 0;
-  var FrensPoolSetterOld = 0;
   var FrensOracleOld = 0;
   var FrensMetaHelperOld = 0;
   var FrensPoolShareTokenURIOld = 0;
@@ -61,27 +57,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   } catch(e) {}
 
   try{
-    FrensInitialiserOld = await ethers.getContract("FrensInitialiser", deployer);
-  } catch(e) {}
-
-  try{
-    FrensManagerOld = await ethers.getContract("FrensManager", deployer);
-  } catch(e) {}
-
-  try{
     FrensPoolShareOld = await ethers.getContract("FrensPoolShare", deployer);
   } catch(e) {}
 
   try{
     StakingPoolFactoryOld = await ethers.getContract("StakingPoolFactory", deployer);
-  } catch(e) {}
-/*
-  try{
-    FrensClaimOld = await ethers.getContract("FrensClaim", deployer);
-  } catch(e) {}
-*/
-  try{
-    FrensPoolSetterOld = await ethers.getContract("FrensPoolSetter", deployer);
   } catch(e) {}
 
   try{
@@ -153,69 +133,23 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[31m%s\x1b[0m', "FactoryProxy updated", FactoryProxy.address);
   }
 
-  await deploy("FrensInitialiser", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: [  FrensStorage.address ],
-    log: true,
-    waitConfirmations: 5,
-  });
-
-  const FrensInitialiser = await ethers.getContract("FrensInitialiser", deployer);
-
-  if(FrensInitialiserOld == 0 || reinitialiseEverything) {
-    const initialiserInit = await FrensInitialiser.setContract(FrensInitialiser.address, "FrensInitialiser");
-    await initialiserInit.wait();
-    const frensInitBoolTrue = await FrensInitialiser.setContractExists(FrensInitialiser.address, true); //grants privileges to write to FrensStorage
-    await frensInitBoolTrue.wait();
-    //ssvRegistry
-    const ssvInit = await FrensInitialiser.setExternalContract(SSVRegistry, "SSVRegistry");
+  if(reinitialiseEverything) {
+    //ssv
+    const ssvHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "SSVRegistry"]);
+    const ssvInit = await FrensStorage.setAddress(ssvHash, SSVRegistry);
     await ssvInit.wait();
     //deposit contract
-    const depContInit = await FrensInitialiser.setExternalContract(DepositContract, "DepositContract");
+    const depContHash = ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "DepositContract"]);
+    const depContInit = await FrensStorage.setAddress(depContHash, DepositContract);
     await depContInit.wait();
     //ENS
-    const ENSInit = await FrensInitialiser.setExternalContract(ENS, "ENS");
+    const ENSHash =  ethers.utils.solidityKeccak256(["string", "string"], ["external.contract", "ENS"]);
+    const ENSInit = await FrensStorage.setAddress(ENSHash, ENS);
     await ENSInit.wait();
-    console.log('\x1b[33m%s\x1b[0m', "initialiser initialised", FrensInitialiser.address);
-  } else if(FrensInitialiserOld.address != FrensInitialiser.address) {
-    const newInitExist = await FrensInitialiserOld.setContractExists(FrensInitialiser.address, true); //grants privileges to write to FrensStorage
-    await newInitExist.wait();
-    const initialiserDel = await FrensInitialiser.deleteContract(FrensInitialiserOld.address,"FrensInitialiser");
-    await initialiserDel.wait();
-    const initialiserInit = await FrensInitialiser.setContract(FrensInitialiser.address, "FrensInitialiser");
-    await initialiserInit.wait();
-    console.log('\x1b[36m%s\x1b[0m', "initialiser updated", FrensInitialiser.address);
-  }
+    console.log('\x1b[36m%s\x1b[0m', "external contracts initialised", FrensInitialiser.address);
+  } 
 
-  await deploy("FrensManager", {
-    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
-    from: deployer,
-    args: [  FrensStorage.address ],
-    log: true,
-    waitConfirmations: 5,
-  });
-
-  const FrensManager = await ethers.getContract("FrensManager", deployer);
-
-  if(FrensManagerOld == 0 || reinitialiseEverything) {
-    const managerInit = await FrensInitialiser.setContract(FrensManager.address, "FrensManager");
-    await managerInit.wait();
-    const frensManageBoolTrue = await FrensInitialiser.setContractExists(FrensManager.address, true); //grants privileges to write to FrensStorage
-    await frensManageBoolTrue.wait();
-   
-    console.log('\x1b[33m%s\x1b[0m', "manager initialised", FrensManager.address);
-  } else if(FrensManagerOld.address != FrensManager.address) {
-    const managerDel = await FrensInitialiser.deleteContract(FrensManagerOld.address,"FrensManager");
-    await managerDel.wait();
-    const managerInit = await FrensInitialiser.setContract(FrensManager.address, "FrensManager");
-    await managerInit.wait();
-    const newManageExist = await FrensInitialiser.setContractExists(FrensManager.address, true); //grants privileges to write to FrensStorage
-    await newManageExist.wait();
-    console.log('\x1b[36m%s\x1b[0m', "manager updated", FrensManager.address);
-  }
-
-
+  
   if(FrensPoolShareOld == 0 || chainId == 31337){ //should not update NFT contract on testnet or mainnet
     await deploy("FrensPoolShare", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
@@ -262,7 +196,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     from: deployer,
     args: [
       //"0x00000000219ab540356cBB839Cbe05303d7705Fa", "0xb9e155e65B5c4D66df28Da8E9a0957f06F11Bc04" //mainnet (using goerli ssvRegistryAddress until there is a mainnet deployment - some features will not work on mainnet fork)
-      FrensStorage.address //goerli
+      FrensPoolShare.address //goerli
      ],
     log: true,
     waitConfirmations: 5,
@@ -398,7 +332,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   await deploy("FrensPoolShareTokenURI", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    args: [  FrensStorage.address ],
+    args: [   ],
     log: true,
     waitConfirmations: 5,
   });
@@ -425,7 +359,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
     args: [
-      FrensStorage.address
+      
      ],
     log: true,
     waitConfirmations: 5,
@@ -540,14 +474,15 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
       args: [
         "0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa",
         false,
-        FrensStorage.address
+        FrensPoolShare.address,
+        FrensArt.address,
       ],
       log: true,
       waitConfirmations: 5,
     });
   }
 
-  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, FrensArt.address/*, false, 0, 32000000000000000000n*/);
   
   newPoolResult = await newPool.wait();
   console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);

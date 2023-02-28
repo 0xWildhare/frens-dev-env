@@ -7,7 +7,7 @@ interface IFrensMetaHelper {
 
   function getEthDecimalString(uint amountInWei) external pure returns(string memory);
 
-  function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory);
+  // function getOperatorsForPool(address poolAddress) external view returns (uint32[] memory, string memory);
 
   function getPoolString(uint id) external view returns (string memory);
 
