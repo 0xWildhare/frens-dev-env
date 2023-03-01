@@ -101,7 +101,7 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1677623186175,
+      "lastModificationDate": 1677650132259,
       "contentHash": "88382e7a6d4bcf6f370ea6fc445d1a7d",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
@@ -145,7 +145,8 @@
         "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
         "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
       "artifacts": {
@@ -201,8 +202,8 @@
       }
     },
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1677632080291,
-      "contentHash": "1c1336fe8f79b767d949ffc30558a1df",
+      "lastModificationDate": 1677650132259,
+      "contentHash": "6f470060ded963ccb624b69642da8b6d",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
         "settings": {
@@ -253,7 +254,8 @@
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
       "artifacts": {
@@ -263,8 +265,8 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1677623186179,
-      "contentHash": "444a99495ee45d6fce331ec4884c213f",
+      "lastModificationDate": 1677650132259,
+      "contentHash": "cea30325b55f1eeb843577ef1a6534a6",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
         "settings": {
@@ -307,6 +309,7 @@
         "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
         "node_modules/base64-sol/base64.sol"
       ],
       "versionRequirement": ">=0.8.0, <0.9.0",
@@ -401,8 +404,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1677639426096,
-      "contentHash": "a5e0614be0bcceb34a9eb98945279010",
+      "lastModificationDate": 1677650132259,
+      "contentHash": "f34159cc72a50a960ad387fe82ea4dae",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -455,7 +458,7 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1677623186179,
+      "lastModificationDate": 1677650132267,
       "contentHash": "2f83b9020bb86cc9f95464d469e82bc5",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
@@ -799,7 +802,7 @@
       }
     },
     "contracts/interfaces/IFrensPoolShare.sol": {
-      "lastModificationDate": 1677623186179,
+      "lastModificationDate": 1677650132267,
       "contentHash": "82b5c52bf1bf6cf3a4c7e136e4bc2cd6",
       "sourceName": "contracts/interfaces/IFrensPoolShare.sol",
       "solcConfig": {
@@ -1446,8 +1449,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/access/AccessControl.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "79af4d35ce7918696f13f0cb6653ec99",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "95a6c227d1b8843e9385518a5bce4853",
       "sourceName": "node_modules/@openzeppelin/contracts/access/AccessControl.sol",
       "solcConfig": {
         "settings": {
@@ -1483,7 +1486,8 @@
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
       ],
       "versionRequirement": "^0.8.0",
       "artifacts": {
@@ -1534,8 +1538,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "e436cea06129be2c73cda4b1acc848b5",
       "sourceName": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
         "settings": {
@@ -1577,7 +1581,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol": {
-      "lastModificationDate": 1672089131099,
+      "lastModificationDate": 1677641023865,
       "contentHash": "ff727125a84ba8d0dd642f6ab0632435",
       "sourceName": "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
       "solcConfig": {
@@ -1622,8 +1626,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "ead7082e39cf31875ff89b22f473500d",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "190f627b9302b9602d3a313e28205cc5",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
         "settings": {
@@ -1662,7 +1666,8 @@
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
       ],
       "versionRequirement": "^0.8.0",
       "artifacts": {
@@ -1672,8 +1677,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "27d219ec6f69478d065fdbfa7931da68",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "eb7e61db29f31d88b3c1cef1b063d338",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
         "settings": {
@@ -1715,8 +1720,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "592df588492d45fdcf46b3cb608c0fbf",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
         "settings": {
@@ -1756,8 +1761,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "88095889e59d16821879a8083f906503",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "212e86880d210b6cac8c3eb0cd6b1fad",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
       "solcConfig": {
         "settings": {
@@ -1798,7 +1803,8 @@
         "node_modules/@openzeppelin/contracts/utils/Context.sol",
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol"
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
       ],
       "versionRequirement": "^0.8.0",
       "artifacts": {
@@ -1808,8 +1814,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "f69eb47f667b846a8698697d25eeff4e",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "f4dd06783f321aa26179bc2b6e361c29",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
       "solcConfig": {
         "settings": {
@@ -1852,7 +1858,7 @@
       }
     },
     "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1672089131099,
+      "lastModificationDate": 1677641023865,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -1896,8 +1902,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "4cff8b2ea0d958750786b4e3ca308445",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "f31ad6fc4bbf9c06203987220156a6ba",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
         "settings": {
@@ -1929,7 +1935,7 @@
         }
       },
       "imports": [],
-      "versionRequirement": "^0.8.0",
+      "versionRequirement": "^0.8.1",
       "artifacts": {
         "Address": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "Address.sol/Address.json"
@@ -1978,8 +1984,8 @@
       }
     },
     "node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1672089131099,
-      "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
+      "lastModificationDate": 1677641023865,
+      "contentHash": "396031251978f8febfd90cb62cb240ec",
       "sourceName": "node_modules/@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
         "settings": {
@@ -2010,7 +2016,9 @@
           "libraries": {}
         }
       },
-      "imports": [],
+      "imports": [
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol"
+      ],
       "versionRequirement": "^0.8.0",
       "artifacts": {
         "Strings": {
@@ -2102,6 +2110,47 @@
         }
       }
     },
+    "node_modules/@openzeppelin/contracts/utils/math/Math.sol": {
+      "lastModificationDate": 1677641023865,
+      "contentHash": "b9c58920ce74d6dc819161786112e7ee",
+      "sourceName": "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "Math": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "Math.sol/Math.json"
+        }
+      }
+    },
     "node_modules/base64-sol/base64.sol": {
       "lastModificationDate": 1672089131095,
       "contentHash": "0d54cb6a748ddde95d92ed7802c9248d",
@@ -2144,8 +2193,8 @@
       }
     },
     "test/foundry/FrensPoolShareTest.t.sol": {
-      "lastModificationDate": 1677636091515,
-      "contentHash": "597b4769475db055802b83e0ae871c54",
+      "lastModificationDate": 1677650187427,
+      "contentHash": "33a6e483976329e653421c99637734b4",
       "sourceName": "test/foundry/FrensPoolShareTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2221,6 +2270,7 @@
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
         "node_modules/base64-sol/base64.sol",
         "test/foundry/TestHelper.sol"
       ],
@@ -2232,8 +2282,8 @@
       }
     },
     "test/foundry/StakingPoolFactoryTest.t.sol": {
-      "lastModificationDate": 1677636080383,
-      "contentHash": "9e02cb616e19d6feb8d66aea1c477cdf",
+      "lastModificationDate": 1677650187431,
+      "contentHash": "12a30bd2a201fe4e7ffdec30bde4dc26",
       "sourceName": "test/foundry/StakingPoolFactoryTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2309,6 +2359,7 @@
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
         "node_modules/base64-sol/base64.sol",
         "test/foundry/TestHelper.sol"
       ],
@@ -2320,8 +2371,8 @@
       }
     },
     "test/foundry/StakingPoolLockedTest.t.sol": {
-      "lastModificationDate": 1677639353070,
-      "contentHash": "e9cf941a16b421814987eb6d9b918270",
+      "lastModificationDate": 1677650187431,
+      "contentHash": "e597b4cc2eb075ea2719dd499fedd69f",
       "sourceName": "test/foundry/StakingPoolLockedTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2397,6 +2448,7 @@
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
         "node_modules/base64-sol/base64.sol"
       ],
       "versionRequirement": "^0.8.13",
@@ -2407,8 +2459,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1677639435620,
-      "contentHash": "19e23da1d7c32e18b08abbd428363fe4",
+      "lastModificationDate": 1677650380694,
+      "contentHash": "cc5ab0623cad6c7d71a14f2e29bec229",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2484,6 +2536,7 @@
         "node_modules/@openzeppelin/contracts/utils/Strings.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
         "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
         "node_modules/base64-sol/base64.sol",
         "test/foundry/TestHelper.sol"
       ],
@@ -2495,7 +2548,7 @@
       }
     },
     "test/foundry/TestHelper.sol": {
-      "lastModificationDate": 1677633019166,
+      "lastModificationDate": 1677650187431,
       "contentHash": "1afccf2823bfda20959a8ae843b40045",
       "sourceName": "test/foundry/TestHelper.sol",
       "solcConfig": {

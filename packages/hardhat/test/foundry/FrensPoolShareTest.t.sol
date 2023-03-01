@@ -46,10 +46,11 @@ contract MiscTest is Test {
     address payable public alice = payable(0x00000000000000000000000000000000000A11cE);
     address payable public bob = payable(0x0000000000000000000000000000000000000B0b);
 
-    bytes pubkey = hex"b01569ec66772826955cb5ff0637ba938c4be3b01fe1ada49ef7a7ab4b799d259d952488240ca8db87d8a9ebad3a8aa7";
-    bytes withdrawal_credentials = hex"010000000000000000000000a38d17ef017a314ccd72b8f199c0e108ef7ca04c";
-    bytes signature = hex"b257af61464f370cf607a57b4b124b24f3513591c7c47643542fc655ca655afabd984f81d66b11f607f912162dcbf16d106d30d4ba9bbad0bf8bdd6aaa96d02784843a1116f5b707c7fd15124769279de944dfe2d39411f1a04bb834c0b0bbc3";
-    bytes32 deposit_data_root = 0x4362a08597a16707b4f9cde88aa2e9d51d17775b67490726072ce8897128d4c2;
+    bytes pubkey = hex"ac542dcb86a85a8deeef9150dbf8ad24860a066deb43b20294ed7fb65257f49899b7103c35b26289035de4227e1cc575";
+    bytes withdrawal_credentials = hex"0100000000000000000000004f81992fce2e1846dd528ec0102e6ee1f61ed3e2";
+    bytes signature = hex"92e3289be8c1379caae22fa1d6637c3953620db6eed35d1861b9bb9f0133be8b0cc631d16a3f034960fb826977138c59023543625ecb863cb5a748714ff5ee9f3286887e679cf251b6b0f14b190beac1ad7010cc136da6dd9e98dd4e8b7faae9";
+    bytes32 deposit_data_root = 0x4093180202063b0e66cd8aef5a934bfabcf32919e494064542b5f1a3889bf516;
+
 
         function setUp() public {
       //deploy storage
@@ -68,6 +69,7 @@ contract MiscTest is Test {
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
       frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "StakingPoolFactory")), address(stakingPoolFactory));
+      frensPoolShare.grantRole(bytes32(0x00),  address(stakingPoolFactory));
       //deploy FrensOracle
       frensOracle = new FrensOracle(frensStorage);
       //initialise FrensOracle
@@ -93,7 +95,7 @@ contract MiscTest is Test {
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       //console.log("pool", pool);
 
-      //create a second staking pool through proxy contract
+      //create a second staking pool
       (address pool2) = stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
@@ -104,17 +106,17 @@ contract MiscTest is Test {
 
     function testMintingDirectly() public {
       hoax(alice);
-      vm.expectRevert("Invalid Pool");
+      vm.expectRevert("you are not allowed to mint");
       frensPoolShare.mint(address(alice));
     }
 
     function testApprove() public {
       startHoax(alice);
-      uint i = 1;
+      uint i = 0;
       while( i < 255 ){ //255 is arbitrarily chosen, the point is to check a few different values.
         stakingPool.depositToPool{value: 1}();
  
-        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, i-1);
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, i);
         assertTrue(id == i );
 
         address shouldBeZero = frensPoolShare.getApproved(i);
@@ -129,13 +131,13 @@ contract MiscTest is Test {
 
     function testBalanceOf() public {
       startHoax(alice);
-      uint i = 1;
+      uint i = 0;
       while( i < 255 ){
         stakingPool.depositToPool{value: 1}();
-        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, i-1);
-        assertTrue(id == i );
+        uint id = frensPoolShare.tokenOfOwnerByIndex(alice, i);
+        assertTrue(id == i, "first is is 0");
         uint balanceOfAlice = frensPoolShare.balanceOf(alice);
-        assertEq(balanceOfAlice, i);
+        assertEq(balanceOfAlice, i + 1, "should have i + 1");
         i++;
       }
     }
@@ -143,7 +145,7 @@ contract MiscTest is Test {
     function testexists() public {
       startHoax(alice);
       
-      uint i = 1;
+      uint i = 0;
        while( i < 255 ){
         assertFalse(frensPoolShare.exists(i));
         stakingPool.depositToPool{value: 1}();
@@ -155,7 +157,7 @@ contract MiscTest is Test {
 
     function testGetPoolById() public {
       startHoax(alice);
-      uint i = 1;
+      uint i = 0;
       while( i < 255 ){
         stakingPool.depositToPool{value: 1}();
         address sbStakingPool = frensPoolShare.getPoolById(i);
@@ -174,7 +176,7 @@ contract MiscTest is Test {
 
     function testIsApprovedForAll() public {
       startHoax(alice);
-      uint i = 1;
+      uint i = 0;
       while( i < 64 ){
         stakingPool.depositToPool{value: 1}();
         i++;
@@ -195,7 +197,7 @@ contract MiscTest is Test {
     }
 
     function testOwnerOf() public {
-      uint i = 1;
+      uint i = 0;
       while( i < 255 ){
         hoax(alice);
         stakingPool.depositToPool{value: 1}();
@@ -221,7 +223,7 @@ contract MiscTest is Test {
       uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
       assertEq(alice, frensPoolShare.ownerOf(id));
       hoax(bob);
-      vm.expectRevert("ERC721: transfer caller is not owner nor approved");
+      vm.expectRevert("ERC721: caller is not token owner or approved");
       frensPoolShare.safeTransferFrom(alice, bob, id);
       hoax(alice);
       frensPoolShare.safeTransferFrom(alice, bob, id);
@@ -239,10 +241,10 @@ contract MiscTest is Test {
 
     function testTokenByIndex() public {
       startHoax(alice);
-      uint i = 1;
+      uint i = 0;
       while( i < 255 ){
         stakingPool.depositToPool{value: 1}();
-        uint id = frensPoolShare.tokenByIndex(i-1);
+        uint id = frensPoolShare.tokenByIndex(i);
         assertTrue(id == i );
         i++;
       }
@@ -254,7 +256,7 @@ contract MiscTest is Test {
       uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
       assertEq(alice, frensPoolShare.ownerOf(id));
       hoax(bob);
-      vm.expectRevert("ERC721: transfer caller is not owner nor approved");
+      vm.expectRevert("ERC721: caller is not token owner or approved");
       frensPoolShare.transferFrom(alice, bob, id);
       hoax(alice);
       frensPoolShare.transferFrom(alice, bob, id);
