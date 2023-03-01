@@ -69,12 +69,12 @@
     }
   ],
   "bytecode": {
-    "object": "0x60803461007457601f6104f338819003918201601f19168301916001600160401b038311848410176100795780849260209460405283398101031261007457516001600160a01b0381169081900361007457600180546001600160a01b03191691909117905560405161046390816100908239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f943691016103be565b908286519483868095519384920161040a565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da90369083016103be565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161040a565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a3818361036a565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b9390503461036757602093846003193601126103635782356001600160a01b03811693908490036100a75763ac2a5dfd60e01b825282828281875afa91821561035957908392918794926102da575b5085519460ff83519686818187019961023d81838d61040a565b8101888152030190205416610268575b50509261008f929160ff94865194859384925192839161040a565b8091929394503b156100a3579083809282885180958193630a645e5560e21b83525af180156102d0579087949392911561024d579091935067ffffffffffffffff82116102bd5750845284918061008f61024d565b634e487b7160e01b835260419052602482fd5b86513d86823e3d90fd5b91509192503d8084833e6102ee818361036a565b81019086818303126100a35780519067ffffffffffffffff82116101d0570181601f820112156100a357805190610324826103a2565b926103318851948561036a565b8284528883830101116101d05782916103529189808098979601910161040a565b9038610223565b85513d85823e3d90fd5b5080fd5b80fd5b90601f8019910116810190811067ffffffffffffffff82111761038c57604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff811161038c57601f01601f191660200190565b81601f82011215610405578035906103d5826103a2565b926103e3604051948561036a565b8284526020838301011161040557816000926020809301838601378301015290565b600080fd5b60005b83811061041d5750506000910152565b818101518382015260200161040d56fea2646970667358221220ffa10c617b2e9ce208ed09da9ad16f69b84f96034e7bf30f4e799a6795a1103064736f6c63430008110033",
+    "object": "0x60803461007457601f6104f338819003918201601f19168301916001600160401b038311848410176100795780849260209460405283398101031261007457516001600160a01b0381169081900361007457600180546001600160a01b03191691909117905560405161046390816100908239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f943691016103be565b908286519483868095519384920161040a565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da90369083016103be565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161040a565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a3818361036a565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b9390503461036757602093846003193601126103635782356001600160a01b03811693908490036100a75763ac2a5dfd60e01b825282828281875afa91821561035957908392918794926102da575b5085519460ff83519686818187019961023d81838d61040a565b8101888152030190205416610268575b50509261008f929160ff94865194859384925192839161040a565b8091929394503b156100a3579083809282885180958193630a645e5560e21b83525af180156102d0579087949392911561024d579091935067ffffffffffffffff82116102bd5750845284918061008f61024d565b634e487b7160e01b835260419052602482fd5b86513d86823e3d90fd5b91509192503d8084833e6102ee818361036a565b81019086818303126100a35780519067ffffffffffffffff82116101d0570181601f820112156100a357805190610324826103a2565b926103318851948561036a565b8284528883830101116101d05782916103529189808098979601910161040a565b9038610223565b85513d85823e3d90fd5b5080fd5b80fd5b90601f8019910116810190811067ffffffffffffffff82111761038c57604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff811161038c57601f01601f191660200190565b81601f82011215610405578035906103d5826103a2565b926103e3604051948561036a565b8284526020838301011161040557816000926020809301838601378301015290565b600080fd5b60005b83811061041d5750506000910152565b818101518382015260200161040d56fea2646970667358221220d64909d31ea65cd6514498517a816bab05bfd48ca838fd26958d77e51831f9d764736f6c63430008110033",
     "sourceMap": "186:703:2:-:0;;;;;;;;;;;;;-1:-1:-1;;186:703:2;;;;-1:-1:-1;;;;;186:703:2;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;186:703:2;;;;;;;;;;;-1:-1:-1;;;;;;186:703:2;;;;;;;;;;;;;;;;;-1:-1:-1;186:703:2;;;;;;-1:-1:-1;186:703:2;;;;;-1:-1:-1;186:703:2",
     "linkReferences": {}
   },
   "deployedBytecode": {
-    "object": "0x6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f943691016103be565b908286519483868095519384920161040a565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da90369083016103be565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161040a565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a3818361036a565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b9390503461036757602093846003193601126103635782356001600160a01b03811693908490036100a75763ac2a5dfd60e01b825282828281875afa91821561035957908392918794926102da575b5085519460ff83519686818187019961023d81838d61040a565b8101888152030190205416610268575b50509261008f929160ff94865194859384925192839161040a565b8091929394503b156100a3579083809282885180958193630a645e5560e21b83525af180156102d0579087949392911561024d579091935067ffffffffffffffff82116102bd5750845284918061008f61024d565b634e487b7160e01b835260419052602482fd5b86513d86823e3d90fd5b91509192503d8084833e6102ee818361036a565b81019086818303126100a35780519067ffffffffffffffff82116101d0570181601f820112156100a357805190610324826103a2565b926103318851948561036a565b8284528883830101116101d05782916103529189808098979601910161040a565b9038610223565b85513d85823e3d90fd5b5080fd5b80fd5b90601f8019910116810190811067ffffffffffffffff82111761038c57604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff811161038c57601f01601f191660200190565b81601f82011215610405578035906103d5826103a2565b926103e3604051948561036a565b8284526020838301011161040557816000926020809301838601378301015290565b600080fd5b60005b83811061041d5750506000910152565b818101518382015260200161040d56fea2646970667358221220ffa10c617b2e9ce208ed09da9ad16f69b84f96034e7bf30f4e799a6795a1103064736f6c63430008110033",
+    "object": "0x6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f943691016103be565b908286519483868095519384920161040a565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da90369083016103be565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161040a565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a3818361036a565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b9390503461036757602093846003193601126103635782356001600160a01b03811693908490036100a75763ac2a5dfd60e01b825282828281875afa91821561035957908392918794926102da575b5085519460ff83519686818187019961023d81838d61040a565b8101888152030190205416610268575b50509261008f929160ff94865194859384925192839161040a565b8091929394503b156100a3579083809282885180958193630a645e5560e21b83525af180156102d0579087949392911561024d579091935067ffffffffffffffff82116102bd5750845284918061008f61024d565b634e487b7160e01b835260419052602482fd5b86513d86823e3d90fd5b91509192503d8084833e6102ee818361036a565b81019086818303126100a35780519067ffffffffffffffff82116101d0570181601f820112156100a357805190610324826103a2565b926103318851948561036a565b8284528883830101116101d05782916103529189808098979601910161040a565b9038610223565b85513d85823e3d90fd5b5080fd5b80fd5b90601f8019910116810190811067ffffffffffffffff82111761038c57604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff811161038c57601f01601f191660200190565b81601f82011215610405578035906103d5826103a2565b926103e3604051948561036a565b8284526020838301011161040557816000926020809301838601378301015290565b600080fd5b60005b83811061041d5750506000910152565b818101518382015260200161040d56fea2646970667358221220d64909d31ea65cd6514498517a816bab05bfd48ca838fd26958d77e51831f9d764736f6c63430008110033",
     "sourceMap": "186:703:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;186:703:2;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;-1:-1:-1;;;789:26:2;;186:703;;;-1:-1:-1;;;;;186:703:2;;;;;;;;;;;;789:26;;;;;;;;;;;186:703;;;775:10;:40;186:703;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;186:703:2;;;;;789:26;;;;;;;;;;;;;;;;:::i;:::-;;;186:703;;;;;;;;;;;;789:26;;;186:703;;;;789:26;;;;;;186:703;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;186:703:2;;;;;;;;;-1:-1:-1;;;561:13:2;;;;;;;;;;;;;;;;;;;;;;;186:703;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;584:61;;186:703;;;;;;;;;;;;;;;;;;;;;:::i;584:61::-;619:15;;;;;;;;;;186:703;;;;;;;;;;;;;;619:15;;;;;;;;;;;;;;;584:61;619:15;186:703;;;;;;;;;-1:-1:-1;186:703:2;;;;;;584:61;;186:703;-1:-1:-1;;;186:703:2;;;;;;;;619:15;186:703;;;;;;;;;561:13;;;;;;;;;;;;;;;:::i;:::-;;;186:703;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;561:13;;;;;186:703;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;186:703:2;;;;:::o;:::-;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;-1:-1:-1;186:703:2;;;;;;;;;;;;;;:::o;:::-;-1:-1:-1;186:703:2;;;;;;;;;;-1:-1:-1;;186:703:2;;;;:::o;:::-;;;;;;;;;;;;",
     "linkReferences": {}
   },
@@ -83,7 +83,7 @@
     "isExiting(bytes)": "d6e65cb9",
     "setExiting(bytes,bool)": "d3b150e6"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"frensStorage_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"}],\"name\":\"checkValidatorState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"isExiting\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubKey\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_isExiting\",\"type\":\"bool\"}],\"name\":\"setExiting\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FrensOracle.sol\":\"FrensOracle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/FrensOracle.sol\":{\"keccak256\":\"0x2d4440e69f6aa64badc0a0d09e0ecfd07274e1d36c857ee8821b5ffccdabe9a3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d883ca312a007dccf5706ded83ebe0bf30c45f553e4ae07866ba9f750e72b787\",\"dweb:/ipfs/QmQUcqnLDchCVTZHYgnmCi6ntmJYMDE4xPavqDQgoibv4u\"]},\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IFrensOracle.sol\":{\"keccak256\":\"0xdf2291434faca3e9976a42d2328a4347ced5978b29477e40eb75642185afdf67\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f84266eaa6df4162f6a2be8dac55a8fd6ba4865a1dda48f4c1dd27c07c8c4316\",\"dweb:/ipfs/QmWbkZtvjrmJ61ZvnFn81UsLEoqzzah7oDkb66eEoSqJ1y\"]},\"contracts/interfaces/IFrensStorage.sol\":{\"keccak256\":\"0x99fcb22e7c7a93607fc2802dc74e2d96b6f1aa251918bb27211ad33b61bb5a5c\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://970a9a34229ba42eadf60cd7a40b1f46fa54d30642ffa5938230312386f66fae\",\"dweb:/ipfs/QmaKjqpMmGr11cc3rEebVH6cJ6GtfBiXnrhDY4WeNPjHrU\"]},\"contracts/interfaces/IStakingPool.sol\":{\"keccak256\":\"0x9c1fde0bb6fec8f684ee091ee181807fb74a28945e70c06761b504f79b5371a6\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4450e2936d49c9fe321994e4684ddfb5a684b5c530a21f7d9afba9f1ba95bf5d\",\"dweb:/ipfs/QmXgAedVuHVhjr7X3Utpi6DojqZH4oj5RR1Z4aZ98c6twc\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"frensStorage_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"}],\"name\":\"checkValidatorState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"isExiting\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubKey\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_isExiting\",\"type\":\"bool\"}],\"name\":\"setExiting\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FrensOracle.sol\":\"FrensOracle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/FrensOracle.sol\":{\"keccak256\":\"0x2d4440e69f6aa64badc0a0d09e0ecfd07274e1d36c857ee8821b5ffccdabe9a3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d883ca312a007dccf5706ded83ebe0bf30c45f553e4ae07866ba9f750e72b787\",\"dweb:/ipfs/QmQUcqnLDchCVTZHYgnmCi6ntmJYMDE4xPavqDQgoibv4u\"]},\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IFrensOracle.sol\":{\"keccak256\":\"0xdf2291434faca3e9976a42d2328a4347ced5978b29477e40eb75642185afdf67\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f84266eaa6df4162f6a2be8dac55a8fd6ba4865a1dda48f4c1dd27c07c8c4316\",\"dweb:/ipfs/QmWbkZtvjrmJ61ZvnFn81UsLEoqzzah7oDkb66eEoSqJ1y\"]},\"contracts/interfaces/IFrensStorage.sol\":{\"keccak256\":\"0x99fcb22e7c7a93607fc2802dc74e2d96b6f1aa251918bb27211ad33b61bb5a5c\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://970a9a34229ba42eadf60cd7a40b1f46fa54d30642ffa5938230312386f66fae\",\"dweb:/ipfs/QmaKjqpMmGr11cc3rEebVH6cJ6GtfBiXnrhDY4WeNPjHrU\"]},\"contracts/interfaces/IStakingPool.sol\":{\"keccak256\":\"0x7d475246b57eeec0453bd8bcfe0b0f36a1ba3e861623ecb9e351c2c6f14f9afc\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://c5246f874ef8f4f06f2546491bcb3a4d48984630b6da375680f09554993275d8\",\"dweb:/ipfs/QmewiGcKryoR7jqnU1okvRDBZkLhX7SEiDBBdfBQGFibXm\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -227,10 +227,10 @@
         "license": "GPL-3.0-only"
       },
       "contracts/interfaces/IStakingPool.sol": {
-        "keccak256": "0x9c1fde0bb6fec8f684ee091ee181807fb74a28945e70c06761b504f79b5371a6",
+        "keccak256": "0x7d475246b57eeec0453bd8bcfe0b0f36a1ba3e861623ecb9e351c2c6f14f9afc",
         "urls": [
-          "bzz-raw://4450e2936d49c9fe321994e4684ddfb5a684b5c530a21f7d9afba9f1ba95bf5d",
-          "dweb:/ipfs/QmXgAedVuHVhjr7X3Utpi6DojqZH4oj5RR1Z4aZ98c6twc"
+          "bzz-raw://c5246f874ef8f4f06f2546491bcb3a4d48984630b6da375680f09554993275d8",
+          "dweb:/ipfs/QmewiGcKryoR7jqnU1okvRDBZkLhX7SEiDBBdfBQGFibXm"
         ],
         "license": "MIT"
       }
@@ -245,16 +245,16 @@
         601
       ],
       "IFrensArt": [
-        2684
+        2698
       ],
       "IFrensOracle": [
-        2742
+        2756
       ],
       "IFrensStorage": [
-        2890
+        2904
       ],
       "IStakingPool": [
-        3012
+        3033
       ]
     },
     "nodeType": "SourceUnit",
@@ -284,7 +284,7 @@
         "file": "./interfaces/IStakingPool.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 602,
-        "sourceUnit": 3013,
+        "sourceUnit": 3034,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -297,7 +297,7 @@
         "file": "./interfaces/IFrensOracle.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 602,
-        "sourceUnit": 2743,
+        "sourceUnit": 2757,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -310,7 +310,7 @@
         "file": "./interfaces/IFrensStorage.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 602,
-        "sourceUnit": 2891,
+        "sourceUnit": 2905,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -380,7 +380,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+              "typeIdentifier": "t_contract$_IFrensStorage_$2904",
               "typeString": "contract IFrensStorage"
             },
             "typeName": {
@@ -393,13 +393,13 @@
                   "276:13:2"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 2890,
+                "referencedDeclaration": 2904,
                 "src": "276:13:2"
               },
-              "referencedDeclaration": 2890,
+              "referencedDeclaration": 2904,
               "src": "276:13:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                 "typeString": "contract IFrensStorage"
               }
             },
@@ -431,7 +431,7 @@
                       "referencedDeclaration": 530,
                       "src": "360:12:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                        "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                         "typeString": "contract IFrensStorage"
                       }
                     },
@@ -445,13 +445,13 @@
                       "referencedDeclaration": 533,
                       "src": "375:13:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                        "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                         "typeString": "contract IFrensStorage"
                       }
                     },
                     "src": "360:28:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                       "typeString": "contract IFrensStorage"
                     }
                   },
@@ -482,7 +482,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                    "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                     "typeString": "contract IFrensStorage"
                   },
                   "typeName": {
@@ -495,13 +495,13 @@
                         "321:13:2"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2890,
+                      "referencedDeclaration": 2904,
                       "src": "321:13:2"
                     },
-                    "referencedDeclaration": 2890,
+                    "referencedDeclaration": 2904,
                     "src": "321:13:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                       "typeString": "contract IFrensStorage"
                     }
                   },
@@ -549,7 +549,7 @@
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IStakingPool_$3012",
+                        "typeIdentifier": "t_contract$_IStakingPool_$3033",
                         "typeString": "contract IStakingPool"
                       },
                       "typeName": {
@@ -562,13 +562,13 @@
                             "484:12:2"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 3012,
+                          "referencedDeclaration": 3033,
                           "src": "484:12:2"
                         },
-                        "referencedDeclaration": 3012,
+                        "referencedDeclaration": 3033,
                         "src": "484:12:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IStakingPool_$3012",
+                          "typeIdentifier": "t_contract$_IStakingPool_$3033",
                           "typeString": "contract IStakingPool"
                         }
                       },
@@ -602,10 +602,10 @@
                       "name": "IStakingPool",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3012,
+                      "referencedDeclaration": 3033,
                       "src": "504:12:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_IStakingPool_$3012_$",
+                        "typeIdentifier": "t_type$_t_contract$_IStakingPool_$3033_$",
                         "typeString": "type(contract IStakingPool)"
                       }
                     },
@@ -621,7 +621,7 @@
                     "src": "504:25:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IStakingPool_$3012",
+                      "typeIdentifier": "t_contract$_IStakingPool_$3033",
                       "typeString": "contract IStakingPool"
                     }
                   },
@@ -674,7 +674,7 @@
                         "referencedDeclaration": 550,
                         "src": "561:4:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IStakingPool_$3012",
+                          "typeIdentifier": "t_contract$_IStakingPool_$3033",
                           "typeString": "contract IStakingPool"
                         }
                       },
@@ -686,7 +686,7 @@
                       "memberLocation": "566:6:2",
                       "memberName": "pubKey",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2916,
+                      "referencedDeclaration": 2930,
                       "src": "561:11:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$__$returns$_t_bytes_memory_ptr_$",
@@ -771,7 +771,7 @@
                               "referencedDeclaration": 550,
                               "src": "619:4:2",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IStakingPool_$3012",
+                                "typeIdentifier": "t_contract$_IStakingPool_$3033",
                                 "typeString": "contract IStakingPool"
                               }
                             },
@@ -783,7 +783,7 @@
                             "memberLocation": "624:8:2",
                             "memberName": "exitPool",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3011,
+                            "referencedDeclaration": 3032,
                             "src": "619:13:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_nonpayable$__$returns$__$",
@@ -859,7 +859,7 @@
               ]
             },
             "baseFunctions": [
-              2734
+              2748
             ],
             "functionSelector": "809bef62",
             "implemented": true,
@@ -1006,7 +1006,7 @@
                               "referencedDeclaration": 530,
                               "src": "789:12:2",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IFrensStorage_$2890",
+                                "typeIdentifier": "t_contract$_IFrensStorage_$2904",
                                 "typeString": "contract IFrensStorage"
                               }
                             },
@@ -1018,7 +1018,7 @@
                             "memberLocation": "802:11:2",
                             "memberName": "getGuardian",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2810,
+                            "referencedDeclaration": 2824,
                             "src": "789:24:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
@@ -1180,7 +1180,7 @@
               ]
             },
             "baseFunctions": [
-              2741
+              2755
             ],
             "functionSelector": "d3b150e6",
             "implemented": true,
@@ -1271,7 +1271,7 @@
                 "210:12:2"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2742,
+              "referencedDeclaration": 2756,
               "src": "210:12:2"
             },
             "id": 523,
@@ -1285,7 +1285,7 @@
         "fullyImplemented": true,
         "linearizedBaseContracts": [
           601,
-          2742
+          2756
         ],
         "name": "FrensOracle",
         "nameLocation": "195:11:2",
