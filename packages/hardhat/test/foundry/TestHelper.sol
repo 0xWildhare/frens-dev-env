@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "../../contracts/FrensBase.sol";
+
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import "../../contracts/interfaces/IFrensStorage.sol";
 
 
 interface IMaliciousProxyInterface {
@@ -10,10 +11,11 @@ interface IMaliciousProxyInterface {
   
 }
 
-contract BoolGetter is FrensBase {
-  constructor(IFrensStorage frensStorage_) FrensBase(frensStorage_) {}
+contract BoolGetter {
+  IFrensStorage frensStorage;
+  constructor(IFrensStorage frensStorage_) {}
   function getBoolFromStorage(bytes32 key) public view returns(bool) {
-    return getBool(key);
+    return frensStorage.getBool(key);
   }
 }
 

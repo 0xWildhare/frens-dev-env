@@ -10,17 +10,12 @@ import "forge-std/Test.sol";
 
 //Frens Contracts
 import "../../contracts/FrensArt.sol";
-import "../../contracts/FrensInitialiser.sol";
-import "../../contracts/FrensManager.sol";
 import "../../contracts/FrensMetaHelper.sol";
 import "../../contracts/FrensPoolShareTokenURI.sol";
 import "../../contracts/FrensStorage.sol";
-import "../../contracts/FactoryProxy.sol";
 import "../../contracts/StakingPool.sol";
 import "../../contracts/StakingPoolFactory.sol";
 import "../../contracts/FrensPoolShare.sol";
-//import "../../contracts/FrensClaim.sol";
-import "../../contracts/FrensPoolSetter.sol";
 import "../../contracts/FrensOracle.sol";
 import "../../contracts/interfaces/IStakingPoolFactory.sol";
 import "../../contracts/interfaces/IDepositContract.sol";
@@ -29,19 +24,13 @@ import "./TestHelper.sol";
 
 contract StakingPoolTest is Test {
     FrensArt public frensArt;
-    FrensInitialiser public frensInitialiser;
-    FrensManager public frensManager;
     FrensMetaHelper public frensMetaHelper;
     FrensPoolShareTokenURI public frensPoolShareTokenURI;
     FrensStorage public frensStorage;
-    FactoryProxy public factoryProxy;
     StakingPoolFactory public stakingPoolFactory;
     StakingPool public stakingPool;
     StakingPool public stakingPool2;
     FrensPoolShare public frensPoolShare;
-    IStakingPoolFactory public proxy;
-    //FrensClaim public frensClaim;
-    FrensPoolSetter public frensPoolSetter;
     FrensOracle public frensOracle;
 
     //mainnet
@@ -66,82 +55,48 @@ contract StakingPoolTest is Test {
     function setUp() public {
       //deploy storage
       frensStorage = new FrensStorage();
-      //deploy proxy
-      factoryProxy = new FactoryProxy(frensStorage);
-      //connect proxy with factory interface
-      proxy = IStakingPoolFactory(address(factoryProxy));
-      //deploy initialiser
-      frensInitialiser = new FrensInitialiser(frensStorage);
-      //initialise initialiser
-      //tx.origin must be this contract
-      vm.prank(address(this), address(this));
-      frensInitialiser.setContract(address(frensInitialiser), "FrensInitialiser");
-      frensInitialiser.setContractExists(address(frensInitialiser), true);
       //initialise SSVRegistry
-      frensInitialiser.setExternalContract(ssvRegistryAddress, "SSVRegistry");
+      frensStorage.setAddress(keccak256(abi.encodePacked("external.contract.address", "SSVRegistry")), ssvRegistryAddress);
       //initialise deposit Contract
-      frensInitialiser.setExternalContract(depCont, "DepositContract");
+      frensStorage.setAddress(keccak256(abi.encodePacked("external.contract.address", "DepositContract")), depCont);
       //initialise ENS 
-      frensInitialiser.setExternalContract(ENSAddress, "ENS");
+      frensStorage.setAddress(keccak256(abi.encodePacked("external.contract.address", "ENS")), ENSAddress);
       //deploy NFT contract
       frensPoolShare = new FrensPoolShare(frensStorage);
       //initialise NFT contract
-      frensInitialiser.setContract(address(frensPoolShare), "FrensPoolShare");
-      frensInitialiser.setContractExists(address(frensPoolShare), false);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShare")), address(frensPoolShare));
       //deploy Factory
       stakingPoolFactory = new StakingPoolFactory(frensStorage);
       //initialise Factory
-      frensInitialiser.setContract(address(stakingPoolFactory), "StakingPoolFactory");
-      frensInitialiser.setContractExists(address(stakingPoolFactory), false);
- /*     //deploy Claims
-      frensClaim = new FrensClaim(frensStorage);
-      //initialise Claims
-      frensInitialiser.setContract(address(frensClaim), "FrensClaim");
-      frensInitialiser.setContractExists(address(frensClaim), true);
-*/      //deploy PoolSetter
-      frensPoolSetter = new FrensPoolSetter(frensStorage);
-      //initialise PoolSetter
-      frensInitialiser.setContract(address(frensPoolSetter), "FrensPoolSetter");
-      frensInitialiser.setContractExists(address(frensPoolSetter), true);
-      //deploy Manager
-      frensManager = new FrensManager(frensStorage);
-      //initialise manager
-      frensInitialiser.setContract(address(frensManager), "FrensManager");
-      frensInitialiser.setContractExists(address(frensManager), true);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "StakingPoolFactory")), address(stakingPoolFactory));
+      frensPoolShare.grantRole(bytes32(0x00),  stakingPoolFactory.address);
       //deploy FrensOracle
       frensOracle = new FrensOracle(frensStorage);
       //initialise FrensOracle
-      frensInitialiser.setContract(address(frensOracle), "FrensOracle");
-      frensInitialiser.setContractExists(address(frensOracle), false);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle")), address(frensOracle));
       //deploy MetaHelper
       frensMetaHelper = new FrensMetaHelper(frensStorage);
       //initialise Metahelper
-      frensInitialiser.setContract(address(frensMetaHelper), "FrensMetaHelper");
-      frensInitialiser.setContractExists(address(frensMetaHelper), false);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "FrensMetaHelper")), address(frensMetaHelper));
       //deploy TokenURI
       frensPoolShareTokenURI = new FrensPoolShareTokenURI(frensStorage);
       //Initialise TokenURI
-      frensInitialiser.setContract(address(frensPoolShareTokenURI), "FrensPoolShareTokenURI");
-      frensInitialiser.setContractExists(address(frensPoolShareTokenURI), false);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "FrensPoolShareTokenURI")), address(frensPoolShareTokenURI));
       //deployArt
       frensArt = new FrensArt(frensStorage);
       //initialise art
-      frensInitialiser.setContract(address(frensArt), "FrensArt");
-      frensInitialiser.setContractExists(address(frensArt), false);
+      frensStorage.setAddress(keccak256(abi.encodePacked("contract.address", "FrensOracle")), address(frensOracle));
       //set contracts as deployed
-      //tx.origin must be this contract
-      vm.prank(address(this), address(this));
-      frensStorage.setDeployedStatus();
-
+     
       //create staking pool through proxy contract
-      (address pool) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
+      (address pool) = stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
       //console.log("pool", pool);
 
       //create a second staking pool through proxy contract
-      (address pool2) = proxy.create(contOwner, false/*, false, 0, 32000000000000000000*/);
+      (address pool2) = stakingPoolFactory.create(contOwner, false/*, false, 0, 32000000000000000000*/);
       //connect to staking pool
       stakingPool2 = StakingPool(payable(pool2));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -160,9 +115,9 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
-        uint depAmt = stakingPool.getDepositAmount(id);
+        uint depAmt = stakingPool.depositForId(id);
         assertEq(x, depAmt);
-        uint totDep = stakingPool.getTotalDeposits();
+        uint totDep = stakingPool.totalDeposits();
         assertEq(x, totDep);
       } else if(x == 0) {
         vm.expectRevert("must deposit ether");
@@ -181,17 +136,17 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
-        uint depAmt = stakingPool.getDepositAmount(id);
+        uint depAmt = stakingPool.depositForId(id);
         assertEq(x, depAmt);
         //should throw for non-existant id
         vm.expectRevert("id does not exist");
         stakingPool.addToDeposit{value: y}(0);
         //existing id should work fine
         stakingPool.addToDeposit{value: y}(id);
-        uint depAmt2 = stakingPool.getDepositAmount(id);
+        uint depAmt2 = stakingPool.depositForId(id);
         uint tot = uint(x) + uint(y);
         assertEq(tot, depAmt2);
-        uint totDeps = stakingPool.getTotalDeposits();
+        uint totDeps = stakingPool.totalDeposits();
         assertEq(tot, totDeps);
       } else if(x == 0) {
         vm.expectRevert("must deposit ether");
@@ -212,14 +167,14 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
-        uint depAmt = stakingPool.getDepositAmount(id);
+        uint depAmt = stakingPool.depositForId(id);
         assertEq(x, depAmt);
         //should throw for wrong pool
         vm.expectRevert("wrong staking pool");
         stakingPool2.addToDeposit{value: y}(id);
         //existing id should work fine (redundant with previous test)
         stakingPool.addToDeposit{value: y}(id);
-        uint depAmt2 = stakingPool.getDepositAmount(id);
+        uint depAmt2 = stakingPool.depositForId(id);
         uint tot = uint(x) + uint(y);
         assertEq(tot, depAmt2);
       } else if(x == 0) {
@@ -241,10 +196,10 @@ contract StakingPoolTest is Test {
         stakingPool.depositToPool{value: x}();
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         assertTrue(id != 0 );
-        uint depAmt = stakingPool.getDepositAmount(id);
+        uint depAmt = stakingPool.depositForId(id);
         assertEq(x, depAmt);
         stakingPool.withdraw(id, y);
-        uint depAmt2 = stakingPool.getDepositAmount(id);
+        uint depAmt2 = stakingPool.depositForId(id);
         uint tot = uint(x) - uint(y);
         assertEq(tot, depAmt2);
       } else if(x == 0) {
@@ -595,7 +550,8 @@ function testFees(uint32 x, uint32 y) public {
       uint aliceDeposit = uint(x) * 31999999999999999999 / maxUint32;
       uint bobDeposit = 32000000000000000000 - aliceDeposit;
       if(x != 0 && y > 100){
-        frensManager.setFees(feeRecipient, 5);
+        vm.prank(address(this));
+        frensStorage.setUint(keccak256(abi.encodePacked("protocol.fee.percent")), 5);
         hoax(alice);
         stakingPool.depositToPool{value: aliceDeposit}();
         hoax(bob);
