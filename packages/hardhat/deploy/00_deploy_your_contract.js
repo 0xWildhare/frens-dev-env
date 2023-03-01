@@ -37,7 +37,6 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   }
 
   var FrensStorageOld = 0;
-  var FactoryProxyOld = 0;
   var FrensPoolShareOld = 0;
   var StakingPoolFactoryOld = 0;
   var FrensOracleOld = 0;
@@ -65,7 +64,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   } catch(e) {}
 
   try{
-    FrensMetaHelperOld = await ethers.getContract("FrensOracle", deployer);
+    FrensOracleOld = await ethers.getContract("FrensOracle", deployer);
   } catch(e) {}
 
   try{
