@@ -1023,6 +1023,19 @@ const StakingPoolABI = [
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getIdsInThisPool",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -1068,6 +1081,25 @@ const StakingPoolABI = [
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "locked",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -1340,7 +1372,7 @@ module.exports = {
   5: { //goerli
     contracts: {
       StakingPool: {
-        address: "0xBCA672756de0C2aEe9B1729DD3d7F4310214E977", //deployed 22/02/2023
+        address: "0x97ec0790F2978443691Fb5dC1D5f3049dCd36DAE", //deployed 01/03/2023
         abi: StakingPoolABI,
       },
     },
