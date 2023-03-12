@@ -115,4 +115,6 @@ npx hardhat node --fork https://goerli.infura.io/v3/ee9cdb4773b84b42bc893ed870a2
 
 forge test --via-ir --fork-url https://mainnet.infura.io/v3/ee9cdb4773b84b42bc893ed870a2c148
 
+forge coverage --report lcov --fork-url https://mainnet.infura.io/v3/ee9cdb4773b84b42bc893ed870a2c148
+
 ./deposit new-mnemonic --chain mainnet --eth1_withdrawal_address

@@ -406,6 +406,8 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const setGuard = await FrensStorage.setGuardian("0x6B5F5497Dd1FaFfC62faf6dCFC0e7f616058De0b");
     await setGuard.wait();
     console.log('\x1b[36m%s\x1b[0m', "New guardian set", "0x6B5F5497Dd1FaFfC62faf6dCFC0e7f616058De0b");
+    FrensPoolShare.grantRole(ethers.constants.HashZero, "0x6B5F5497Dd1FaFfC62faf6dCFC0e7f616058De0b");
+    console.log('\x1b[31m%s\x1b[0m', "mainnet deployment: multisig must accept guardianship, and revoke 0x00 role from deployer");
   }
 /*
   await deploy("FrensArtTest", {
