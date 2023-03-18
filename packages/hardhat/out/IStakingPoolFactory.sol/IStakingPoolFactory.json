@@ -11,6 +11,21 @@
           "internalType": "bool",
           "name": "_validatorLocked",
           "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "frensLocked",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolMin",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "poolMax",
+          "type": "uint256"
         }
       ],
       "name": "create",
@@ -36,9 +51,9 @@
     "linkReferences": {}
   },
   "methodIdentifiers": {
-    "create(address,bool)": "319e9090"
+    "create(address,bool,bool,uint256,uint256)": "e403e1ae"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_validatorLocked\",\"type\":\"bool\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0x51a9513e55ce45437c8e21d18d49506cfd08b86b8f4fd76350eafc141aaa203f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ba89ad2584eb3c4ce2cf2b17abbaa3b459cae2758c8db26b11249387ab244da2\",\"dweb:/ipfs/QmfPBFQSXj7HkxJhfeFuY2ewR85RoisrqWrURw5jGSjY4r\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"_validatorLocked\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"frensLocked\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"poolMin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"poolMax\",\"type\":\"uint256\"}],\"name\":\"create\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStakingPoolFactory.sol\":\"IStakingPoolFactory\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IStakingPoolFactory.sol\":{\"keccak256\":\"0x120c1e9d548980b63d2f35fe9b369ac04df47312e5c35cbc02dc76f87218857b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://a9dffd387ca5cf2fcae04505ef0b0bc287784ee41ffe4e1a2e06fd2b332d9183\",\"dweb:/ipfs/QmcBSz3XLnH9AGbWbSEihmv6SNK7L8PAoLYjFxKVpZAkBT\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -57,6 +72,21 @@
               "internalType": "bool",
               "name": "_validatorLocked",
               "type": "bool"
+            },
+            {
+              "internalType": "bool",
+              "name": "frensLocked",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "poolMin",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "poolMax",
+              "type": "uint256"
             }
           ],
           "stateMutability": "nonpayable",
@@ -116,10 +146,10 @@
         "license": "MIT"
       },
       "contracts/interfaces/IStakingPoolFactory.sol": {
-        "keccak256": "0x51a9513e55ce45437c8e21d18d49506cfd08b86b8f4fd76350eafc141aaa203f",
+        "keccak256": "0x120c1e9d548980b63d2f35fe9b369ac04df47312e5c35cbc02dc76f87218857b",
         "urls": [
-          "bzz-raw://ba89ad2584eb3c4ce2cf2b17abbaa3b459cae2758c8db26b11249387ab244da2",
-          "dweb:/ipfs/QmfPBFQSXj7HkxJhfeFuY2ewR85RoisrqWrURw5jGSjY4r"
+          "bzz-raw://a9dffd387ca5cf2fcae04505ef0b0bc287784ee41ffe4e1a2e06fd2b332d9183",
+          "dweb:/ipfs/QmcBSz3XLnH9AGbWbSEihmv6SNK7L8PAoLYjFxKVpZAkBT"
         ],
         "license": "MIT"
       }
@@ -128,20 +158,20 @@
   },
   "ast": {
     "absolutePath": "contracts/interfaces/IStakingPoolFactory.sol",
-    "id": 3026,
+    "id": 3371,
     "exportedSymbols": {
       "IFrensArt": [
-        2684
+        2986
       ],
       "IStakingPoolFactory": [
-        3025
+        3370
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "0:289:20",
+    "src": "0:284:20",
     "nodes": [
       {
-        "id": 3014,
+        "id": 3353,
         "nodeType": "PragmaDirective",
         "src": "0:31:20",
         "nodes": [],
@@ -156,46 +186,46 @@
         ]
       },
       {
-        "id": 3015,
+        "id": 3354,
         "nodeType": "ImportDirective",
         "src": "64:25:20",
         "nodes": [],
         "absolutePath": "contracts/interfaces/IFrensArt.sol",
         "file": "./IFrensArt.sol",
         "nameLocation": "-1:-1:-1",
-        "scope": 3026,
-        "sourceUnit": 2685,
+        "scope": 3371,
+        "sourceUnit": 2987,
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "id": 3025,
+        "id": 3370,
         "nodeType": "ContractDefinition",
-        "src": "91:197:20",
+        "src": "91:192:20",
         "nodes": [
           {
-            "id": 3024,
+            "id": 3369,
             "nodeType": "FunctionDefinition",
-            "src": "126:159:20",
+            "src": "126:154:20",
             "nodes": [],
-            "functionSelector": "319e9090",
+            "functionSelector": "e403e1ae",
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "create",
             "nameLocation": "135:6:20",
             "parameters": {
-              "id": 3020,
+              "id": 3365,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3017,
+                  "id": 3356,
                   "mutability": "mutable",
                   "name": "_owner",
                   "nameLocation": "155:6:20",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3024,
+                  "scope": 3369,
                   "src": "147:14:20",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -204,7 +234,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3016,
+                    "id": 3355,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "147:7:20",
@@ -218,12 +248,12 @@
                 },
                 {
                   "constant": false,
-                  "id": 3019,
+                  "id": 3358,
                   "mutability": "mutable",
                   "name": "_validatorLocked",
                   "nameLocation": "173:16:20",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3024,
+                  "scope": 3369,
                   "src": "168:21:20",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -232,7 +262,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 3018,
+                    "id": 3357,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "168:4:20",
@@ -242,23 +272,104 @@
                     }
                   },
                   "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3360,
+                  "mutability": "mutable",
+                  "name": "frensLocked",
+                  "nameLocation": "201:11:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3369,
+                  "src": "196:16:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 3359,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "196:4:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3362,
+                  "mutability": "mutable",
+                  "name": "poolMin",
+                  "nameLocation": "223:7:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3369,
+                  "src": "218:12:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3361,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "218:4:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 3364,
+                  "mutability": "mutable",
+                  "name": "poolMax",
+                  "nameLocation": "241:7:20",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3369,
+                  "src": "236:12:20",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3363,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "236:4:20",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
                 }
               ],
-              "src": "141:117:20"
+              "src": "141:112:20"
             },
             "returnParameters": {
-              "id": 3023,
+              "id": 3368,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3022,
+                  "id": 3367,
                   "mutability": "mutable",
                   "name": "",
                   "nameLocation": "-1:-1:-1",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3024,
-                  "src": "276:7:20",
+                  "scope": 3369,
+                  "src": "271:7:20",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -266,10 +377,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3021,
+                    "id": 3366,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "276:7:20",
+                    "src": "271:7:20",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -279,9 +390,9 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "275:9:20"
+              "src": "270:9:20"
             },
-            "scope": 3025,
+            "scope": 3370,
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "external"
@@ -294,11 +405,11 @@
         "contractKind": "interface",
         "fullyImplemented": false,
         "linearizedBaseContracts": [
-          3025
+          3370
         ],
         "name": "IStakingPoolFactory",
         "nameLocation": "101:19:20",
-        "scope": 3026,
+        "scope": 3371,
         "usedErrors": []
       }
     ],

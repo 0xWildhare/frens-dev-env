@@ -135,7 +135,7 @@ contract StakingPool is IStakingPool, Ownable{
     }
 
     function withdraw(uint _id, uint _amount) external mustBeAccepting correctPoolOnly(_id) onlyIdOwner(_id){
-        require(depositForId[_id] - _amount >= poolMin, "below minimum deposit for pool - use withdrawAll");
+        require(depositForId[_id] >= poolMin + _amount, "invalid amount, withdraw less or use withdrawAll");
         _withdraw(_id, _amount);
     }
 
@@ -144,7 +144,6 @@ contract StakingPool is IStakingPool, Ownable{
     }
 
     function _withdraw(uint _id, uint _amount) internal {
-        require(depositForId[_id] >= _amount, "not enough deposited");
         depositForId[_id] -= _amount;
         totalDeposits -= _amount;
         payable(frensPoolShare.ownerOf(_id)).transfer(_amount);
