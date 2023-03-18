@@ -280,12 +280,7 @@ contract StakingPoolTest is Test {
         uint bobBalance = address(bob).balance;
         uint aliceShare = (address(stakingPool).balance) * aliceDeposit / 32000000000000000000;
         uint bobShare = (address(stakingPool).balance) - aliceShare;
-        //vm.prank(alice);
-        /*
-        uint frensClaimBalance = address(frensClaim).balance;
-        //to account for rounding errors max 2 wei (bc we subtract 1 wei in contract to avoid drawing negative)
-        assertApproxEqAbs(frensClaimBalance, bobShare, 2, "frensClaim balance pre-claim wrong");
-*/
+        
         if(aliceShare == 1) aliceShare = 0;
         if(bobShare == 1) bobShare =0;
         

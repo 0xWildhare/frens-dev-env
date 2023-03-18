@@ -404,8 +404,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1679108728835,
-      "contentHash": "b4306662d484a762ae93949f124a5d34",
+      "lastModificationDate": 1679172380264,
+      "contentHash": "4b19f7fa630e62d8de83de7b978eeb9f",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -2281,6 +2281,95 @@
         }
       }
     },
+    "test/foundry/RageQuitTest.t.sol": {
+      "lastModificationDate": 1679173304816,
+      "contentHash": "1f5f08cf0f5364099bd3d405b6b39369",
+      "sourceName": "test/foundry/RageQuitTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensArt.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensOracle.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensLogo.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensOracle.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IPmFont.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "contracts/interfaces/IWaves.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/AccessControl.sol",
+        "node_modules/@openzeppelin/contracts/access/IAccessControl.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "StakingPoolTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "RageQuitTest.t.sol/StakingPoolTest.json"
+        }
+      }
+    },
     "test/foundry/StakingPoolFactoryTest.t.sol": {
       "lastModificationDate": 1679098988038,
       "contentHash": "36d7d37783b97df35cf753c16f89ecd3",
@@ -2459,8 +2548,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1679111254452,
-      "contentHash": "9a50ac1ce218d987e5002be13c8ed8b8",
+      "lastModificationDate": 1679169374080,
+      "contentHash": "16daf77763aecf758a2e650c39add570",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {

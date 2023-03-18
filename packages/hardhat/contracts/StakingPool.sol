@@ -309,7 +309,6 @@ contract StakingPool is IStakingPool, Ownable{
     correctPoolOnly(buyersTokenId) 
     correctPoolOnly(rageQuitId){
         require(msg.value >= rageQuitInfo[rageQuitId].price, "must send correct value");
-        require(buyersTokenId != rageQuitId, "can't self buyout");
         address rageOwner = frensPoolShare.ownerOf(rageQuitId);
         payable(rageOwner).transfer(msg.value);
         locked[rageQuitId] = false;
@@ -323,7 +322,7 @@ contract StakingPool is IStakingPool, Ownable{
 
   function unlockTransfer(uint _id) public {
     uint endTime = rageQuitInfo[_id].time + 1 weeks;
-    require(endTime <= block.timestamp);
+    require(endTime <= block.timestamp, "allow one week before unlock");
     locked[_id] = false;
   }
 
