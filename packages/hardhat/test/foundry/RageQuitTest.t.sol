@@ -52,6 +52,8 @@ contract StakingPoolTest is Test {
     bytes signature = hex"92e3289be8c1379caae22fa1d6637c3953620db6eed35d1861b9bb9f0133be8b0cc631d16a3f034960fb826977138c59023543625ecb863cb5a748714ff5ee9f3286887e679cf251b6b0f14b190beac1ad7010cc136da6dd9e98dd4e8b7faae9";
     bytes32 deposit_data_root = 0x4093180202063b0e66cd8aef5a934bfabcf32919e494064542b5f1a3889bf516;
 
+    bytes32[] filler;
+
     function setUp() public {
       //deploy storage
       frensStorage = new FrensStorage();
@@ -91,7 +93,7 @@ contract StakingPoolTest is Test {
       //set contracts as deployed
      
       //create staking pool through proxy contract
-      (address pool) = stakingPoolFactory.create(contOwner, false, true, 0, 32000000000000000000);
+      (address pool) = stakingPoolFactory.create(contOwner, false, true, 0, 32000000000000000000, bytes32(0));
       //connect to staking pool
       stakingPool = StakingPool(payable(pool));
       //console.log the pool address for fun  if(FrensPoolShareOld == 0){
@@ -102,18 +104,18 @@ contract StakingPoolTest is Test {
     function testTransferLock(uint72 x) public {
       if(x > 0 && x <= 32 ether){
         startHoax(alice);
-        stakingPool.depositToPool{value: x}();
+        stakingPool.depositToPool{value: x}(filler);
         uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
         vm.expectRevert("not transferable");
         frensPoolShare.transferFrom(alice, bob, id);
       } else if(x == 0) {
         vm.expectRevert("must deposit ether");
         startHoax(alice);
-        stakingPool.depositToPool{value: x}();
+        stakingPool.depositToPool{value: x}(filler);
       } else {
         vm.expectRevert("total deposits cannot be more than 32 Eth");
         startHoax(alice);
-        stakingPool.depositToPool{value: x}();
+        stakingPool.depositToPool{value: x}(filler);
       }
     }
 
@@ -122,9 +124,9 @@ contract StakingPoolTest is Test {
       uint aliceDeposit = (uint(x) + 1) * 31999999999999999999 / (maxUint32);
       uint bobDeposit = 32000000000000000000 - aliceDeposit;
       hoax(alice);
-      stakingPool.depositToPool{value: aliceDeposit}();
+      stakingPool.depositToPool{value: aliceDeposit}(filler);
       hoax(bob);
-      stakingPool.depositToPool{value: bobDeposit}();
+      stakingPool.depositToPool{value: bobDeposit}(filler);
       //test transfer lock
       uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
       vm.expectRevert("not transferable");
@@ -162,9 +164,9 @@ contract StakingPoolTest is Test {
       uint aliceDeposit = (uint(x) + 1) * 31999999999999999999 / (maxUint32);
       uint bobDeposit = 32000000000000000000 - aliceDeposit;
       hoax(alice);
-      stakingPool.depositToPool{value: aliceDeposit}();
+      stakingPool.depositToPool{value: aliceDeposit}(filler);
       hoax(bob);
-      stakingPool.depositToPool{value: bobDeposit}();
+      stakingPool.depositToPool{value: bobDeposit}(filler);
       //test transfer lock
       uint id = frensPoolShare.tokenOfOwnerByIndex(alice, 0);
       uint idForBob = frensPoolShare.tokenOfOwnerByIndex(bob, 0);

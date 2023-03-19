@@ -390,6 +390,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
       args: [
         "0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa",
         false,
+        false,
+        0,
+        32,
+        "0xb7a7979225e59a15ce3a74e444a4036db10e7a4ce068f5c5436626083ca833ba",
         FrensStorage.address
       ],
       log: true,
@@ -397,7 +401,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     });
   }
 
-  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, true, 0, 32000000000000000000n, "0x00");
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, true, 0, 32000000000000000000n, "0xb7a7979225e59a15ce3a74e444a4036db10e7a4ce068f5c5436626083ca833ba");
   
   newPoolResult = await newPool.wait();
   console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);
