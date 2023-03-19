@@ -397,7 +397,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     });
   }
 
-  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, true, 0, 32000000000000000000n);
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true, true, 0, 32000000000000000000n, "0x00");
   
   newPoolResult = await newPool.wait();
   console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);
