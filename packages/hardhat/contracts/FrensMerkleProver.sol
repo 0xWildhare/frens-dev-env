@@ -7,10 +7,6 @@ import "./interfaces/IFrensMerkleProver.sol";
 contract FrensMerkleProver is IFrensMerkleProver{
 
     function verify(bytes32[] calldata merkleProof, bytes32 merkleRoot, address sender) public pure {
-            require(MerkleProof.verify(merkleProof, merkleRoot, _toBytes32(sender)), "invalid merkle proof");
-    }
-
-    function _toBytes32(address addr) pure internal returns (bytes32) {
-        return bytes32(uint256(uint160(addr)));
+            require(MerkleProof.verify(merkleProof, merkleRoot, keccak256(abi.encodePacked(sender))), "invalid merkle proof");
     }
 }

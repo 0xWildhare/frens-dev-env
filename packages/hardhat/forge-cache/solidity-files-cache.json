@@ -101,8 +101,8 @@
       }
     },
     "contracts/FrensMerkleProver.sol": {
-      "lastModificationDate": 1679183148548,
-      "contentHash": "835410ced8a0440aa13609fa1f96e421",
+      "lastModificationDate": 1679271557737,
+      "contentHash": "4b593d9e21059115869d139537582a5f",
       "sourceName": "contracts/FrensMerkleProver.sol",
       "solcConfig": {
         "settings": {
@@ -2676,6 +2676,98 @@
       "artifacts": {
         "StakingPoolLockedTest": {
           "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolLockedTest.t.sol/StakingPoolLockedTest.json"
+        }
+      }
+    },
+    "test/foundry/StakingPoolPrivateTest.t.sol": {
+      "lastModificationDate": 1679272004124,
+      "contentHash": "74e3f92d3a016db65db81959df7bdb21",
+      "sourceName": "test/foundry/StakingPoolPrivateTest.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "london",
+          "viaIR": true,
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "contracts/FrensArt.sol",
+        "contracts/FrensMerkleProver.sol",
+        "contracts/FrensMetaHelper.sol",
+        "contracts/FrensOracle.sol",
+        "contracts/FrensPoolShare.sol",
+        "contracts/FrensPoolShareTokenURI.sol",
+        "contracts/FrensStorage.sol",
+        "contracts/StakingPool.sol",
+        "contracts/StakingPoolFactory.sol",
+        "contracts/interfaces/IDepositContract.sol",
+        "contracts/interfaces/IENS.sol",
+        "contracts/interfaces/IFrensArt.sol",
+        "contracts/interfaces/IFrensLogo.sol",
+        "contracts/interfaces/IFrensMerkleProver.sol",
+        "contracts/interfaces/IFrensMetaHelper.sol",
+        "contracts/interfaces/IFrensOracle.sol",
+        "contracts/interfaces/IFrensPoolShare.sol",
+        "contracts/interfaces/IFrensPoolShareTokenURI.sol",
+        "contracts/interfaces/IFrensStorage.sol",
+        "contracts/interfaces/IPmFont.sol",
+        "contracts/interfaces/IReverseResolver.sol",
+        "contracts/interfaces/IStakingPool.sol",
+        "contracts/interfaces/IStakingPoolFactory.sol",
+        "contracts/interfaces/IWaves.sol",
+        "lib/forge-std/lib/ds-test/src/test.sol",
+        "lib/forge-std/src/Script.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/Test.sol",
+        "lib/forge-std/src/Vm.sol",
+        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src/console2.sol",
+        "node_modules/@openzeppelin/contracts/access/AccessControl.sol",
+        "node_modules/@openzeppelin/contracts/access/IAccessControl.sol",
+        "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+        "node_modules/@openzeppelin/contracts/interfaces/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+        "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+        "node_modules/@openzeppelin/contracts/utils/Address.sol",
+        "node_modules/@openzeppelin/contracts/utils/Context.sol",
+        "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+        "node_modules/@openzeppelin/contracts/utils/cryptography/MerkleProof.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+        "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+        "node_modules/base64-sol/base64.sol",
+        "test/foundry/TestHelper.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "StakingPoolPrivateTest": {
+          "0.8.17+commit.8df45f5f.Linux.gcc": "StakingPoolPrivateTest.t.sol/StakingPoolPrivateTest.json"
         }
       }
     },

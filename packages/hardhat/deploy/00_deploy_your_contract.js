@@ -46,6 +46,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   var PmFontOld = 0;
   var FrensLogoOld = 0;
   var WavesOld = 0;
+  var FrensMerkleProverOld = 0;
 
   try{
     FrensStorageOld = await ethers.getContract("FrensStorage", deployer);
@@ -89,6 +90,9 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   try{
     WavesOld = await ethers.getContract("Waves", deployer);
+  } catch(e) {}
+  try{
+    FrensMerkleProverOld = await ethers.getContract("FrensMerkleProver", deployer);
   } catch(e) {}
 
   
@@ -381,6 +385,30 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const wavesInit = await FrensStorage.setAddress(wavesHash, Waves.address);
     await wavesInit.wait();
     console.log('\x1b[36m%s\x1b[0m', "Waves updated", Waves.address);
+  }
+
+  await deploy("FrensMerkleProver", {
+    // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
+    from: deployer,
+    args: [
+      
+     ],
+    log: true,
+    waitConfirmations: 5,
+  });
+
+  const FrensMerkleProver = await ethers.getContract("FrensMerkleProver", deployer);
+
+  if(FrensMerkleProverOld == 0 || reinitialiseEverything){
+    const FrensMerkleProverHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMerkleProver"]);
+    const FrensMerkleProverInit = await FrensStorage.setAddress(FrensMerkleProverHash, FrensMerkleProver.address);
+    await FrensMerkleProverInit.wait();
+    console.log('\x1b[33m%s\x1b[0m', "FrensMerkleProver initialised", FrensMerkleProver.address);
+  } else if(FrensMerkleProverOld.address != FrensMerkleProver.address){
+    const FrensMerkleProverHash = ethers.utils.solidityKeccak256(["string", "string"], ["contract.address", "FrensMerkleProver"]);
+    const FrensMerkleProverInit = await FrensStorage.setAddress(FrensMerkleProverHash, FrensMerkleProver.address);
+    await FrensMerkleProverInit.wait();
+    console.log('\x1b[36m%s\x1b[0m', "FrensMerkleProver updated", FrensMerkleProver.address);
   }
 
   if(chainId == 31337){
