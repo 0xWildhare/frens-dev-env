@@ -2680,8 +2680,8 @@
       }
     },
     "test/foundry/StakingPoolPrivateTest.t.sol": {
-      "lastModificationDate": 1679272004124,
-      "contentHash": "74e3f92d3a016db65db81959df7bdb21",
+      "lastModificationDate": 1679331597987,
+      "contentHash": "3a184ca9477cc9106fd008710771c77a",
       "sourceName": "test/foundry/StakingPoolPrivateTest.t.sol",
       "solcConfig": {
         "settings": {
