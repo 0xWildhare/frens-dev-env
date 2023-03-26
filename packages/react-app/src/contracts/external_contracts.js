@@ -1559,7 +1559,7 @@ module.exports = {
   31337: { //localhost
     contracts: {
       StakingPool: {
-        address: "0x53CA7a8cba6d06D8B6623331AB564d03a036CC09",
+        address: "0x17de060D4D8fbC889dC4a36Bc581A7a4Ba3F7523",
         abi: StakingPoolABI,
       },
     },
