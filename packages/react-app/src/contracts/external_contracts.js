@@ -923,19 +923,6 @@ const StakingPoolABI = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "tokenId",
-        "type": "uint256"
-      }
-    ],
-    "name": "burn",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
         "name": "rageQuitId",
         "type": "uint256"
       },
@@ -1296,6 +1283,11 @@ const StakingPoolABI = [
         "internalType": "uint256",
         "name": "time",
         "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "rageQuitting",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",

@@ -309,11 +309,13 @@ contract StakingPool is IStakingPool, Ownable{
     }
     
   function rageQuit(uint _id, uint _price) public onlyIdOwner(_id) correctPoolOnly(_id){
+    require(locked[_id], "no reason to rageQuit an unlocked share");
     uint deposit = depositForId[_id];
     require(_price <= deposit, "cannot set price higher than deposit");
-    rageQuitInfo[_id].price = _price;
-    rageQuitInfo[_id].time =  block.timestamp;
-    rageQuitInfo[_id].rageQuitting = true;
+    RageQuit storage newQuit = rageQuitInfo[_id];
+    newQuit.price = _price;
+    newQuit.time =  block.timestamp;
+    newQuit.rageQuitting = true;
   }
   
   function buyOut(
@@ -350,6 +352,7 @@ contract StakingPool is IStakingPool, Ownable{
     frensPoolShare.burn(tokenId);
   }
   */
+  
     //getters
 
     function getIdsInThisPool() public view returns(uint[] memory) {
