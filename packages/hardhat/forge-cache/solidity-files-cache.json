@@ -448,8 +448,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1679885890283,
-      "contentHash": "11ae31f1476d9a2ff575b7480fa97f7c",
+      "lastModificationDate": 1680046302586,
+      "contentHash": "afcc25510b99bd41a549a0661525ed7f",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
