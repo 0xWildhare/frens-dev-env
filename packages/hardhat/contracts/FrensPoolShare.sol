@@ -1,5 +1,9 @@
-// SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+
+///@title Frens Pool Share NFT
+///@author 0xWildhare and FRENS team
+///@dev see ERC721
 
 import "./interfaces/IFrensPoolShareTokenURI.sol";
 import "./interfaces/IFrensArt.sol";
@@ -22,14 +26,17 @@ contract FrensPoolShare is
     
     IFrensStorage frensStorage;
 
+    //maps each ID to the pool that minted it
     mapping(uint => address) public poolByIds;
 
+    ///@dev sets the storage contract and the token name/symbol
     constructor(IFrensStorage frensStorage_) ERC721("FRENS Share", "FRENS") {
         frensStorage = frensStorage_;
         _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
 
     }
 
+    ///@dev callable by the staking pools only (requires MINTER_ROLE)
     function mint(address userAddress) public {
         require(
             hasRole(MINTER_ROLE, msg.sender),
@@ -48,7 +55,7 @@ contract FrensPoolShare is
         return (poolByIds[_id]);
     }
 
-    //stakingPool is allowed during rageQuit
+    ///@dev stakingPool is allowed during rageQuit, so the user cannot block the sale of the NFT by changing the allow
     function getApproved(uint256 tokenId) public view virtual override(ERC721, IERC721) returns (address) {
         _requireMinted(tokenId);
         address poolAddr = poolByIds[tokenId];

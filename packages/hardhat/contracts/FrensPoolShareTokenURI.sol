@@ -1,5 +1,9 @@
-// SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
+// SPDX-License-Identifier: MIT
+
+///@title Frens Pool Share Token URI
+///@author 0xWildhare and Frens team h/t scaffoldETH and budilGuidl
+///@dev returns the image and metadata for the NFT bytes64 encoded
 
 //import "hardhat/console.sol";
 import "./interfaces/IStakingPool.sol";

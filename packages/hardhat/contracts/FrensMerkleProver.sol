@@ -1,6 +1,10 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
+///@title Frens Merkle Prover
+///@author 0xWildhare and Frens Team
+///@dev checks merkle proof validity for address
+
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "./interfaces/IFrensMerkleProver.sol";
 
