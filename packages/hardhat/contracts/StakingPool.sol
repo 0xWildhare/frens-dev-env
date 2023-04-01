@@ -166,7 +166,8 @@ contract StakingPool is IStakingPool, Ownable{
     function _withdraw(uint _id, uint _amount) internal {
         depositForId[_id] -= _amount;
         totalDeposits -= _amount;
-        payable(frensPoolShare.ownerOf(_id)).transfer(_amount);
+        bool success = payable(frensPoolShare.ownerOf(_id)).send(_amount);
+        assert(success);
     }
 
 
@@ -299,10 +300,14 @@ contract StakingPool is IStakingPool, Ownable{
         if (feePercent > 0 && !exited) {
             address feeRecipient = frensStorage.getAddress(keccak256(abi.encodePacked("protocol.fee.recipient")));
             uint feeAmount = (feePercent * amount) / 100;
-            if (feeAmount > 1) payable(feeRecipient).transfer(feeAmount - 1); //-1 wei to avoid rounding error issues
+            if (feeAmount > 1){ 
+                bool success1 = payable(feeRecipient).send(feeAmount - 1); //-1 wei to avoid rounding error issues
+                assert(success1);
+            }
             amount = amount - feeAmount;
         }
-        payable(frensPoolShare.ownerOf(_id)).transfer(amount);
+        bool success2 = payable(frensPoolShare.ownerOf(_id)).send(amount);
+        assert(success2);
     }
 
     function exitPool() external {
@@ -332,7 +337,8 @@ contract StakingPool is IStakingPool, Ownable{
         require(rageQuitInfo[rageQuitId].rageQuitting, "must be rage quitting");
         require(msg.value >= rageQuitInfo[rageQuitId].price, "must send correct value");
         address rageOwner = frensPoolShare.ownerOf(rageQuitId);
-        payable(rageOwner).transfer(msg.value);
+        bool success = payable(rageOwner).send(msg.value);
+        assert(success);
         locked[rageQuitId] = false;
         frensPoolShare.safeTransferFrom(
             rageOwner,
