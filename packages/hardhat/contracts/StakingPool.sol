@@ -244,7 +244,8 @@ contract StakingPool is IStakingPool, Ownable{
         require(depositForId[_id] >= _amount, "not enough deposited");
         depositForId[_id] -= _amount;
         totalDeposits -= _amount;
-        payable(msg.sender).transfer(_amount);
+        bool success = payable(msg.sender).send(_amount);
+        assert(success);
     }
 
     ///@notice allows user to claim their portion of the rewards
@@ -274,11 +275,14 @@ contract StakingPool is IStakingPool, Ownable{
         if (feePercent > 0 && !exited) {
             address feeRecipient = frensStorage.getAddress(keccak256(abi.encodePacked("protocol.fee.recipient")));
             uint feeAmount = (feePercent * amount) / 100;
-            if (feeAmount > 1) payable(feeRecipient).transfer(feeAmount - 1); //-1 wei to avoid rounding error issues
+            if (feeAmount > 1){ 
+                bool success1 = payable(feeRecipient).send(feeAmount - 1); //-1 wei to avoid rounding error issues
+                assert(success1);
+            }
             amount = amount - feeAmount;
         }
-        bool success = payable(frensPoolShare.ownerOf(_id)).send(amount);
-        assert(success);
+        bool success2 = payable(frensPoolShare.ownerOf(_id)).send(amount);
+        assert(success2);
     }
 
     ///@dev this marks the pool as exited, but does not affect the functionality of amy methods, except that an exited pool no longer extracts fees
