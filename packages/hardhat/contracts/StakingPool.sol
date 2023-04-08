@@ -149,7 +149,7 @@ contract StakingPool is IStakingPool, Ownable{
     ///@dev recieves funds and returns FrenspoolShare NFT
    function depositToPool(
         bytes32[] calldata merkleProof
-        )
+    )
         external
         payable
         noZeroValueTxn
@@ -176,7 +176,13 @@ contract StakingPool is IStakingPool, Ownable{
 
     ///@notice allows a user to add funds to an existing NFT ID
     ///@dev recieves funds and increases deposit for a FrensPoolShare ID
-    function addToDeposit(uint _id) external payable mustBeAccepting maxTotDep correctPoolOnly(_id){
+    function addToDeposit(uint _id) 
+        external 
+        payable 
+        mustBeAccepting 
+        maxTotDep 
+        correctPoolOnly(_id)
+    {
         require(frensPoolShare.exists(_id), "id does not exist"); //id must exist
         require(depositForId[_id] + msg.value <= poolMax, "above maximum deposit for pool");
         depositForId[_id] += msg.value;
@@ -337,7 +343,11 @@ contract StakingPool is IStakingPool, Ownable{
         currentState = PoolState.exited;
     }
     
-    function rageQuit(uint _id, uint _price) public onlyIdOwner(_id) correctPoolOnly(_id){
+    ///@dev for transferlocked NFTs, if the owner wants to sell, they must allow the other members of the pool a chance to buy them out before the NFT is unlocked
+    function rageQuit(uint _id, uint _price) 
+        public onlyIdOwner(_id) 
+        correctPoolOnly(_id)
+    {
         require(locked[_id], "no reason to rageQuit an unlocked share");
         uint deposit = depositForId[_id];
         require(_price <= deposit, "cannot set price higher than deposit");
@@ -347,15 +357,17 @@ contract StakingPool is IStakingPool, Ownable{
         newQuit.rageQuitting = true;
     }
   
-  function buyOut(
-    uint rageQuitId, 
-    uint buyersTokenId
+    ///@dev once an NFT owner in a transfer locked pool calls rage quir, the other members of the pool have 1 week to buy them out, or the NFT unlocks
+    function buyOut(
+        uint rageQuitId, 
+        uint buyersTokenId
     ) 
-    public
-    payable
-    onlyIdOwner(buyersTokenId) 
-    correctPoolOnly(buyersTokenId) 
-    correctPoolOnly(rageQuitId){
+        public
+        payable
+        onlyIdOwner(buyersTokenId) 
+        correctPoolOnly(buyersTokenId) 
+        correctPoolOnly(rageQuitId)
+    {
         require(rageQuitInfo[rageQuitId].rageQuitting, "must be rage quitting");
         require(msg.value >= rageQuitInfo[rageQuitId].price, "must send correct value");
         address rageOwner = frensPoolShare.ownerOf(rageQuitId);
@@ -371,17 +383,14 @@ contract StakingPool is IStakingPool, Ownable{
         rageQuitInfo[rageQuitId].rageQuitting = false;
     }
 
+    ///@dev once a week has elapsed after initiating the rageQuit, the NFT owner can unlock the NFT and sell it on the open market.
     function unlockTransfer(uint _id) public {
         uint endTime = rageQuitInfo[_id].time + 1 weeks;
         require(endTime <= block.timestamp, "allow one week before unlock");
         locked[_id] = false;
         rageQuitInfo[_id].rageQuitting = false;
     }
-    /*
-    function burn(uint tokenId) public onlyIdOwner(tokenId) { //this is only here to test the burn method in frensPoolShare
-        frensPoolShare.burn(tokenId);
-    }
-    */
+
   
     //getters
 
