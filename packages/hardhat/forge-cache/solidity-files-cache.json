@@ -364,8 +364,8 @@
       }
     },
     "contracts/FrensStorage.sol": {
-      "lastModificationDate": 1680382201396,
-      "contentHash": "598d2ce6bdcf789ce60187d03025dcef",
+      "lastModificationDate": 1680999659371,
+      "contentHash": "02b5939aa923f694ea71e8603b59f666",
       "sourceName": "contracts/FrensStorage.sol",
       "solcConfig": {
         "settings": {
@@ -448,8 +448,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1680998590393,
-      "contentHash": "e9a85c9f83c80866e05ce704b974e467",
+      "lastModificationDate": 1681000767887,
+      "contentHash": "94e70e6d1a02aef69c91e8c4a46832a3",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -976,8 +976,8 @@
       }
     },
     "contracts/interfaces/IFrensStorage.sol": {
-      "lastModificationDate": 1677623186183,
-      "contentHash": "94208649c951b85dd87d3c3b9f46afee",
+      "lastModificationDate": 1680999493137,
+      "contentHash": "4624af88b8e1d20dddb7febf13579618",
       "sourceName": "contracts/interfaces/IFrensStorage.sol",
       "solcConfig": {
         "settings": {
@@ -2862,7 +2862,7 @@
       }
     },
     "test/foundry/TestHelper.sol": {
-      "lastModificationDate": 1677650187431,
+      "lastModificationDate": 1680380795070,
       "contentHash": "1afccf2823bfda20959a8ae843b40045",
       "sourceName": "test/foundry/TestHelper.sol",
       "solcConfig": {
