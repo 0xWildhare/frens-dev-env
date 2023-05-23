@@ -383,13 +383,13 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     console.log('\x1b[36m%s\x1b[0m', "Waves updated", Waves.address);
   }
 
-  if(chainId == 31337){
+  if(chainId == 5){
     await deploy("StakingPool", {//need abi
       // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
       from: deployer,
       args: [
         "0x42f58dd8528c302eeC4dCbC71159bA737908D6Fa",
-        false,
+        
         FrensStorage.address
       ],
       log: true,
@@ -397,7 +397,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     });
   }
 
-  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6", true/*, false, 0, 32000000000000000000n*/);
+  const newPool = await StakingPoolFactory.create("0xa53A6fE2d8Ad977aD926C485343Ba39f32D3A3F6"/*, false, 0, 32000000000000000000n*/);
   
   newPoolResult = await newPool.wait();
   console.log('\x1b[36m%s\x1b[0m',"New StakingPool", newPoolResult.logs[0].address);
