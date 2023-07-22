@@ -69,12 +69,12 @@
     }
   ],
   "bytecode": {
-    "object": "0x60803461007457601f61045738819003918201601f19168301916001600160401b038311848410176100795780849260209460405283398101031261007457516001600160a01b0381169081900361007457600180546001600160a01b0319169190911790556040516103c790816100908239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f94369101610322565b908286519483868095519384920161036e565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da9036908301610322565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161036e565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a381836102ce565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b83858492346102ca57602093846003193601126100a75780356001600160a01b038116908190036100a35763ac2a5dfd60e01b83528391839182905afa9081156102c057908491839161023d575b509061008f9160ff938286519483868095519384920161036e565b9150503d8083833e61024f81836102ce565b81019084818303126100a75780519067ffffffffffffffff82116100a3570181601f820112156100a75780519061028582610306565b92610292865194856102ce565b8284528683830101116100a35792826102b7879360ff96858061008f9801910161036e565b91925092610222565b83513d84823e3d90fd5b5080fd5b90601f8019910116810190811067ffffffffffffffff8211176102f057604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff81116102f057601f01601f191660200190565b81601f820112156103695780359061033982610306565b9261034760405194856102ce565b8284526020838301011161036957816000926020809301838601378301015290565b600080fd5b60005b8381106103815750506000910152565b818101518382015260200161037156fea2646970667358221220fe9c4da6762134ad83cbeb3f578ca1a0a2d059e470b16eddecaa22852d540ec364736f6c63430008110033",
+    "object": "0x60803461007457601f61045738819003918201601f19168301916001600160401b038311848410176100795780849260209460405283398101031261007457516001600160a01b0381169081900361007457600180546001600160a01b0319169190911790556040516103c790816100908239f35b600080fd5b634e487b7160e01b600052604160045260246000fdfe6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f94369101610322565b908286519483868095519384920161036e565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da9036908301610322565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161036e565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a381836102ce565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b83858492346102ca57602093846003193601126100a75780356001600160a01b038116908190036100a35763ac2a5dfd60e01b83528391839182905afa9081156102c057908491839161023d575b509061008f9160ff938286519483868095519384920161036e565b9150503d8083833e61024f81836102ce565b81019084818303126100a75780519067ffffffffffffffff82116100a3570181601f820112156100a75780519061028582610306565b92610292865194856102ce565b8284528683830101116100a35792826102b7879360ff96858061008f9801910161036e565b91925092610222565b83513d84823e3d90fd5b5080fd5b90601f8019910116810190811067ffffffffffffffff8211176102f057604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff81116102f057601f01601f191660200190565b81601f820112156103695780359061033982610306565b9261034760405194856102ce565b8284526020838301011161036957816000926020809301838601378301015290565b600080fd5b60005b8381106103815750506000910152565b818101518382015260200161037156fea26469706673582212202749ced342450424b6d30f9ea3ec0cf36b70fe3aef8784ceae8ff49f7b4d467764736f6c63430008110033",
     "sourceMap": "416:859:2:-:0;;;;;;;;;;;;;-1:-1:-1;;416:859:2;;;;-1:-1:-1;;;;;416:859:2;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;416:859:2;;;;;;;;;;;-1:-1:-1;;;;;;416:859:2;;;;;;;;;;;;;;;;;-1:-1:-1;416:859:2;;;;;;-1:-1:-1;416:859:2;;;;;-1:-1:-1;416:859:2",
     "linkReferences": {}
   },
   "deployedBytecode": {
-    "object": "0x6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f94369101610322565b908286519483868095519384920161036e565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da9036908301610322565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161036e565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a381836102ce565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b83858492346102ca57602093846003193601126100a75780356001600160a01b038116908190036100a35763ac2a5dfd60e01b83528391839182905afa9081156102c057908491839161023d575b509061008f9160ff938286519483868095519384920161036e565b9150503d8083833e61024f81836102ce565b81019084818303126100a75780519067ffffffffffffffff82116100a3570181601f820112156100a75780519061028582610306565b92610292865194856102ce565b8284528683830101116100a35792826102b7879360ff96858061008f9801910161036e565b91925092610222565b83513d84823e3d90fd5b5080fd5b90601f8019910116810190811067ffffffffffffffff8211176102f057604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff81116102f057601f01601f191660200190565b81601f820112156103695780359061033982610306565b9261034760405194856102ce565b8284526020838301011161036957816000926020809301838601378301015290565b600080fd5b60005b8381106103815750506000910152565b818101518382015260200161037156fea2646970667358221220fe9c4da6762134ad83cbeb3f578ca1a0a2d059e470b16eddecaa22852d540ec364736f6c63430008110033",
+    "object": "0x6080604081815260048036101561001557600080fd5b600092833560e01c908163809bef62146101d457508063d3b150e6146100ab5763d6e65cb91461004457600080fd5b346100a75760203660031901126100a757803567ffffffffffffffff81116100a3576020809461007c60ff9461008f94369101610322565b908286519483868095519384920161036e565b820190815203019020541690519015158152f35b8380fd5b8280fd5b50346100a757816003193601126100a757803567ffffffffffffffff81116100a3576100da9036908301610322565b602435928315158094036101d05760015481516353adc3e960e11b8152602094916001600160a01b039190869082908590829086165afa9081156101c657889161018c575b501633036101585750908261013f9392519382858094519384920161036e565b8101858152030190209060ff8019835416911617905580f35b83606492519162461bcd60e51b8352820152601060248201526f36bab9ba1031329033bab0b93234b0b760811b6044820152fd5b90508581813d83116101bf575b6101a381836102ce565b810103126101bb575181811681036101bb573861011f565b8780fd5b503d610199565b84513d8a823e3d90fd5b8480fd5b83858492346102ca57602093846003193601126100a75780356001600160a01b038116908190036100a35763ac2a5dfd60e01b83528391839182905afa9081156102c057908491839161023d575b509061008f9160ff938286519483868095519384920161036e565b9150503d8083833e61024f81836102ce565b81019084818303126100a75780519067ffffffffffffffff82116100a3570181601f820112156100a75780519061028582610306565b92610292865194856102ce565b8284528683830101116100a35792826102b7879360ff96858061008f9801910161036e565b91925092610222565b83513d84823e3d90fd5b5080fd5b90601f8019910116810190811067ffffffffffffffff8211176102f057604052565b634e487b7160e01b600052604160045260246000fd5b67ffffffffffffffff81116102f057601f01601f191660200190565b81601f820112156103695780359061033982610306565b9261034760405194856102ce565b8284526020838301011161036957816000926020809301838601378301015290565b600080fd5b60005b8381106103815750506000910152565b818101518382015260200161037156fea26469706673582212202749ced342450424b6d30f9ea3ec0cf36b70fe3aef8784ceae8ff49f7b4d467764736f6c63430008110033",
     "sourceMap": "416:859:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;416:859:2;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;-1:-1:-1;;;1175:26:2;;416:859;;;-1:-1:-1;;;;;416:859:2;;;;;;;;;;;;1175:26;;;;;;;;;;;416:859;;;1161:10;:40;416:859;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;416:859:2;;;;;1175:26;;;;;;;;;;;;;;;;:::i;:::-;;;416:859;;;;;;;;;;;;1175:26;;;416:859;;;;1175:26;;;;;;416:859;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;416:859:2;;;;;;;;-1:-1:-1;;;951:13:2;;416:859;;;;;;951:13;;;;;;;;;;;;;;416:859;;;;;;;;;;;;;;;;;;;;;:::i;951:13::-;;;;;;;;;;;;;:::i;:::-;;;416:859;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;951:13;;;;;;;416:859;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;416:859:2;;;;:::o;:::-;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;:::i;:::-;;;;;;;;;;;;;-1:-1:-1;416:859:2;;;;;;;;;;;;;;:::o;:::-;-1:-1:-1;416:859:2;;;;;;;;;;-1:-1:-1;;416:859:2;;;;:::o;:::-;;;;;;;;;;;;",
     "linkReferences": {}
   },
@@ -83,7 +83,7 @@
     "isExiting(bytes)": "d6e65cb9",
     "setExiting(bytes,bool)": "d3b150e6"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"frensStorage_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"}],\"name\":\"checkValidatorState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"isExiting\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubKey\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_isExiting\",\"type\":\"bool\"}],\"name\":\"setExiting\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"checkValidatorState(address)\":{\"details\":\"called by the staking pool to check if the validator is exiting\"},\"setExiting(bytes,bool)\":{\"details\":\"allows multisig (guardian) to set a pool as exiting. \"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FrensOracle.sol\":\"FrensOracle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/FrensOracle.sol\":{\"keccak256\":\"0x9efc7befb6f06fbb1630d4f693045533fb0a78bd0ffc7ade41c1c1c279b5ff21\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3453a5daafa8be15ef4a2b5c123ead348826d34d64cd2d810ad6222f39f04c09\",\"dweb:/ipfs/QmVhv7hqg8Av18e9noGd7xVYx5VXenG1CjF4PTxQ3MVu1B\"]},\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IFrensOracle.sol\":{\"keccak256\":\"0xdf2291434faca3e9976a42d2328a4347ced5978b29477e40eb75642185afdf67\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f84266eaa6df4162f6a2be8dac55a8fd6ba4865a1dda48f4c1dd27c07c8c4316\",\"dweb:/ipfs/QmWbkZtvjrmJ61ZvnFn81UsLEoqzzah7oDkb66eEoSqJ1y\"]},\"contracts/interfaces/IFrensStorage.sol\":{\"keccak256\":\"0x426ac9a703a13d4127b56886421d55a8380292dadfb2693d2e8373316075f220\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://e8179a87c1e6fcb4762230888412cfaa2e7ba52d314cee3ffe8a17933f259ccf\",\"dweb:/ipfs/QmacSF3u61KjNyK982VwKAA1G86cLZBhYvpPJhdprTg2Rd\"]},\"contracts/interfaces/IStakingPool.sol\":{\"keccak256\":\"0xd8bac46068041b9cd5672b8a7b90238e794735ea8d783448d8730b1c9aac0c74\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://b6b9ec820f7f687243130ca6fcdc32ff6497a8c451d35976a084b0c1053d8d92\",\"dweb:/ipfs/QmPjjKLKj3wy5h261uDMX498ahoVBt2oEFpDAQBFaSj9SP\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract IFrensStorage\",\"name\":\"frensStorage_\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"poolAddress\",\"type\":\"address\"}],\"name\":\"checkValidatorState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"name\":\"isExiting\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"pubKey\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"_isExiting\",\"type\":\"bool\"}],\"name\":\"setExiting\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"checkValidatorState(address)\":{\"details\":\"called by the staking pool to check if the validator is exiting\"},\"setExiting(bytes,bool)\":{\"details\":\"allows multisig (guardian) to set a pool as exiting. \"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/FrensOracle.sol\":\"FrensOracle\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@ensdomains/=node_modules/@ensdomains/\",\":@openzeppelin/=node_modules/@openzeppelin/\",\":base64-sol/=node_modules/base64-sol/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":eth-gas-reporter/=node_modules/eth-gas-reporter/\",\":forge-std/=lib/forge-std/src/\",\":hardhat-deploy/=node_modules/hardhat-deploy/\",\":hardhat/=node_modules/hardhat/\"],\"viaIR\":true},\"sources\":{\"contracts/FrensOracle.sol\":{\"keccak256\":\"0x9efc7befb6f06fbb1630d4f693045533fb0a78bd0ffc7ade41c1c1c279b5ff21\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3453a5daafa8be15ef4a2b5c123ead348826d34d64cd2d810ad6222f39f04c09\",\"dweb:/ipfs/QmVhv7hqg8Av18e9noGd7xVYx5VXenG1CjF4PTxQ3MVu1B\"]},\"contracts/interfaces/IFrensArt.sol\":{\"keccak256\":\"0xfdb4c36608a20ac7f10ccb1b5d59ec26b25587860fb596dc12414b27591db2a0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://964db06f48cd83968079b4fc0660ed620e0dbf02fc75f747f3482763d2730c7d\",\"dweb:/ipfs/QmTssWRwWEDGnwyCKrVkLpUMS3cXhBhPrLZXJJRiJKETfz\"]},\"contracts/interfaces/IFrensOracle.sol\":{\"keccak256\":\"0xdf2291434faca3e9976a42d2328a4347ced5978b29477e40eb75642185afdf67\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://f84266eaa6df4162f6a2be8dac55a8fd6ba4865a1dda48f4c1dd27c07c8c4316\",\"dweb:/ipfs/QmWbkZtvjrmJ61ZvnFn81UsLEoqzzah7oDkb66eEoSqJ1y\"]},\"contracts/interfaces/IFrensStorage.sol\":{\"keccak256\":\"0x426ac9a703a13d4127b56886421d55a8380292dadfb2693d2e8373316075f220\",\"license\":\"GPL-3.0-only\",\"urls\":[\"bzz-raw://e8179a87c1e6fcb4762230888412cfaa2e7ba52d314cee3ffe8a17933f259ccf\",\"dweb:/ipfs/QmacSF3u61KjNyK982VwKAA1G86cLZBhYvpPJhdprTg2Rd\"]},\"contracts/interfaces/IStakingPool.sol\":{\"keccak256\":\"0xe1b4101e52876a0fac1abbc1cd11c0053ee1b775dc87baf60183e7d3a01b16c2\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://5e5520ecd37cd5cbf42a521e93ec868ad3b75318febf559b1b5cd2d7225d04a4\",\"dweb:/ipfs/QmcUPn7pHmxQhr7oLycCzdVeLfRgGtCNDYxGWuBBu5f5W2\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.17+commit.8df45f5f"
@@ -234,10 +234,10 @@
         "license": "GPL-3.0-only"
       },
       "contracts/interfaces/IStakingPool.sol": {
-        "keccak256": "0xd8bac46068041b9cd5672b8a7b90238e794735ea8d783448d8730b1c9aac0c74",
+        "keccak256": "0xe1b4101e52876a0fac1abbc1cd11c0053ee1b775dc87baf60183e7d3a01b16c2",
         "urls": [
-          "bzz-raw://b6b9ec820f7f687243130ca6fcdc32ff6497a8c451d35976a084b0c1053d8d92",
-          "dweb:/ipfs/QmPjjKLKj3wy5h261uDMX498ahoVBt2oEFpDAQBFaSj9SP"
+          "bzz-raw://5e5520ecd37cd5cbf42a521e93ec868ad3b75318febf559b1b5cd2d7225d04a4",
+          "dweb:/ipfs/QmcUPn7pHmxQhr7oLycCzdVeLfRgGtCNDYxGWuBBu5f5W2"
         ],
         "license": "MIT"
       }
@@ -252,16 +252,16 @@
         597
       ],
       "IFrensArt": [
-        2689
+        2802
       ],
       "IFrensOracle": [
-        2747
+        2860
       ],
       "IFrensStorage": [
-        2898
+        3011
       ],
       "IStakingPool": [
-        3030
+        3154
       ]
     },
     "nodeType": "SourceUnit",
@@ -291,7 +291,7 @@
         "file": "./interfaces/IStakingPool.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 598,
-        "sourceUnit": 3031,
+        "sourceUnit": 3155,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -304,7 +304,7 @@
         "file": "./interfaces/IFrensOracle.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 598,
-        "sourceUnit": 2748,
+        "sourceUnit": 2861,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -317,7 +317,7 @@
         "file": "./interfaces/IFrensStorage.sol",
         "nameLocation": "-1:-1:-1",
         "scope": 598,
-        "sourceUnit": 2899,
+        "sourceUnit": 3012,
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -387,7 +387,7 @@
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+              "typeIdentifier": "t_contract$_IFrensStorage_$3011",
               "typeString": "contract IFrensStorage"
             },
             "typeName": {
@@ -400,13 +400,13 @@
                   "585:13:2"
                 ],
                 "nodeType": "IdentifierPath",
-                "referencedDeclaration": 2898,
+                "referencedDeclaration": 3011,
                 "src": "585:13:2"
               },
-              "referencedDeclaration": 2898,
+              "referencedDeclaration": 3011,
               "src": "585:13:2",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                 "typeString": "contract IFrensStorage"
               }
             },
@@ -438,7 +438,7 @@
                       "referencedDeclaration": 534,
                       "src": "669:12:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                        "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                         "typeString": "contract IFrensStorage"
                       }
                     },
@@ -452,13 +452,13 @@
                       "referencedDeclaration": 537,
                       "src": "684:13:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                        "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                         "typeString": "contract IFrensStorage"
                       }
                     },
                     "src": "669:28:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                       "typeString": "contract IFrensStorage"
                     }
                   },
@@ -489,7 +489,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                    "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                     "typeString": "contract IFrensStorage"
                   },
                   "typeName": {
@@ -502,13 +502,13 @@
                         "630:13:2"
                       ],
                       "nodeType": "IdentifierPath",
-                      "referencedDeclaration": 2898,
+                      "referencedDeclaration": 3011,
                       "src": "630:13:2"
                     },
-                    "referencedDeclaration": 2898,
+                    "referencedDeclaration": 3011,
                     "src": "630:13:2",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                      "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                       "typeString": "contract IFrensStorage"
                     }
                   },
@@ -556,7 +556,7 @@
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IStakingPool_$3030",
+                        "typeIdentifier": "t_contract$_IStakingPool_$3154",
                         "typeString": "contract IStakingPool"
                       },
                       "typeName": {
@@ -569,13 +569,13 @@
                             "874:12:2"
                           ],
                           "nodeType": "IdentifierPath",
-                          "referencedDeclaration": 3030,
+                          "referencedDeclaration": 3154,
                           "src": "874:12:2"
                         },
-                        "referencedDeclaration": 3030,
+                        "referencedDeclaration": 3154,
                         "src": "874:12:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IStakingPool_$3030",
+                          "typeIdentifier": "t_contract$_IStakingPool_$3154",
                           "typeString": "contract IStakingPool"
                         }
                       },
@@ -609,10 +609,10 @@
                       "name": "IStakingPool",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3030,
+                      "referencedDeclaration": 3154,
                       "src": "894:12:2",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_IStakingPool_$3030_$",
+                        "typeIdentifier": "t_type$_t_contract$_IStakingPool_$3154_$",
                         "typeString": "type(contract IStakingPool)"
                       }
                     },
@@ -628,7 +628,7 @@
                     "src": "894:25:2",
                     "tryCall": false,
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IStakingPool_$3030",
+                      "typeIdentifier": "t_contract$_IStakingPool_$3154",
                       "typeString": "contract IStakingPool"
                     }
                   },
@@ -681,7 +681,7 @@
                         "referencedDeclaration": 555,
                         "src": "951:4:2",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_IStakingPool_$3030",
+                          "typeIdentifier": "t_contract$_IStakingPool_$3154",
                           "typeString": "contract IStakingPool"
                         }
                       },
@@ -693,7 +693,7 @@
                       "memberLocation": "956:6:2",
                       "memberName": "pubKey",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2924,
+                      "referencedDeclaration": 3037,
                       "src": "951:11:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$__$returns$_t_bytes_memory_ptr_$",
@@ -765,7 +765,7 @@
               ]
             },
             "baseFunctions": [
-              2739
+              2852
             ],
             "documentation": {
               "id": 546,
@@ -918,7 +918,7 @@
                               "referencedDeclaration": 534,
                               "src": "1175:12:2",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IFrensStorage_$2898",
+                                "typeIdentifier": "t_contract$_IFrensStorage_$3011",
                                 "typeString": "contract IFrensStorage"
                               }
                             },
@@ -930,7 +930,7 @@
                             "memberLocation": "1188:11:2",
                             "memberName": "getGuardian",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 2815,
+                            "referencedDeclaration": 2928,
                             "src": "1175:24:2",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
@@ -1092,7 +1092,7 @@
               ]
             },
             "baseFunctions": [
-              2746
+              2859
             ],
             "documentation": {
               "id": 572,
@@ -1189,7 +1189,7 @@
                 "440:12:2"
               ],
               "nodeType": "IdentifierPath",
-              "referencedDeclaration": 2747,
+              "referencedDeclaration": 2860,
               "src": "440:12:2"
             },
             "id": 527,
@@ -1203,7 +1203,7 @@
         "fullyImplemented": true,
         "linearizedBaseContracts": [
           597,
-          2747
+          2860
         ],
         "name": "FrensOracle",
         "nameLocation": "425:11:2",

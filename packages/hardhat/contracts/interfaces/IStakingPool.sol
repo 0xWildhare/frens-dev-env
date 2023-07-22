@@ -46,14 +46,13 @@ interface IStakingPool {
 
     // function getDepositAmount(uint _id) external view returns(uint);
 
-    // function stake(
-    //     bytes calldata pubkey,
-    //     bytes calldata withdrawal_credentials,
-    //     bytes calldata signature,
-    //     bytes32 deposit_data_root
-    // ) external;
+    function stake(
+        bytes calldata pubkey,
+        bytes calldata withdrawal_credentials,
+        bytes calldata signature,
+        bytes32 deposit_data_root
+    ) external;
 
     function stake() external;
 
-    // function exitPool() external;
 }

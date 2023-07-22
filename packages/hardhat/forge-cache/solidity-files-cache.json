@@ -101,7 +101,7 @@
       }
     },
     "contracts/FrensMetaHelper.sol": {
-      "lastModificationDate": 1684816708502,
+      "lastModificationDate": 1685654291453,
       "contentHash": "173e14dd0ee755b90a18d2cc0582cf47",
       "sourceName": "contracts/FrensMetaHelper.sol",
       "solcConfig": {
@@ -156,7 +156,7 @@
       }
     },
     "contracts/FrensOracle.sol": {
-      "lastModificationDate": 1684816708502,
+      "lastModificationDate": 1685654291453,
       "contentHash": "c0f44611f85c93088fee35c1018e3963",
       "sourceName": "contracts/FrensOracle.sol",
       "solcConfig": {
@@ -202,7 +202,7 @@
       }
     },
     "contracts/FrensPoolShare.sol": {
-      "lastModificationDate": 1684816708502,
+      "lastModificationDate": 1685654291453,
       "contentHash": "e92ab44ec99f340af5e90b19a7a3023a",
       "sourceName": "contracts/FrensPoolShare.sol",
       "solcConfig": {
@@ -265,7 +265,7 @@
       }
     },
     "contracts/FrensPoolShareTokenURI.sol": {
-      "lastModificationDate": 1684816708502,
+      "lastModificationDate": 1685654291453,
       "contentHash": "0ca999bbd33d953e460ea3e13144e865",
       "sourceName": "contracts/FrensPoolShareTokenURI.sol",
       "solcConfig": {
@@ -404,8 +404,8 @@
       }
     },
     "contracts/StakingPool.sol": {
-      "lastModificationDate": 1684816708502,
-      "contentHash": "a2b7655932d33bad5c002cd58789bd6e",
+      "lastModificationDate": 1685654291453,
+      "contentHash": "bec4439045eba32d53048bda996bd701",
       "sourceName": "contracts/StakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -458,8 +458,8 @@
       }
     },
     "contracts/StakingPoolFactory.sol": {
-      "lastModificationDate": 1684816708502,
-      "contentHash": "aec4edc426fc6a0a7da26f7883b3b188",
+      "lastModificationDate": 1685654291457,
+      "contentHash": "a2d16d185958fef1af6737639111417b",
       "sourceName": "contracts/StakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -1012,8 +1012,8 @@
       }
     },
     "contracts/interfaces/IStakingPool.sol": {
-      "lastModificationDate": 1684816708506,
-      "contentHash": "cab59d02a854a58facd45a62f8fddf36",
+      "lastModificationDate": 1685654291461,
+      "contentHash": "794d0936cfb6f74b044b341f2989d9f1",
       "sourceName": "contracts/interfaces/IStakingPool.sol",
       "solcConfig": {
         "settings": {
@@ -1055,8 +1055,8 @@
       }
     },
     "contracts/interfaces/IStakingPoolFactory.sol": {
-      "lastModificationDate": 1684816708506,
-      "contentHash": "5fd7e2fb6bec121a4cf02a49e1880d94",
+      "lastModificationDate": 1685650787289,
+      "contentHash": "91aeb72afb8f80fa06e4f390b2b99e36",
       "sourceName": "contracts/interfaces/IStakingPoolFactory.sol",
       "solcConfig": {
         "settings": {
@@ -2193,8 +2193,8 @@
       }
     },
     "test/foundry/FrensPoolShareTest.t.sol": {
-      "lastModificationDate": 1684816744698,
-      "contentHash": "26ee34ef6f326ef56e86511ed86a1aed",
+      "lastModificationDate": 1685654547552,
+      "contentHash": "486d0ca28f053654b854496cef3e671f",
       "sourceName": "test/foundry/FrensPoolShareTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2282,8 +2282,8 @@
       }
     },
     "test/foundry/StakingPoolFactoryTest.t.sol": {
-      "lastModificationDate": 1684816744698,
-      "contentHash": "404e831cde1f986ef00bfd8a37fe6e76",
+      "lastModificationDate": 1685654547552,
+      "contentHash": "12a30bd2a201fe4e7ffdec30bde4dc26",
       "sourceName": "test/foundry/StakingPoolFactoryTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2371,8 +2371,8 @@
       }
     },
     "test/foundry/StakingPoolLockedTest.t.sol": {
-      "lastModificationDate": 1684816744698,
-      "contentHash": "611479e1ed5544fcabcaa02c6bbf9747",
+      "lastModificationDate": 1685654547552,
+      "contentHash": "e597b4cc2eb075ea2719dd499fedd69f",
       "sourceName": "test/foundry/StakingPoolLockedTest.t.sol",
       "solcConfig": {
         "settings": {
@@ -2459,8 +2459,8 @@
       }
     },
     "test/foundry/StakingPoolTest.t.sol": {
-      "lastModificationDate": 1684816744702,
-      "contentHash": "ac5797a09cd626f596fd96d6e0ded98d",
+      "lastModificationDate": 1685654547552,
+      "contentHash": "c8e003428a6837024d7535dbd89a33a6",
       "sourceName": "test/foundry/StakingPoolTest.t.sol",
       "solcConfig": {
         "settings": {
