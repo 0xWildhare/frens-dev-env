@@ -26,7 +26,7 @@ const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 //
 // Select the network you want to deploy to here:
 //
-const defaultNetwork = "mainnet";
+const defaultNetwork = "goerli";
 
 const mainnetGwei = 22;
 
@@ -105,6 +105,12 @@ module.exports = {
     goerli: {
       url: "https://goerli.infura.io/v3/ee9cdb4773b84b42bc893ed870a2c148", // <---- YOUR INFURA ID! (or it won't work)
       //      url: "https://speedy-nodes-nyc.moralis.io/XXXXXXXXXXXXXXXXXXXXXXXXX/eth/goerli", // <---- YOUR MORALIS ID! (not limited to infura)
+      accounts: {
+        mnemonic: mnemonic(),
+      },
+    },
+    holesky: {
+      url: "https://rpc.holesky.ethpandaops.io",
       accounts: {
         mnemonic: mnemonic(),
       },
@@ -264,7 +270,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.17",
+        version: "0.8.20",
         settings: {
           optimizer: {
             enabled: true,

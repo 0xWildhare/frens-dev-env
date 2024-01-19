@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.8.0 <0.9.0;
+pragma solidity 0.8.20;
 
 ///@title Frens Meta Helper
 ///@author 0xWildhare and Frens Team
@@ -48,19 +48,6 @@ contract FrensMetaHelper is IFrensMetaHelper {
     function getPoolString(uint id) external view returns (string memory) {
         IStakingPool stakingPool = IStakingPool(frensPoolShare.getPoolById(id));
         return Strings.toHexString(uint160(address(stakingPool)), 20);
-    }
-
-    function _iToHex(
-        bytes memory buffer
-    ) internal pure returns (string memory) {
-        // Fixed buffer size for hexadecimal convertion
-        bytes memory converted = new bytes(buffer.length * 2);
-        bytes memory _base = "0123456789abcdef";
-        for (uint256 i = 0; i < buffer.length; i++) {
-            converted[i * 2] = _base[uint8(buffer[i]) / _base.length];
-            converted[i * 2 + 1] = _base[uint8(buffer[i]) % _base.length];
-        }
-        return string(abi.encodePacked("0x", converted));
     }
 
     ///@return does the address have an ENS set?

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.8.0 <0.9.0;
+pragma solidity 0.8.20;
 
 ///@title Frens Art
 ///@author 0xWildhare and Frens Team
@@ -10,7 +10,6 @@ import "./interfaces/IPmFont.sol";
 import "./interfaces/IFrensLogo.sol";
 import "./interfaces/IWaves.sol";
 import "./interfaces/IFrensStorage.sol";
-//import "hardhat/console.sol";
 
 contract FrensArt {
 
@@ -22,7 +21,7 @@ contract FrensArt {
         frensStorage = frensStorage_;
     }
 
-    function renderTokenById(uint256 id) public view returns (string memory) {
+    function renderTokenById(uint256 id) external view returns (string memory) {
         IFrensMetaHelper frensMetaHelper = IFrensMetaHelper(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "FrensMetaHelper"))));
         IPmFont pmFont = IPmFont(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "PmFont"))));
         IWaves waves = IWaves(frensStorage.getAddress(keccak256(abi.encodePacked("contract.address", "Waves"))));
